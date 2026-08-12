@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Forno — Pizzeria</title>
+<meta name="description" content="Neighbourhood pizzeria with menu, ordering and locations.">
+<meta property="og:title" content="Forno — Pizzeria">
+<meta property="og:description" content="Neighbourhood pizzeria with menu, ordering and locations.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" data-editable-label="Brand name" href="#top">Forno</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#menu">Menu</a><a data-editable="nav.link2" href="#work">Gallery</a><a data-editable="nav.link3" href="#contact">Find us</a>
+    </nav>
+    <div class="nav-actions"><a class="btn btn-primary" data-editable="nav.cta" data-editable-label="Order for collection button" href="#contact">Order for collection</a></div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-split">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" data-editable="hero.eyebrow">48-hour dough</p>
+      <h1 data-editable="hero.title">Neapolitan, more or less</h1>
+      <p class="lede" data-editable="hero.subtitle">Wood-fired, ninety seconds, slightly charred and not up for negotiation. Two ovens, one recipe.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Order for collection button" href="#contact">Order for collection</a>
+        <a class="btn btn-outline" data-editable="hero.ctaAlt" data-editable-label="See the menu button" href="#menu">See the menu</a>
+      </div>
+      
+    </div>
+    <div class="hero-visual">
+      <img data-editable="hero.image" src="https://picsum.photos/seed/pizza-hero/1000/1100" alt="Showcase" loading="lazy" width="1000" height="1100">
+    </div>
+  </div>
+</section>
+
+<section class="section menu" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="menu.title">Menu</h2>
+    </div>
+    <div class="menu-group">
+      <h3 class="menu-group-title" data-editable="menu.group1">Pizza</h3>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name1">Marinara</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price1">9</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc1">Tomato, garlic, oregano, olive oil. No cheese, no apology.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name2">Margherita</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price2">11</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc2">Fior di latte, basil, tomato.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name3">Diavola</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price3">14</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc3">Spicy salami, chilli honey, fior di latte.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name4">Funghi</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price4">14</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc4">Mixed mushroom, thyme, taleggio, garlic oil.</p>
+        </li>
+      </ul>
+    </div><div class="menu-group">
+      <h3 class="menu-group-title" data-editable="menu.group2">Sides and sweet</h3>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g2name1">Focaccia</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g2price1">5</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g2desc1">Rosemary and sea salt, from the same dough.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g2name2">Rocket and parmesan</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g2price2">6</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g2desc2">Lemon, olive oil, too much parmesan.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g2name3">Tiramisu</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g2price3">7</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g2desc3">Made this morning, gone by nine.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat">
+      <span class="stat-value" data-editable="stats.value1">90s</span>
+      <span class="stat-label" data-editable="stats.label1">In the oven</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value2">48h</span>
+      <span class="stat-label" data-editable="stats.label2">Dough ferment</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value3">2</span>
+      <span class="stat-label" data-editable="stats.label3">Locations</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value4">430°C</span>
+      <span class="stat-label" data-editable="stats.label4">Oven temperature</span>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="gallery.title">Selected work</h2>
+    </div>
+    <div class="gallery-grid">
+      <figure class="shot">
+        <img data-editable="gallery.image1" src="https://picsum.photos/seed/pizza-1/800/600" alt="The oven" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption1">The oven</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image2" src="https://picsum.photos/seed/pizza-2/800/600" alt="Friday night" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption2">Friday night</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image3" src="https://picsum.photos/seed/pizza-3/800/600" alt="Dough, day two" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption3">Dough, day two</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 data-editable="contact.title">Get in touch</h2>
+      <p class="section-intro" data-editable="contact.intro">We reply to every message within one business day.</p>
+      <ul class="contact-list">
+        <li><span>Email</span><a data-editable="contact.email" href="mailto:eat@example.com">eat@example.com</a></li>
+        <li><span>Phone</span><a data-editable="contact.phone" href="tel:+15553307788">+1 (555) 330-7788</a></li>
+        <li><span>Address</span><p data-editable="contact.address">12 Kiln Street · 4 Market Row</p></li>
+        <li><span>Hours</span><p data-editable="contact.hours">Tue — Sun, 5pm to 10pm</p></li>
+      </ul>
+    </div>
+    <form class="contact-form" novalidate>
+      <label>Name<input type="text" name="name" placeholder="Your name" required></label>
+      <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+      <label>Message<textarea name="message" rows="4" placeholder="How can we help?"></textarea></label>
+      <button class="btn btn-primary" type="submit" data-editable="contact.submit">Send message</button>
+      <p class="form-note">This form is a starting point — connect it to your own backend or a form service.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Forno</a>
+      <p data-editable="footer.note">Collection only at Kiln Street. No pineapple conversation, please.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#menu">Menu</a><a data-editable="footer.link2" href="#work">Gallery</a><a data-editable="footer.link3" href="#contact">Find us</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Forno. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

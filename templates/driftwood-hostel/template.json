@@ -1,0 +1,28 @@
+{
+  "name": "Driftwood — Hostel",
+  "slug": "driftwood-hostel",
+  "category": "travel",
+  "tags": [
+    "hostel",
+    "budget",
+    "dark",
+    "hospitality"
+  ],
+  "description": "Sociable hostel page with rooms, facilities and instant booking.",
+  "theme": "aurora",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

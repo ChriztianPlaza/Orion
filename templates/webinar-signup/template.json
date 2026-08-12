@@ -1,0 +1,26 @@
+{
+  "name": "Broadcast — Webinar",
+  "slug": "webinar-signup",
+  "category": "landing-page",
+  "tags": [
+    "webinar",
+    "event",
+    "dark",
+    "conversion"
+  ],
+  "description": "Single-goal webinar registration page with agenda and speakers.",
+  "theme": "cobalt",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

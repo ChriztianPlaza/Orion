@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Roast — Coffee Subscription</title>
+<meta name="description" content="Coffee subscription store with plans, origins and delivery.">
+<meta property="og:title" content="Roast — Coffee Subscription">
+<meta property="og:description" content="Coffee subscription store with plans, origins and delivery.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@400;500;700&family=Fraunces:opsz,wght@9..144,400;9..144,600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" data-editable-label="Brand name" href="#top">Roast</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#how">How it works</a><a data-editable="nav.link2" href="#pricing">Plans</a><a data-editable="nav.link3" href="#work">Coffees</a><a data-editable="nav.link4" href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions"><a class="btn btn-primary" data-editable="nav.cta" data-editable-label="Start a subscription button" href="#pricing">Start a subscription</a></div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-split">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" data-editable="hero.eyebrow">Roasted Monday, posted Tuesday</p>
+      <h1 data-editable="hero.title">Coffee that arrives while it is still worth drinking</h1>
+      <p class="lede" data-editable="hero.subtitle">Single origins roasted to order and sent the next morning. Pause, skip or change grind whenever you like.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Start a subscription button" href="#pricing">Start a subscription</a>
+        <a class="btn btn-outline" data-editable="hero.ctaAlt" data-editable-label="See this month's coffees button" href="#work">See this month's coffees</a>
+      </div>
+      
+    </div>
+    <div class="hero-visual">
+      <img data-editable="hero.image" src="https://picsum.photos/seed/coffee-hero/1000/1100" alt="Showcase" loading="lazy" width="1000" height="1100">
+    </div>
+  </div>
+</section>
+
+<section class="section steps" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="steps.title">How it works</h2>
+    </div>
+    <ol class="step-list">
+      <li class="step">
+        <span class="step-num">01</span>
+        <h3 data-editable="steps.title1">Pick a plan</h3>
+        <p data-editable="steps.body1">How much, how often, and whole bean or ground for your brewer.</p>
+      </li><li class="step">
+        <span class="step-num">02</span>
+        <h3 data-editable="steps.title2">We roast</h3>
+        <p data-editable="steps.body2">Every Monday, to order. Nothing sits in a warehouse.</p>
+      </li><li class="step">
+        <span class="step-num">03</span>
+        <h3 data-editable="steps.title3">It arrives</h3>
+        <p data-editable="steps.body3">Through the letterbox, usually Wednesday.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="pricing.title">Simple pricing</h2>
+      <p class="section-intro" data-editable="pricing.intro">No contracts. Cancel whenever you like.</p>
+    </div>
+    <div class="grid grid-3">
+      <article class="plan">
+        
+        <h3 data-editable="pricing.name1">One bag</h3>
+        <p class="plan-price"><span data-editable="pricing.price1">$14</span><small data-editable="pricing.cadence1">/mo</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p1f1">250g a month</li><li data-editable="pricing.p1f2">Free delivery</li><li data-editable="pricing.p1f3">Pause any time</li>
+        </ul>
+        <a class="btn btn-outline" data-editable="pricing.cta1" data-editable-label="Subscribe button" href="#contact">Subscribe</a>
+      </article><article class="plan plan-featured">
+        <span class="plan-flag" data-editable="pricing.flag2">Most popular</span>
+        <h3 data-editable="pricing.name2">Two bags</h3>
+        <p class="plan-price"><span data-editable="pricing.price2">$25</span><small data-editable="pricing.cadence2">/mo</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p2f1">500g a month</li><li data-editable="pricing.p2f2">Free delivery</li><li data-editable="pricing.p2f3">Two different origins</li><li data-editable="pricing.p2f4">Pause any time</li>
+        </ul>
+        <a class="btn btn-primary" data-editable="pricing.cta2" data-editable-label="Subscribe button" href="#contact">Subscribe</a>
+      </article><article class="plan">
+        
+        <h3 data-editable="pricing.name3">Office</h3>
+        <p class="plan-price"><span data-editable="pricing.price3">$96</span><small data-editable="pricing.cadence3">/mo</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p3f1">2kg a month</li><li data-editable="pricing.p3f2">Invoiced</li><li data-editable="pricing.p3f3">Brewing guide session</li>
+        </ul>
+        <a class="btn btn-outline" data-editable="pricing.cta3" data-editable-label="Enquire button" href="#contact">Enquire</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="gallery.title">Selected work</h2>
+    </div>
+    <div class="gallery-grid">
+      <figure class="shot">
+        <img data-editable="gallery.image1" src="https://picsum.photos/seed/coffee-1/800/600" alt="Kenya, Nyeri — blackcurrant, cane sugar" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption1">Kenya, Nyeri — blackcurrant, cane sugar</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image2" src="https://picsum.photos/seed/coffee-2/800/600" alt="Colombia, Huila — cocoa, orange" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption2">Colombia, Huila — cocoa, orange</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image3" src="https://picsum.photos/seed/coffee-3/800/600" alt="Ethiopia, Guji — peach, jasmine" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption3">Ethiopia, Guji — peach, jasmine</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" id="faq">
+  <div class="wrap narrow">
+    <div class="section-head"><h2 data-editable="faq.title">Frequently asked</h2></div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary data-editable="faq.q1">Can I skip a month?</summary>
+        <p data-editable="faq.a1">Yes, from your account, up to the Sunday before roasting.</p>
+      </details><details class="faq-item">
+        <summary data-editable="faq.q2">Do you pay farmers properly?</summary>
+        <p data-editable="faq.a2">We publish what we paid per kilo for every lot, alongside the market price.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band" id="contact">
+  <div class="wrap cta-inner">
+    <h2 data-editable="cta.title">First bag half price</h2>
+    <p data-editable="cta.body">Cancel after one delivery if it is not for you.</p>
+    <div class="hero-actions"><a class="btn btn-primary" data-editable="cta.button" data-editable-label="Start a subscription button" href="#pricing">Start a subscription</a></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Roast</a>
+      <p data-editable="footer.note">Compostable bags. Prices published per lot.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#how">How it works</a><a data-editable="footer.link2" href="#pricing">Plans</a><a data-editable="footer.link3" href="#work">Coffees</a><a data-editable="footer.link4" href="#faq">FAQ</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Roast. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

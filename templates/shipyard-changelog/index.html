@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shipyard — Changelog</title>
+<meta name="description" content="Product changelog and status page for a developer product.">
+<meta property="og:title" content="Shipyard — Changelog">
+<meta property="og:description" content="Product changelog and status page for a developer product.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav nav-minimal" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" href="#top">Shipyard</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#how">Changelog</a><a data-editable="nav.link2" href="#features">Status</a><a data-editable="nav.link3" href="#">Docs</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-stacked">
+  <div class="wrap">
+    <h1 class="display" data-editable="hero.title">Everything we shipped, in order</h1>
+    <div class="hero-stacked-row">
+      <p class="lede" data-editable="hero.subtitle">Weekly releases, written by the people who built them. No marketing passes over these notes.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Subscribe to updates button" href="#contact">Subscribe to updates</a>
+        <a class="btn btn-ghost" data-editable="hero.ctaAlt" data-editable-label="Read the docs button" href="#">Read the docs</a>
+      </div>
+    </div>
+    <div class="hero-media wide"><img data-editable="hero.image" src="https://picsum.photos/seed/changelog-hero/1600/900" alt="Preview" loading="lazy" width="1600" height="900"></div>
+  </div>
+</section>
+
+<section class="section steps" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="steps.title">How it works</h2>
+    </div>
+    <ol class="step-list">
+      <li class="step">
+        <span class="step-num">01</span>
+        <h3 data-editable="steps.title1">v4.2 — Scheduled exports</h3>
+        <p data-editable="steps.body1">Cron-style schedules for any saved export, with delivery to S3 or a webhook.</p>
+      </li><li class="step">
+        <span class="step-num">02</span>
+        <h3 data-editable="steps.title2">v4.1 — Faster cold starts</h3>
+        <p data-editable="steps.body2">Median cold start down from 340 ms to 61 ms after moving the runtime bootstrap.</p>
+      </li><li class="step">
+        <span class="step-num">03</span>
+        <h3 data-editable="steps.title3">v4.0 — New permissions model</h3>
+        <p data-editable="steps.body3">Per-resource roles replacing workspace-wide access. Migration guide in the docs.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section features" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="features.title">Everything you need</h2>
+      
+    </div>
+    <div class="grid grid-3">
+      <article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 0c3 3 3 15 0 18M3 12h18"/></svg></span>
+        <h3 data-editable="features.title1">API</h3>
+        <p data-editable="features.body1">Operational · 99.99% over 90 days</p>
+      </article><article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5zm9 11-9 5-9-5"/></svg></span>
+        <h3 data-editable="features.title2">Dashboard</h3>
+        <p data-editable="features.body2">Operational · 99.98% over 90 days</p>
+      </article><article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></span>
+        <h3 data-editable="features.title3">Webhooks</h3>
+        <p data-editable="features.body3">Operational · 99.95% over 90 days</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" id="faq">
+  <div class="wrap narrow">
+    <div class="section-head"><h2 data-editable="faq.title">Frequently asked</h2></div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary data-editable="faq.q1">How do I get notified?</summary>
+        <p data-editable="faq.a1">RSS, email, or a webhook into your own Slack. All three are free.</p>
+      </details><details class="faq-item">
+        <summary data-editable="faq.q2">Do you post incidents here?</summary>
+        <p data-editable="faq.a2">Yes, including the postmortem, usually within five working days.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Shipyard</a>
+      <p data-editable="footer.note">Written by engineers. Occasionally too honest.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#how">Changelog</a><a data-editable="footer.link2" href="#features">Status</a><a data-editable="footer.link3" href="#">Docs</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Shipyard. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

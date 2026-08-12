@@ -1,0 +1,28 @@
+{
+  "name": "Paws — Veterinary Clinic",
+  "slug": "paws-veterinary",
+  "category": "healthcare",
+  "tags": [
+    "veterinary",
+    "pets",
+    "dark",
+    "clinic"
+  ],
+  "description": "Friendly vet practice page with services, plans and emergency details.",
+  "theme": "forest",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

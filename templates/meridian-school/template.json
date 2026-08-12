@@ -1,0 +1,28 @@
+{
+  "name": "Meridian — School",
+  "slug": "meridian-school",
+  "category": "education",
+  "tags": [
+    "school",
+    "education",
+    "light",
+    "institution"
+  ],
+  "description": "Warm, informative school site with admissions and life at the school.",
+  "theme": "linen",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Meridian — Wealth Advisory",
+  "slug": "meridian-wealth",
+  "category": "finance",
+  "tags": [
+    "wealth",
+    "advisory",
+    "dark",
+    "luxury"
+  ],
+  "description": "Discreet advisory page for a private client practice.",
+  "theme": "noir",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A. Reyes — Developer Portfolio</title>
+<meta name="description" content="Understated engineering portfolio: work, writing and a short about.">
+<meta property="og:title" content="A. Reyes — Developer Portfolio">
+<meta property="og:description" content="Understated engineering portfolio: work, writing and a short about.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav nav-minimal" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" href="#top">A. Reyes</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#work">Work</a><a data-editable="nav.link2" href="#features">About</a><a data-editable="nav.link3" href="#contact">Contact</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-stacked">
+  <div class="wrap">
+    <h1 class="display" data-editable="hero.title">I build software that stays simple as it grows</h1>
+    <div class="hero-stacked-row">
+      <p class="lede" data-editable="hero.subtitle">Backend and infrastructure engineer. Currently working on developer tooling and distributed systems.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="See recent work button" href="#work">See recent work</a>
+        <a class="btn btn-ghost" data-editable="hero.ctaAlt" data-editable-label="Get in touch button" href="#contact">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-media wide"><img data-editable="hero.image" src="https://picsum.photos/seed/mono-code/1600/900" alt="Preview" loading="lazy" width="1600" height="900"></div>
+  </div>
+</section>
+
+<section class="section gallery" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="gallery.title">Selected work</h2>
+    </div>
+    <div class="gallery-grid">
+      <figure class="shot">
+        <img data-editable="gallery.image1" src="https://picsum.photos/seed/proj-ledger/800/600" alt="Ledger — double-entry accounting engine handling 40k writes/sec" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption1">Ledger — double-entry accounting engine handling 40k writes/sec</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image2" src="https://picsum.photos/seed/proj-atlas/800/600" alt="Atlas — internal platform that cut deploy time by 70%" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption2">Atlas — internal platform that cut deploy time by 70%</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image3" src="https://picsum.photos/seed/proj-cache/800/600" alt="Warden — open-source cache with predictable eviction" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption3">Warden — open-source cache with predictable eviction</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image4" src="https://picsum.photos/seed/proj-observe/800/600" alt="Signalbox — tracing library adopted across 30 services" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption4">Signalbox — tracing library adopted across 30 services</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image5" src="https://picsum.photos/seed/proj-queue/800/600" alt="Tideway — durable queue with exactly-once delivery" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption5">Tideway — durable queue with exactly-once delivery</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image6" src="https://picsum.photos/seed/proj-cli/800/600" alt="Loom — CLI that scaffolds services in one command" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption6">Loom — CLI that scaffolds services in one command</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section features" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="features.title">How I work</h2>
+      
+    </div>
+    <div class="grid grid-3">
+      <article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3z"/></svg></span>
+        <h3 data-editable="features.title1">Boring on purpose</h3>
+        <p data-editable="features.body1">I reach for proven tools first and reserve novelty for the actual problem.</p>
+      </article><article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6m6-12 6 6-6 6"/></svg></span>
+        <h3 data-editable="features.title2">Write it down</h3>
+        <p data-editable="features.body2">Design docs before code. It is cheaper to argue in a document.</p>
+      </article><article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9z"/></svg></span>
+        <h3 data-editable="features.title3">Own the outcome</h3>
+        <p data-editable="features.body3">I stay with a system through the on-call rotation that follows.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 data-editable="contact.title">Get in touch</h2>
+      <p class="section-intro" data-editable="contact.intro">We reply to every message within one business day.</p>
+      <ul class="contact-list">
+        <li><span>Email</span><a data-editable="contact.email" href="mailto:hello@example.com">hello@example.com</a></li>
+        <li><span>Phone</span><a data-editable="contact.phone" href="tel:+15550102288">+1 (555) 010-2288</a></li>
+        <li><span>Address</span><p data-editable="contact.address">Lisbon, Portugal — open to remote</p></li>
+        
+      </ul>
+    </div>
+    <form class="contact-form" novalidate>
+      <label>Name<input type="text" name="name" placeholder="Your name" required></label>
+      <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+      <label>Message<textarea name="message" rows="4" placeholder="How can we help?"></textarea></label>
+      <button class="btn btn-primary" type="submit" data-editable="contact.submit">Send message</button>
+      <p class="form-note">This form is a starting point — connect it to your own backend or a form service.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">A. Reyes</a>
+      <p data-editable="footer.note">Available for contract work from March.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#work">Work</a><a data-editable="footer.link2" href="#features">About</a><a data-editable="footer.link3" href="#contact">Contact</a>
+    </nav>
+    <nav class="footer-social" aria-label="Social">
+      <a data-editable="footer.social1" href="#" rel="noopener">GitHub</a><a data-editable="footer.social2" href="#" rel="noopener">Writing</a><a data-editable="footer.social3" href="#contact" rel="noopener">Email</a>
+    </nav>
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 A. Reyes. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

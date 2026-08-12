@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Stratus — Cloud Platform</title>
+<meta name="description" content="Cloud infrastructure page with regions, pricing and technical depth.">
+<meta property="og:title" content="Stratus — Cloud Platform">
+<meta property="og:description" content="Cloud infrastructure page with regions, pricing and technical depth.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" data-editable-label="Brand name" href="#top">Stratus</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#features">Features</a><a data-editable="nav.link2" href="#how">How it works</a><a data-editable="nav.link3" href="#pricing">Pricing</a><a data-editable="nav.link4" href="#faq">FAQ</a>
+    </nav>
+    <div class="nav-actions"><a class="btn btn-primary" data-editable="nav.cta" data-editable-label="Launch an instance button" href="#pricing">Launch an instance</a></div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-centered">
+  <div class="wrap hero-inner">
+    <p class="eyebrow" data-editable="hero.eyebrow">Managed compute</p>
+    <h1 data-editable="hero.title" data-editable-label="Hero headline">Servers you can reason about</h1>
+    <p class="lede" data-editable="hero.subtitle" data-editable-label="Hero subtitle">Predictable pricing, plain configuration and no service you have never heard of appearing on the bill.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Launch an instance button" href="#pricing">Launch an instance</a>
+      <a class="btn btn-ghost" data-editable="hero.ctaAlt" data-editable-label="Read the docs button" href="#features">Read the docs</a>
+    </div>
+    <div class="hero-media"><img data-editable="hero.image" data-editable-label="Hero image" src="https://picsum.photos/seed/stratus-cloud/1600/1000" alt="Product preview" loading="lazy" width="1200" height="750"></div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat">
+      <span class="stat-value" data-editable="stats.value1">12</span>
+      <span class="stat-label" data-editable="stats.label1">Regions</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value2">$0</span>
+      <span class="stat-label" data-editable="stats.label2">Egress to the internet</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value3">45s</span>
+      <span class="stat-label" data-editable="stats.label3">Provision time</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value4">99.99%</span>
+      <span class="stat-label" data-editable="stats.label4">Compute SLA</span>
+    </div>
+  </div>
+</section>
+
+<section class="section features" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="features.title">Built for the way you work</h2>
+      
+    </div>
+    <div class="bento">
+      <article class="card bento-1">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20V10m6 10V4m6 16v-7m4 7H3"/></svg></span>
+        <h3 data-editable="features.title1">Flat pricing</h3>
+        <p data-editable="features.body1">One rate per vCPU hour. No committed use discounts to decode.</p>
+      </article><article class="card bento-2">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 20v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2M9.5 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm11 12v-2a4 4 0 0 0-3-3.9M16 2.1a4 4 0 0 1 0 7.8"/></svg></span>
+        <h3 data-editable="features.title2">Real support</h3>
+        <p data-editable="features.body2">An engineer replies, in your timezone, within fifteen minutes.</p>
+      </article><article class="card bento-3">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5zm9 11-9 5-9-5"/></svg></span>
+        <h3 data-editable="features.title3">Managed databases</h3>
+        <p data-editable="features.body3">Postgres and Redis with point-in-time restore.</p>
+      </article><article class="card bento-4">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h12v10H6V11zm3 0V7a3 3 0 0 1 6 0v4"/></svg></span>
+        <h3 data-editable="features.title4">Private networking</h3>
+        <p data-editable="features.body4">VPC by default, with peering across regions.</p>
+      </article><article class="card bento-5">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 6-6 6 6 6m6-12 6 6-6 6"/></svg></span>
+        <h3 data-editable="features.title5">Terraform native</h3>
+        <p data-editable="features.body5">The provider is written by the same team as the API.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section steps" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="steps.title">How it works</h2>
+    </div>
+    <ol class="step-list">
+      <li class="step">
+        <span class="step-num">01</span>
+        <h3 data-editable="steps.title1">Create a project</h3>
+        <p data-editable="steps.body1">Sign up with a card and you are provisioned immediately.</p>
+      </li><li class="step">
+        <span class="step-num">02</span>
+        <h3 data-editable="steps.title2">Define infrastructure</h3>
+        <p data-editable="steps.body2">Terraform, CLI or console — same result either way.</p>
+      </li><li class="step">
+        <span class="step-num">03</span>
+        <h3 data-editable="steps.title3">Scale</h3>
+        <p data-editable="steps.body3">Resize live with no rebuild and no downtime.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="pricing.title">Simple pricing</h2>
+      <p class="section-intro" data-editable="pricing.intro">No contracts. Cancel whenever you like.</p>
+    </div>
+    <div class="grid grid-3">
+      <article class="plan">
+        
+        <h3 data-editable="pricing.name1">Starter</h3>
+        <p class="plan-price"><span data-editable="pricing.price1">$0</span><small data-editable="pricing.cadence1">/mo</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p1f1">1 workspace</li><li data-editable="pricing.p1f2">Community support</li><li data-editable="pricing.p1f3">Core features</li>
+        </ul>
+        <a class="btn btn-outline" data-editable="pricing.cta1" data-editable-label="Start free button" href="#contact">Start free</a>
+      </article><article class="plan plan-featured">
+        <span class="plan-flag" data-editable="pricing.flag2">Most popular</span>
+        <h3 data-editable="pricing.name2">Growth</h3>
+        <p class="plan-price"><span data-editable="pricing.price2">$29</span><small data-editable="pricing.cadence2">/mo</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p2f1">Unlimited workspaces</li><li data-editable="pricing.p2f2">Priority support</li><li data-editable="pricing.p2f3">Advanced analytics</li><li data-editable="pricing.p2f4">Integrations</li>
+        </ul>
+        <a class="btn btn-primary" data-editable="pricing.cta2" data-editable-label="Choose Growth button" href="#contact">Choose Growth</a>
+      </article><article class="plan">
+        
+        <h3 data-editable="pricing.name3">Scale</h3>
+        <p class="plan-price"><span data-editable="pricing.price3">$99</span><small data-editable="pricing.cadence3">/mo</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p3f1">SSO and SCIM</li><li data-editable="pricing.p3f2">Dedicated manager</li><li data-editable="pricing.p3f3">Custom SLAs</li><li data-editable="pricing.p3f4">Audit logs</li>
+        </ul>
+        <a class="btn btn-outline" data-editable="pricing.cta3" data-editable-label="Talk to sales button" href="#contact">Talk to sales</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" id="faq">
+  <div class="wrap narrow">
+    <div class="section-head"><h2 data-editable="faq.title">Frequently asked</h2></div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary data-editable="faq.q1">Do you charge for egress?</summary>
+        <p data-editable="faq.a1">No. Traffic out to the internet is included.</p>
+      </details><details class="faq-item">
+        <summary data-editable="faq.q2">Can we migrate from a hyperscaler?</summary>
+        <p data-editable="faq.a2">Yes, and our team will do the first workload with you at no cost.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Stratus</a>
+      <p data-editable="footer.note">Independent infrastructure company since 2016.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#features">Features</a><a data-editable="footer.link2" href="#how">How it works</a><a data-editable="footer.link3" href="#pricing">Pricing</a><a data-editable="footer.link4" href="#faq">FAQ</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Stratus. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

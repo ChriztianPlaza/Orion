@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Margin — Writing</title>
+<meta name="description" content="Reading-first blog layout with a clean index and generous type.">
+<meta property="og:title" content="Margin — Writing">
+<meta property="og:description" content="Reading-first blog layout with a clean index and generous type.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600;700&family=Newsreader:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav nav-minimal" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" href="#top">Margin</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#work">Archive</a><a data-editable="nav.link2" href="#contact">About</a><a data-editable="nav.link3" href="#contact">Subscribe</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-stacked">
+  <div class="wrap">
+    <h1 class="display" data-editable="hero.title">Notes on building things carefully</h1>
+    <div class="hero-stacked-row">
+      <p class="lede" data-editable="hero.subtitle">A newsletter and archive about software, craft, and the parts of both that do not fit in a thread.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Subscribe button" href="#contact">Subscribe</a>
+        <a class="btn btn-ghost" data-editable="hero.ctaAlt" data-editable-label="Read the archive button" href="#work">Read the archive</a>
+      </div>
+    </div>
+    <div class="hero-media wide"><img data-editable="hero.image" src="https://picsum.photos/seed/margin-desk/1600/900" alt="Preview" loading="lazy" width="1600" height="900"></div>
+  </div>
+</section>
+
+<section class="section gallery" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="gallery.title">Selected work</h2>
+    </div>
+    <div class="gallery-grid">
+      <figure class="shot">
+        <img data-editable="gallery.image1" src="https://picsum.photos/seed/post-1/800/600" alt="The cost of a small abstraction — 12 min read" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption1">The cost of a small abstraction — 12 min read</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image2" src="https://picsum.photos/seed/post-2/800/600" alt="Why your migration keeps slipping — 8 min read" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption2">Why your migration keeps slipping — 8 min read</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image3" src="https://picsum.photos/seed/post-3/800/600" alt="Notes on writing design documents — 15 min read" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption3">Notes on writing design documents — 15 min read</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image4" src="https://picsum.photos/seed/post-4/800/600" alt="Against the redesign — 6 min read" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption4">Against the redesign — 6 min read</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image5" src="https://picsum.photos/seed/post-5/800/600" alt="What I learned deleting 40k lines — 11 min read" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption5">What I learned deleting 40k lines — 11 min read</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image6" src="https://picsum.photos/seed/post-6/800/600" alt="Interfaces that age well — 9 min read" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption6">Interfaces that age well — 9 min read</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 data-editable="contact.title">Get in touch</h2>
+      <p class="section-intro" data-editable="contact.intro">We reply to every message within one business day.</p>
+      <ul class="contact-list">
+        <li><span>Email</span><a data-editable="contact.email" href="mailto:hello@example.com">hello@example.com</a></li>
+        <li><span>Phone</span><a data-editable="contact.phone" href="tel:">—</a></li>
+        <li><span>Address</span><p data-editable="contact.address">Written from Copenhagen</p></li>
+        
+      </ul>
+    </div>
+    <form class="contact-form" novalidate>
+      <label>Name<input type="text" name="name" placeholder="Your name" required></label>
+      <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+      <label>Message<textarea name="message" rows="4" placeholder="How can we help?"></textarea></label>
+      <button class="btn btn-primary" type="submit" data-editable="contact.submit">Send message</button>
+      <p class="form-note">This form is a starting point — connect it to your own backend or a form service.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Margin</a>
+      <p data-editable="footer.note">Roughly monthly. Always free.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#work">Archive</a><a data-editable="footer.link2" href="#contact">About</a><a data-editable="footer.link3" href="#contact">Subscribe</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Margin. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

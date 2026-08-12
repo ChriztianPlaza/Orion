@@ -1,0 +1,28 @@
+{
+  "name": "Harbour — Marketing Agency",
+  "slug": "harbour-marketing",
+  "category": "agency",
+  "tags": [
+    "marketing",
+    "growth",
+    "light",
+    "agency"
+  ],
+  "description": "Results-led marketing agency page with proof, process and pricing.",
+  "theme": "slate",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

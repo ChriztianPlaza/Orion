@@ -1,0 +1,28 @@
+{
+  "name": "Pixelforge — Game Studio",
+  "slug": "pixel-game-studio",
+  "category": "gaming",
+  "tags": [
+    "gaming",
+    "indie",
+    "dark",
+    "studio"
+  ],
+  "description": "Indie game studio page with a featured title, trailer slot and press kit.",
+  "theme": "aurora",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

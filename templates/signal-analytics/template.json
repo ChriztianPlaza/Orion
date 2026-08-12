@@ -1,0 +1,28 @@
+{
+  "name": "Signal — Product Analytics",
+  "slug": "signal-analytics",
+  "category": "saas",
+  "tags": [
+    "analytics",
+    "data",
+    "dark",
+    "b2b"
+  ],
+  "description": "Data-forward SaaS page with alternating feature rows and a metrics band.",
+  "theme": "cobalt",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Wander — Travel",
+  "slug": "wander-travel",
+  "category": "travel",
+  "tags": [
+    "travel",
+    "tours",
+    "warm",
+    "light"
+  ],
+  "description": "Trip-led travel site with itineraries, gallery and booking enquiry.",
+  "theme": "sandstone",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

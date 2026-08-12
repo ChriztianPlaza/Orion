@@ -1,0 +1,28 @@
+{
+  "name": "Grain — Portrait Studio",
+  "slug": "grain-studio-portraits",
+  "category": "photography",
+  "tags": [
+    "photography",
+    "portrait",
+    "light",
+    "studio"
+  ],
+  "description": "Bright, editorial portrait studio page with session types and booking.",
+  "theme": "paper",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

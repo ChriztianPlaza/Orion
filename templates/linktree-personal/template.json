@@ -1,0 +1,26 @@
+{
+  "name": "Hub — Personal Links",
+  "slug": "linktree-personal",
+  "category": "personal",
+  "tags": [
+    "links",
+    "creator",
+    "dark",
+    "mobile"
+  ],
+  "description": "Mobile-first link hub for creators, with a single column of destinations.",
+  "theme": "aurora",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

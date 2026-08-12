@@ -1,0 +1,28 @@
+{
+  "name": "Roast — Coffee Subscription",
+  "slug": "roast-coffee-subscription",
+  "category": "ecommerce",
+  "tags": [
+    "coffee",
+    "subscription",
+    "warm",
+    "shop"
+  ],
+  "description": "Coffee subscription store with plans, origins and delivery.",
+  "theme": "sandstone",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Assembly — Conference</title>
+<meta name="description" content="Conference landing page with speakers, schedule and ticket tiers.">
+<meta property="og:title" content="Assembly — Conference">
+<meta property="og:description" content="Conference landing page with speakers, schedule and ticket tiers.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" data-editable-label="Brand name" href="#top">Assembly</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#team">Speakers</a><a data-editable="nav.link2" href="#how">Schedule</a><a data-editable="nav.link3" href="#pricing">Tickets</a><a data-editable="nav.link4" href="#contact">Venue</a>
+    </nav>
+    <div class="nav-actions"><a class="btn btn-primary" data-editable="nav.cta" data-editable-label="Get tickets button" href="#pricing">Get tickets</a></div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-centered">
+  <div class="wrap hero-inner">
+    <p class="eyebrow" data-editable="hero.eyebrow">18 — 19 September · Copenhagen</p>
+    <h1 data-editable="hero.title" data-editable-label="Hero headline">Two days about building software that lasts</h1>
+    <p class="lede" data-editable="hero.subtitle" data-editable-label="Hero subtitle">Sixteen talks, no vendor pitches, and enough break time to actually talk to people.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Get tickets button" href="#pricing">Get tickets</a>
+      <a class="btn btn-ghost" data-editable="hero.ctaAlt" data-editable-label="See speakers button" href="#team">See speakers</a>
+    </div>
+    <div class="hero-media"><img data-editable="hero.image" data-editable-label="Hero image" src="https://picsum.photos/seed/conference-hall/1600/1000" alt="Product preview" loading="lazy" width="1200" height="750"></div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat">
+      <span class="stat-value" data-editable="stats.value1">16</span>
+      <span class="stat-label" data-editable="stats.label1">Talks</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value2">400</span>
+      <span class="stat-label" data-editable="stats.label2">Attendees</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value3">2</span>
+      <span class="stat-label" data-editable="stats.label3">Days</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value4">0</span>
+      <span class="stat-label" data-editable="stats.label4">Sponsor keynotes</span>
+    </div>
+  </div>
+</section>
+
+<section class="section team" id="team">
+  <div class="wrap">
+    <div class="section-head"><h2 data-editable="team.title">The team</h2></div>
+    <div class="grid grid-4">
+      <article class="member">
+        <span class="avatar" aria-hidden="true" style="background:var(--accent)1f;color:var(--accent)">AM</span>
+        <h3 data-editable="team.name1">Dr. Ada Mensah</h3>
+        <p data-editable="team.role1">Distributed systems</p>
+      </article><article class="member">
+        <span class="avatar" aria-hidden="true" style="background:var(--accent)1f;color:var(--accent)">RS</span>
+        <h3 data-editable="team.name2">Ravi Subramanian</h3>
+        <p data-editable="team.role2">Platform engineering</p>
+      </article><article class="member">
+        <span class="avatar" aria-hidden="true" style="background:var(--accent)1f;color:var(--accent)">JL</span>
+        <h3 data-editable="team.name3">Johanna Lind</h3>
+        <p data-editable="team.role3">Design systems</p>
+      </article><article class="member">
+        <span class="avatar" aria-hidden="true" style="background:var(--accent)1f;color:var(--accent)">MI</span>
+        <h3 data-editable="team.name4">Marcus Ilori</h3>
+        <p data-editable="team.role4">Reliability</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section steps" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="steps.title">How it works</h2>
+    </div>
+    <ol class="step-list">
+      <li class="step">
+        <span class="step-num">01</span>
+        <h3 data-editable="steps.title1">Day one — Foundations</h3>
+        <p data-editable="steps.body1">Architecture, data and the decisions that are expensive to reverse.</p>
+      </li><li class="step">
+        <span class="step-num">02</span>
+        <h3 data-editable="steps.title2">Day two — Operations</h3>
+        <p data-editable="steps.body2">Reliability, on-call and running things you did not build.</p>
+      </li><li class="step">
+        <span class="step-num">03</span>
+        <h3 data-editable="steps.title3">Both evenings</h3>
+        <p data-editable="steps.body3">Dinner included, seated in small groups by interest.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="pricing.title">Simple pricing</h2>
+      <p class="section-intro" data-editable="pricing.intro">No contracts. Cancel whenever you like.</p>
+    </div>
+    <div class="grid grid-3">
+      <article class="plan">
+        
+        <h3 data-editable="pricing.name1">Early</h3>
+        <p class="plan-price"><span data-editable="pricing.price1">$390</span><small data-editable="pricing.cadence1">sold out</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p1f1">Both days</li><li data-editable="pricing.p1f2">Dinner included</li><li data-editable="pricing.p1f3">Recordings</li>
+        </ul>
+        <a class="btn btn-outline" data-editable="pricing.cta1" data-editable-label="Sold out button" href="#contact">Sold out</a>
+      </article><article class="plan plan-featured">
+        <span class="plan-flag" data-editable="pricing.flag2">Most popular</span>
+        <h3 data-editable="pricing.name2">Standard</h3>
+        <p class="plan-price"><span data-editable="pricing.price2">$490</span><small data-editable="pricing.cadence2">per ticket</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p2f1">Both days</li><li data-editable="pricing.p2f2">Dinner included</li><li data-editable="pricing.p2f3">Recordings</li><li data-editable="pricing.p2f4">Workshop access</li>
+        </ul>
+        <a class="btn btn-primary" data-editable="pricing.cta2" data-editable-label="Buy ticket button" href="#contact">Buy ticket</a>
+      </article><article class="plan">
+        
+        <h3 data-editable="pricing.name3">Team of 5</h3>
+        <p class="plan-price"><span data-editable="pricing.price3">$1,950</span><small data-editable="pricing.cadence3">5 tickets</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p3f1">Five tickets</li><li data-editable="pricing.p3f2">Reserved seating</li><li data-editable="pricing.p3f3">Invoice payment</li>
+        </ul>
+        <a class="btn btn-outline" data-editable="pricing.cta3" data-editable-label="Buy tickets button" href="#contact">Buy tickets</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" id="faq">
+  <div class="wrap narrow">
+    <div class="section-head"><h2 data-editable="faq.title">Frequently asked</h2></div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary data-editable="faq.q1">Are talks recorded?</summary>
+        <p data-editable="faq.a1">Yes, and released free three weeks after the event.</p>
+      </details><details class="faq-item">
+        <summary data-editable="faq.q2">Is there a diversity programme?</summary>
+        <p data-editable="faq.a2">Yes — twenty funded tickets including travel. Applications open in June.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 data-editable="contact.title">Get in touch</h2>
+      <p class="section-intro" data-editable="contact.intro">We reply to every message within one business day.</p>
+      <ul class="contact-list">
+        <li><span>Email</span><a data-editable="contact.email" href="mailto:hello@example.com">hello@example.com</a></li>
+        <li><span>Phone</span><a data-editable="contact.phone" href="tel:+4533001122">+45 33 00 11 22</a></li>
+        <li><span>Address</span><p data-editable="contact.address">Papirøen Hall, Copenhagen</p></li>
+        <li><span>Hours</span><p data-editable="contact.hours">Doors 8:30am both days</p></li>
+      </ul>
+    </div>
+    <form class="contact-form" novalidate>
+      <label>Name<input type="text" name="name" placeholder="Your name" required></label>
+      <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+      <label>Message<textarea name="message" rows="4" placeholder="How can we help?"></textarea></label>
+      <button class="btn btn-primary" type="submit" data-editable="contact.submit">Send message</button>
+      <p class="form-note">This form is a starting point — connect it to your own backend or a form service.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Assembly</a>
+      <p data-editable="footer.note">Code of conduct published and enforced.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#team">Speakers</a><a data-editable="footer.link2" href="#how">Schedule</a><a data-editable="footer.link3" href="#pricing">Tickets</a><a data-editable="footer.link4" href="#contact">Venue</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Assembly. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

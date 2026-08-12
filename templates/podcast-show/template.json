@@ -1,0 +1,28 @@
+{
+  "name": "Frequency — Podcast",
+  "slug": "podcast-show",
+  "category": "creative",
+  "tags": [
+    "podcast",
+    "audio",
+    "dark",
+    "media"
+  ],
+  "description": "Podcast homepage with episodes, platforms and sponsorship information.",
+  "theme": "midnight",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Quarry — Property Developer",
+  "slug": "quarry-property-developer",
+  "category": "real-estate",
+  "tags": [
+    "property",
+    "development",
+    "warm",
+    "listings"
+  ],
+  "description": "Development launch page with plot availability and a reservation path.",
+  "theme": "sandstone",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

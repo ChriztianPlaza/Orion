@@ -1,0 +1,28 @@
+{
+  "name": "Ledger — Accounting",
+  "slug": "ledger-accounting",
+  "category": "finance",
+  "tags": [
+    "accounting",
+    "finance",
+    "light",
+    "services"
+  ],
+  "description": "Calm, trustworthy accounting practice site with transparent pricing.",
+  "theme": "porcelain",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

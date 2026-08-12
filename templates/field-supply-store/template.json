@@ -1,0 +1,28 @@
+{
+  "name": "Field Supply — Store",
+  "slug": "field-supply-store",
+  "category": "ecommerce",
+  "tags": [
+    "ecommerce",
+    "shop",
+    "light",
+    "products"
+  ],
+  "description": "Product-led store front with a featured range, story and stockists.",
+  "theme": "linen",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Nova — AI Platform",
+  "slug": "nova-ai-platform",
+  "category": "saas",
+  "tags": [
+    "ai",
+    "dark",
+    "startup",
+    "minimal"
+  ],
+  "description": "A restrained, high-contrast launch page for an AI product. Big type, hairline borders, and a bento feature grid.",
+  "theme": "midnight",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

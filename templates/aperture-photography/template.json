@@ -1,0 +1,28 @@
+{
+  "name": "Aperture — Photographer",
+  "slug": "aperture-photography",
+  "category": "photography",
+  "tags": [
+    "photography",
+    "gallery",
+    "dark",
+    "luxury"
+  ],
+  "description": "Full-bleed photography portfolio with a cover hero and gold accents.",
+  "theme": "noir",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

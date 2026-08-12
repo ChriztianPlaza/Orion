@@ -1,0 +1,28 @@
+{
+  "name": "Cadence — CRM",
+  "slug": "cadence-crm",
+  "category": "saas",
+  "tags": [
+    "crm",
+    "sales",
+    "light",
+    "b2b"
+  ],
+  "description": "Clean, light B2B layout for a sales or customer platform.",
+  "theme": "slate",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

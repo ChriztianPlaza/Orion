@@ -1,0 +1,28 @@
+{
+  "name": "Atelier — Designer Portfolio",
+  "slug": "atelier-designer",
+  "category": "portfolio",
+  "tags": [
+    "designer",
+    "editorial",
+    "light",
+    "serif"
+  ],
+  "description": "Serif-led portfolio with an editorial hero and case-study grid.",
+  "theme": "porcelain",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

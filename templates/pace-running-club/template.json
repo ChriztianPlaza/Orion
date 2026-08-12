@@ -1,0 +1,28 @@
+{
+  "name": "Pace — Running Club",
+  "slug": "pace-running-club",
+  "category": "fitness",
+  "tags": [
+    "running",
+    "community",
+    "dark",
+    "club"
+  ],
+  "description": "Community running club page with sessions, routes and membership.",
+  "theme": "cobalt",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

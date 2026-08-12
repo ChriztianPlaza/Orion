@@ -1,0 +1,28 @@
+{
+  "name": "Kite — Fintech Startup",
+  "slug": "kite-fintech",
+  "category": "startup",
+  "tags": [
+    "fintech",
+    "money",
+    "dark",
+    "trust"
+  ],
+  "description": "Trust-forward fintech layout with proof points above the fold.",
+  "theme": "forest",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

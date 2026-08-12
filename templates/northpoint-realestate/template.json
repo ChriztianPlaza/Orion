@@ -1,0 +1,28 @@
+{
+  "name": "Northpoint — Real Estate",
+  "slug": "northpoint-realestate",
+  "category": "real-estate",
+  "tags": [
+    "real-estate",
+    "property",
+    "light",
+    "listings"
+  ],
+  "description": "Property listing page with a cover hero, featured homes and agent contact.",
+  "theme": "linen",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

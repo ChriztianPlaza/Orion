@@ -1,0 +1,28 @@
+{
+  "name": "Summit — Roofing",
+  "slug": "summit-roofing",
+  "category": "construction",
+  "tags": [
+    "roofing",
+    "trades",
+    "light",
+    "local"
+  ],
+  "description": "Straightforward trades page with services, guarantees and free quotes.",
+  "theme": "slate",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

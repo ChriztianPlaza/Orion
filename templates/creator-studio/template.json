@@ -1,0 +1,28 @@
+{
+  "name": "Studio — Creator",
+  "slug": "creator-studio",
+  "category": "personal",
+  "tags": [
+    "creator",
+    "influencer",
+    "colorful",
+    "dark"
+  ],
+  "description": "High-contrast creator page with sponsorship info and audience stats.",
+  "theme": "neon",
+  "colorScheme": "colorful",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

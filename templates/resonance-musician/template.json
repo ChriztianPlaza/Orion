@@ -1,0 +1,28 @@
+{
+  "name": "Resonance — Musician",
+  "slug": "resonance-musician",
+  "category": "portfolio",
+  "tags": [
+    "music",
+    "artist",
+    "dark",
+    "gradient"
+  ],
+  "description": "Musician page with releases, tour dates and booking.",
+  "theme": "aurora",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

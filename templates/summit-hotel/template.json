@@ -1,0 +1,28 @@
+{
+  "name": "Summit — Boutique Hotel",
+  "slug": "summit-hotel",
+  "category": "travel",
+  "tags": [
+    "hotel",
+    "hospitality",
+    "dark",
+    "luxury"
+  ],
+  "description": "Hotel site with rooms, amenities and a direct booking path.",
+  "theme": "noir",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

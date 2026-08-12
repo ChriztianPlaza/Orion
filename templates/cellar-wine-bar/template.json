@@ -1,0 +1,28 @@
+{
+  "name": "Cellar — Wine Bar",
+  "slug": "cellar-wine-bar",
+  "category": "restaurant",
+  "tags": [
+    "wine",
+    "bar",
+    "dark",
+    "intimate"
+  ],
+  "description": "Intimate wine bar page with list, small plates and booking.",
+  "theme": "noir",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

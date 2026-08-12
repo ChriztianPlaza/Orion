@@ -1,0 +1,28 @@
+{
+  "name": "Quiet Room — Therapy Practice",
+  "slug": "quiet-room-therapy",
+  "category": "healthcare",
+  "tags": [
+    "therapy",
+    "counselling",
+    "light",
+    "calm"
+  ],
+  "description": "Gentle, low-pressure therapy practice page with approach and fees.",
+  "theme": "linen",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

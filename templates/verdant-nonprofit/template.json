@@ -1,0 +1,28 @@
+{
+  "name": "Verdant — Nonprofit",
+  "slug": "verdant-nonprofit",
+  "category": "business",
+  "tags": [
+    "nonprofit",
+    "charity",
+    "dark",
+    "impact"
+  ],
+  "description": "Cause-led nonprofit site with impact figures, programmes and donation path.",
+  "theme": "forest",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

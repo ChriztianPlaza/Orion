@@ -1,0 +1,28 @@
+{
+  "name": "Bloom — Boutique",
+  "slug": "bloom-boutique",
+  "category": "ecommerce",
+  "tags": [
+    "ecommerce",
+    "fashion",
+    "light",
+    "boutique"
+  ],
+  "description": "Soft, feminine boutique store page with lookbook and collections.",
+  "theme": "blush",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

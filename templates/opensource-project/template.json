@@ -1,0 +1,28 @@
+{
+  "name": "Kernel — Open Source",
+  "slug": "opensource-project",
+  "category": "developer",
+  "tags": [
+    "open-source",
+    "developer",
+    "dark",
+    "docs"
+  ],
+  "description": "Open-source project homepage with install, docs and contributor info.",
+  "theme": "midnight",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

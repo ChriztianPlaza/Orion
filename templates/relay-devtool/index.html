@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>relay — Developer Tool</title>
+<meta name="description" content="Monospace, terminal-first landing page for a CLI or developer platform.">
+<meta property="og:title" content="relay — Developer Tool">
+<meta property="og:description" content="Monospace, terminal-first landing page for a CLI or developer platform.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav nav-minimal" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" href="#top">relay</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#features">Docs</a><a data-editable="nav.link2" href="#how">Install</a><a data-editable="nav.link3" href="#pricing">Pricing</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-terminal">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" data-editable="hero.eyebrow">v3.2 released</p>
+      <h1 data-editable="hero.title">Preview environments for every branch</h1>
+      <p class="lede" data-editable="hero.subtitle">One command spins up a full stack — database, queues, secrets — and tears it down when the branch merges.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Install the CLI button" href="#how">Install the CLI</a>
+        <a class="btn btn-outline" data-editable="hero.ctaAlt" data-editable-label="Browse docs button" href="#features">Browse docs</a>
+      </div>
+    </div>
+    <div class="terminal" aria-hidden="true">
+      <div class="terminal-bar"><i></i><i></i><i></i></div>
+      <pre class="terminal-body" data-editable="hero.code" data-editable-label="Code sample">$ npx create-app my-project
+<span class="ok">✓</span> Installing dependencies
+<span class="ok">✓</span> Generating routes
+<span class="ok">✓</span> Ready in 1.2s
+
+  Local  http://localhost:3000</pre>
+    </div>
+  </div>
+</section>
+
+<section class="section features" id="features">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="features.title">Everything you need</h2>
+      
+    </div>
+    <div class="grid grid-3">
+      <article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z"/></svg></span>
+        <h3 data-editable="features.title1">Instant environments</h3>
+        <p data-editable="features.body1">Boot a complete stack in about eleven seconds, seeded and ready.</p>
+      </article><article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 9 5-9 5-9-5 9-5zm9 11-9 5-9-5"/></svg></span>
+        <h3 data-editable="features.title2">Ephemeral databases</h3>
+        <p data-editable="features.body2">Branch your data the same way you branch your code.</p>
+      </article><article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 11h12v10H6V11zm3 0V7a3 3 0 0 1 6 0v4"/></svg></span>
+        <h3 data-editable="features.title3">Secrets that stay secret</h3>
+        <p data-editable="features.body3">Scoped, rotated and never written to a log line.</p>
+      </article><article class="card">
+        <span class="card-icon"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 0c3 3 3 15 0 18M3 12h18"/></svg></span>
+        <h3 data-editable="features.title4">Anywhere it runs</h3>
+        <p data-editable="features.body4">Local Docker, your cluster, or ours — same manifest.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section steps" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="steps.title">How it works</h2>
+    </div>
+    <ol class="step-list">
+      <li class="step">
+        <span class="step-num">01</span>
+        <h3 data-editable="steps.title1">Install</h3>
+        <p data-editable="steps.body1">brew install relay, or grab a single static binary.</p>
+      </li><li class="step">
+        <span class="step-num">02</span>
+        <h3 data-editable="steps.title2">Link a repo</h3>
+        <p data-editable="steps.body2">Relay reads your compose or manifest file and infers services.</p>
+      </li><li class="step">
+        <span class="step-num">03</span>
+        <h3 data-editable="steps.title3">Open a pull request</h3>
+        <p data-editable="steps.body3">A URL appears on the PR before CI even finishes.</p>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<section class="section pricing" id="pricing">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="pricing.title">Simple pricing</h2>
+      <p class="section-intro" data-editable="pricing.intro">No contracts. Cancel whenever you like.</p>
+    </div>
+    <div class="grid grid-2">
+      <article class="plan">
+        
+        <h3 data-editable="pricing.name1">Solo</h3>
+        <p class="plan-price"><span data-editable="pricing.price1">$0</span><small data-editable="pricing.cadence1">/mo</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p1f1">3 environments</li><li data-editable="pricing.p1f2">Community Discord</li><li data-editable="pricing.p1f3">Local runner</li>
+        </ul>
+        <a class="btn btn-outline" data-editable="pricing.cta1" data-editable-label="Get started button" href="#contact">Get started</a>
+      </article><article class="plan plan-featured">
+        <span class="plan-flag" data-editable="pricing.flag2">Most popular</span>
+        <h3 data-editable="pricing.name2">Team</h3>
+        <p class="plan-price"><span data-editable="pricing.price2">$24</span><small data-editable="pricing.cadence2">/user/mo</small></p>
+        <ul class="plan-features">
+          <li data-editable="pricing.p2f1">Unlimited environments</li><li data-editable="pricing.p2f2">Shared secrets</li><li data-editable="pricing.p2f3">CI integration</li><li data-editable="pricing.p2f4">SSO</li>
+        </ul>
+        <a class="btn btn-primary" data-editable="pricing.cta2" data-editable-label="Start trial button" href="#contact">Start trial</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" id="faq">
+  <div class="wrap narrow">
+    <div class="section-head"><h2 data-editable="faq.title">Frequently asked</h2></div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary data-editable="faq.q1">Does it work with monorepos?</summary>
+        <p data-editable="faq.a1">Yes. Point Relay at a workspace root and it maps each service independently.</p>
+      </details><details class="faq-item">
+        <summary data-editable="faq.q2">What happens on merge?</summary>
+        <p data-editable="faq.a2">The environment is destroyed and its resources released within a minute.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">relay</a>
+      <p data-editable="footer.note">Built by people who got tired of waiting on staging.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#features">Docs</a><a data-editable="footer.link2" href="#how">Install</a><a data-editable="footer.link3" href="#pricing">Pricing</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 relay. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

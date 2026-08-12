@@ -1,0 +1,28 @@
+{
+  "name": "Section — Architecture",
+  "slug": "portfolio-architect",
+  "category": "portfolio",
+  "tags": [
+    "architecture",
+    "portfolio",
+    "light",
+    "minimal"
+  ],
+  "description": "Architecture practice portfolio with project index and studio information.",
+  "theme": "paper",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

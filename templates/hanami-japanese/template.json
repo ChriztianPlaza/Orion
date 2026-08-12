@@ -1,0 +1,28 @@
+{
+  "name": "Hanami — Japanese Restaurant",
+  "slug": "hanami-japanese",
+  "category": "restaurant",
+  "tags": [
+    "restaurant",
+    "japanese",
+    "light",
+    "minimal"
+  ],
+  "description": "Quiet, precise restaurant page with a considered menu layout.",
+  "theme": "porcelain",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

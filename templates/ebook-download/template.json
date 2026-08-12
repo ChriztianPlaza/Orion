@@ -1,0 +1,26 @@
+{
+  "name": "Chapter — Ebook Landing",
+  "slug": "ebook-download",
+  "category": "landing-page",
+  "tags": [
+    "ebook",
+    "lead",
+    "light",
+    "marketing"
+  ],
+  "description": "Lead-magnet landing page for a downloadable guide.",
+  "theme": "linen",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

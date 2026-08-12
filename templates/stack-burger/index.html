@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>STACK — Burger Joint</title>
+<meta name="description" content="Loud, appetite-driven burger restaurant page with menu and ordering.">
+<meta property="og:title" content="STACK — Burger Joint">
+<meta property="og:description" content="Loud, appetite-driven burger restaurant page with menu and ordering.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" data-editable-label="Brand name" href="#top">STACK</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#menu">Menu</a><a data-editable="nav.link2" href="#contact">Locations</a><a data-editable="nav.link3" href="#contact">Order</a>
+    </nav>
+    <div class="nav-actions"><a class="btn btn-primary" data-editable="nav.cta" data-editable-label="Order now button" href="#contact">Order now</a></div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-cover" data-editable="hero.background" data-editable-type="background" data-editable-label="Hero background" style="background-image:url('https://picsum.photos/seed/burger-hero/1800/1100')">
+  <div class="hero-scrim"></div>
+  <div class="wrap hero-inner">
+    <p class="eyebrow" data-editable="hero.eyebrow">Three locations, one recipe</p>
+    <h1 data-editable="hero.title">Smashed, seared, stacked</h1>
+    <p class="lede" data-editable="hero.subtitle">Ground daily, cooked hot and fast, served in under seven minutes. That is the entire business plan.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Order now button" href="#contact">Order now</a>
+      <a class="btn btn-ghost" data-editable="hero.ctaAlt" data-editable-label="See the menu button" href="#menu">See the menu</a>
+    </div>
+  </div>
+</section>
+
+<section class="section menu" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="menu.title">Menu</h2>
+    </div>
+    <div class="menu-group">
+      <h3 class="menu-group-title" data-editable="menu.group1">Burgers</h3>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name1">The Classic</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price1">11</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc1">Two smashed patties, American cheese, pickle, house sauce.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name2">The Double Stack</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price2">15</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc2">Four patties. Consider your afternoon.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name3">Chilli Cheese</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price3">13</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc3">Fermented chilli, aged cheddar, crispy onion.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name4">The Garden</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price4">12</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc4">Charred mushroom patty, smoked mayo, tomato.</p>
+        </li>
+      </ul>
+    </div><div class="menu-group">
+      <h3 class="menu-group-title" data-editable="menu.group2">Sides &amp; shakes</h3>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g2name1">Fries</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g2price1">5</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g2desc1">Triple cooked, rosemary salt.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g2name2">Loaded fries</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g2price2">8</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g2desc2">Cheese sauce, jalapeño, pickled onion.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g2name3">Malt shake</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g2price3">6.50</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g2desc3">Vanilla, chocolate or salted caramel.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat">
+      <span class="stat-value" data-editable="stats.value1">7 min</span>
+      <span class="stat-label" data-editable="stats.label1">Average ticket time</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value2">3</span>
+      <span class="stat-label" data-editable="stats.label2">Locations</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value3">100%</span>
+      <span class="stat-label" data-editable="stats.label3">Ground on site</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value4">1</span>
+      <span class="stat-label" data-editable="stats.label4">Sauce recipe, never changed</span>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="gallery.title">Selected work</h2>
+    </div>
+    <div class="gallery-grid">
+      <figure class="shot">
+        <img data-editable="gallery.image1" src="https://picsum.photos/seed/burger-1/800/600" alt="The Classic" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption1">The Classic</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image2" src="https://picsum.photos/seed/burger-2/800/600" alt="Friday night, Bell Street" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption2">Friday night, Bell Street</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image3" src="https://picsum.photos/seed/burger-3/800/600" alt="The grill" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption3">The grill</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 data-editable="contact.title">Get in touch</h2>
+      <p class="section-intro" data-editable="contact.intro">We reply to every message within one business day.</p>
+      <ul class="contact-list">
+        <li><span>Email</span><a data-editable="contact.email" href="mailto:eat@example.com">eat@example.com</a></li>
+        <li><span>Phone</span><a data-editable="contact.phone" href="tel:+15556007788">+1 (555) 600-7788</a></li>
+        <li><span>Address</span><p data-editable="contact.address">Bell Street · Market Row · Northgate</p></li>
+        <li><span>Hours</span><p data-editable="contact.hours">Every day, 11:30am to 10pm</p></li>
+      </ul>
+    </div>
+    <form class="contact-form" novalidate>
+      <label>Name<input type="text" name="name" placeholder="Your name" required></label>
+      <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+      <label>Message<textarea name="message" rows="4" placeholder="How can we help?"></textarea></label>
+      <button class="btn btn-primary" type="submit" data-editable="contact.submit">Send message</button>
+      <p class="form-note">This form is a starting point — connect it to your own backend or a form service.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">STACK</a>
+      <p data-editable="footer.note">No reservations. Never have, never will.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#menu">Menu</a><a data-editable="footer.link2" href="#contact">Locations</a><a data-editable="footer.link3" href="#contact">Order</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 STACK. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

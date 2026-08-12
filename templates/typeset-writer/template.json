@@ -1,0 +1,28 @@
+{
+  "name": "Typeset — Writer",
+  "slug": "typeset-writer",
+  "category": "portfolio",
+  "tags": [
+    "writer",
+    "author",
+    "light",
+    "editorial"
+  ],
+  "description": "Author page with books, essays and speaking enquiries.",
+  "theme": "paper",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,26 @@
+{
+  "name": "Orbit — Waitlist",
+  "slug": "orbit-waitlist",
+  "category": "startup",
+  "tags": [
+    "waitlist",
+    "coming-soon",
+    "minimal",
+    "dark"
+  ],
+  "description": "Single-screen waitlist page. Fast to load, easy to customise, one clear action.",
+  "theme": "midnight",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

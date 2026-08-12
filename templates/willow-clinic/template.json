@@ -1,0 +1,28 @@
+{
+  "name": "Willow — Health Clinic",
+  "slug": "willow-clinic",
+  "category": "healthcare",
+  "tags": [
+    "healthcare",
+    "clinic",
+    "light",
+    "services"
+  ],
+  "description": "Reassuring clinic site with services, team and appointment booking.",
+  "theme": "porcelain",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

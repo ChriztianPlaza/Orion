@@ -1,0 +1,28 @@
+{
+  "name": "Static — Streamer",
+  "slug": "static-streamer",
+  "category": "gaming",
+  "tags": [
+    "streaming",
+    "creator",
+    "dark",
+    "colorful"
+  ],
+  "description": "Streamer page with schedule, sponsors and community links.",
+  "theme": "neon",
+  "colorScheme": "colorful",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Clan — Game Server",
+  "slug": "clan-server",
+  "category": "gaming",
+  "tags": [
+    "gaming",
+    "community",
+    "dark",
+    "terminal"
+  ],
+  "description": "Community game server page with rules, ranks and how to join.",
+  "theme": "terminal",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

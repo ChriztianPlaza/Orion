@@ -1,0 +1,28 @@
+{
+  "name": "Grind — Coffee Shop",
+  "slug": "grind-cafe",
+  "category": "restaurant",
+  "tags": [
+    "cafe",
+    "coffee",
+    "warm",
+    "local"
+  ],
+  "description": "Warm neighbourhood café site with menu, hours and location.",
+  "theme": "sandstone",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Amplify — PR Agency",
+  "slug": "signal-pr-agency",
+  "category": "agency",
+  "tags": [
+    "pr",
+    "communications",
+    "light",
+    "agency"
+  ],
+  "description": "Communications agency page with services, results and press coverage.",
+  "theme": "porcelain",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

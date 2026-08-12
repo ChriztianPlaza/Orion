@@ -1,0 +1,28 @@
+{
+  "name": "Reference — Docs Portal",
+  "slug": "docs-portal",
+  "category": "developer",
+  "tags": [
+    "docs",
+    "developer",
+    "light",
+    "reference"
+  ],
+  "description": "Documentation landing page with quickstarts, guides and API reference entry points.",
+  "theme": "slate",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

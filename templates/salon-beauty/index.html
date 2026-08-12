@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lumen — Salon</title>
+<meta name="description" content="Beauty salon site with treatments, pricing and online booking.">
+<meta property="og:title" content="Lumen — Salon">
+<meta property="og:description" content="Beauty salon site with treatments, pricing and online booking.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&family=Playfair+Display:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav nav-center" id="top">
+  <div class="wrap nav-inner">
+    <nav class="nav-links nav-left" aria-label="Main">
+      <a data-editable="nav.link1" href="#menu">Treatments</a><a data-editable="nav.link2" href="#work">Gallery</a>
+    </nav>
+    <a class="brand brand-center" data-editable="nav.brand" href="#top">Lumen</a>
+    <nav class="nav-links nav-right" aria-label="Secondary">
+      <a data-editable="nav.link3" href="#testimonials">Reviews</a><a data-editable="nav.link4" href="#contact">Book</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-split">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" data-editable="hero.eyebrow">Open Tuesday to Saturday</p>
+      <h1 data-editable="hero.title">Hair, done with intention</h1>
+      <p class="lede" data-editable="hero.subtitle">A small salon where appointments run long enough to do the job properly and nobody upsells you.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Book online button" href="#contact">Book online</a>
+        <a class="btn btn-outline" data-editable="hero.ctaAlt" data-editable-label="See treatments button" href="#menu">See treatments</a>
+      </div>
+      
+    </div>
+    <div class="hero-visual">
+      <img data-editable="hero.image" src="https://picsum.photos/seed/salon-interior/1000/1100" alt="Showcase" loading="lazy" width="1000" height="1100">
+    </div>
+  </div>
+</section>
+
+<section class="section menu" id="menu">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="menu.title">Menu</h2>
+    </div>
+    <div class="menu-group">
+      <h3 class="menu-group-title" data-editable="menu.group1">Cutting</h3>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name1">Cut and finish</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price1">85</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc1">Consultation, cut and styling. Ninety minutes.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name2">Restyle</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price2">120</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc2">For significant changes. Two hours.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g1name3">Fringe trim</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g1price3">0</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g1desc3">Free between appointments.</p>
+        </li>
+      </ul>
+    </div><div class="menu-group">
+      <h3 class="menu-group-title" data-editable="menu.group2">Colour</h3>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g2name1">Root tint</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g2price1">95</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g2desc1">Regrowth colour and finish.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g2name2">Full head highlights</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g2price2">185</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g2desc2">Includes toner and treatment.</p>
+        </li><li class="menu-item">
+          <div class="menu-item-head">
+            <span class="menu-item-name" data-editable="menu.g2name3">Balayage</span>
+            <span class="menu-dots" aria-hidden="true"></span>
+            <span class="menu-item-price" data-editable="menu.g2price3">from 210</span>
+          </div>
+          <p class="menu-item-desc" data-editable="menu.g2desc3">Hand painted, consultation required first.</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="gallery.title">Selected work</h2>
+    </div>
+    <div class="gallery-grid">
+      <figure class="shot">
+        <img data-editable="gallery.image1" src="https://picsum.photos/seed/salon-1/800/600" alt="Balayage, mid-length" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption1">Balayage, mid-length</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image2" src="https://picsum.photos/seed/salon-2/800/600" alt="The studio" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption2">The studio</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image3" src="https://picsum.photos/seed/salon-3/800/600" alt="Colour work" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption3">Colour work</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section quotes" id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="quotes.title">What people say</h2>
+    </div>
+    <div class="grid grid-2">
+      <figure class="quote">
+        <blockquote data-editable="quotes.text1">First time in years someone actually listened to what I asked for.</blockquote>
+        <figcaption>
+          <span class="avatar" aria-hidden="true" style="background:var(--accent)1f;color:var(--accent)">BE</span>
+          <span><strong data-editable="quotes.name1">Beth Halloran</strong><em data-editable="quotes.role1">Client</em></span>
+        </figcaption>
+      </figure><figure class="quote">
+        <blockquote data-editable="quotes.text2">They talked me out of a colour that would have been a disaster.</blockquote>
+        <figcaption>
+          <span class="avatar" aria-hidden="true" style="background:var(--accent)1f;color:var(--accent)">IN</span>
+          <span><strong data-editable="quotes.name2">Ines Duarte</strong><em data-editable="quotes.role2">Client</em></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 data-editable="contact.title">Get in touch</h2>
+      <p class="section-intro" data-editable="contact.intro">We reply to every message within one business day.</p>
+      <ul class="contact-list">
+        <li><span>Email</span><a data-editable="contact.email" href="mailto:book@example.com">book@example.com</a></li>
+        <li><span>Phone</span><a data-editable="contact.phone" href="tel:+15556603311">+1 (555) 660-3311</a></li>
+        <li><span>Address</span><p data-editable="contact.address">Ground floor, 5 Market Lane</p></li>
+        <li><span>Hours</span><p data-editable="contact.hours">Tue — Sat, 9am to 6pm · Thu until 8pm</p></li>
+      </ul>
+    </div>
+    <form class="contact-form" novalidate>
+      <label>Name<input type="text" name="name" placeholder="Your name" required></label>
+      <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+      <label>Message<textarea name="message" rows="4" placeholder="How can we help?"></textarea></label>
+      <button class="btn btn-primary" type="submit" data-editable="contact.submit">Send message</button>
+      <p class="form-note">This form is a starting point — connect it to your own backend or a form service.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Lumen</a>
+      <p data-editable="footer.note">Consultations are free and never rushed.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#menu">Treatments</a><a data-editable="footer.link2" href="#work">Gallery</a><a data-editable="footer.link3" href="#testimonials">Reviews</a><a data-editable="footer.link4" href="#contact">Book</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Lumen. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

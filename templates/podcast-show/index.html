@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Frequency — Podcast</title>
+<meta name="description" content="Podcast homepage with episodes, platforms and sponsorship information.">
+<meta property="og:title" content="Frequency — Podcast">
+<meta property="og:description" content="Podcast homepage with episodes, platforms and sponsorship information.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Inter+Tight:wght@500;600;700&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav nav-minimal" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" href="#top">Frequency</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#work">Episodes</a><a data-editable="nav.link2" href="#faq">About</a><a data-editable="nav.link3" href="#contact">Sponsor</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-split">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow" data-editable="hero.eyebrow">New episodes every Tuesday</p>
+      <h1 data-editable="hero.title">Long conversations with people who build things</h1>
+      <p class="lede" data-editable="hero.subtitle">No ad reads in the middle, no clip-farming, no guest who is only here because of a book launch.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Listen now button" href="#work">Listen now</a>
+        <a class="btn btn-outline" data-editable="hero.ctaAlt" data-editable-label="Browse episodes button" href="#work">Browse episodes</a>
+      </div>
+      
+    </div>
+    <div class="hero-visual">
+      <img data-editable="hero.image" src="https://picsum.photos/seed/podcast-mic/1000/1100" alt="Showcase" loading="lazy" width="1000" height="1100">
+    </div>
+  </div>
+</section>
+
+<section class="section gallery" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="gallery.title">Selected work</h2>
+    </div>
+    <div class="gallery-grid">
+      <figure class="shot">
+        <img data-editable="gallery.image1" src="https://picsum.photos/seed/ep-1/800/600" alt="#118 — Running a database team of four" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption1">#118 — Running a database team of four</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image2" src="https://picsum.photos/seed/ep-2/800/600" alt="#117 — What twenty years of on-call teaches you" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption2">#117 — What twenty years of on-call teaches you</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image3" src="https://picsum.photos/seed/ep-3/800/600" alt="#116 — Designing for people who hate software" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption3">#116 — Designing for people who hate software</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image4" src="https://picsum.photos/seed/ep-4/800/600" alt="#115 — The economics of open source" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption4">#115 — The economics of open source</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="wrap stat-grid">
+    <div class="stat">
+      <span class="stat-value" data-editable="stats.value1">118</span>
+      <span class="stat-label" data-editable="stats.label1">Episodes</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value2">74 min</span>
+      <span class="stat-label" data-editable="stats.label2">Average length</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value3">160k</span>
+      <span class="stat-label" data-editable="stats.label3">Monthly listeners</span>
+    </div><div class="stat">
+      <span class="stat-value" data-editable="stats.value4">0</span>
+      <span class="stat-label" data-editable="stats.label4">Mid-roll ads</span>
+    </div>
+  </div>
+</section>
+
+<section class="section faq" id="faq">
+  <div class="wrap narrow">
+    <div class="section-head"><h2 data-editable="faq.title">Frequently asked</h2></div>
+    <div class="faq-list">
+      <details class="faq-item" open>
+        <summary data-editable="faq.q1">How do I pitch a guest?</summary>
+        <p data-editable="faq.a1">Email us with who, why now, and what they would disagree with us about.</p>
+      </details><details class="faq-item">
+        <summary data-editable="faq.q2">Do you take sponsors?</summary>
+        <p data-editable="faq.a2">One per episode, read at the start, and only products we use.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band" id="contact">
+  <div class="wrap cta-inner">
+    <h2 data-editable="cta.title">Subscribe wherever you listen</h2>
+    <p data-editable="cta.body">Start today — it only takes a few minutes.</p>
+    <div class="hero-actions"><a class="btn btn-primary" data-editable="cta.button" data-editable-label="Listen now button" href="#work">Listen now</a></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Frequency</a>
+      <p data-editable="footer.note">Independently produced. Transcripts for every episode.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#work">Episodes</a><a data-editable="footer.link2" href="#faq">About</a><a data-editable="footer.link3" href="#contact">Sponsor</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Frequency. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "Composer — Freelancer",
+  "slug": "freelance-composer",
+  "category": "portfolio",
+  "tags": [
+    "freelance",
+    "services",
+    "warm",
+    "light"
+  ],
+  "description": "Warm, approachable freelance page with services and clear rates.",
+  "theme": "sandstone",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

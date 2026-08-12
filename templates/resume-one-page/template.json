@@ -1,0 +1,28 @@
+{
+  "name": "Résumé — One Page",
+  "slug": "resume-one-page",
+  "category": "personal",
+  "tags": [
+    "resume",
+    "cv",
+    "light",
+    "personal"
+  ],
+  "description": "Single-page CV built for printing and for linking.",
+  "theme": "paper",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

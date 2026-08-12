@@ -1,0 +1,28 @@
+{
+  "name": "Meridian — Digital Agency",
+  "slug": "meridian-agency",
+  "category": "agency",
+  "tags": [
+    "agency",
+    "services",
+    "dark",
+    "b2b"
+  ],
+  "description": "Confident agency site with services, case studies and a clear enquiry path.",
+  "theme": "midnight",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,28 @@
+{
+  "name": "Commons — Coworking",
+  "slug": "coworking-space",
+  "category": "business",
+  "tags": [
+    "coworking",
+    "workspace",
+    "light",
+    "local"
+  ],
+  "description": "Coworking space site with membership tiers, amenities and a tour request.",
+  "theme": "linen",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

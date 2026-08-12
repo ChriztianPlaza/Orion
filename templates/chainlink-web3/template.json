@@ -1,0 +1,28 @@
+{
+  "name": "Vault — Blockchain",
+  "slug": "chainlink-web3",
+  "category": "technology",
+  "tags": [
+    "blockchain",
+    "web3",
+    "dark",
+    "colorful"
+  ],
+  "description": "Web3 protocol page with audits, docs and a strong technical stance.",
+  "theme": "neon",
+  "colorScheme": "colorful",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

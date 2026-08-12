@@ -1,0 +1,28 @@
+{
+  "name": "Foundry — Branding Studio",
+  "slug": "foundry-branding",
+  "category": "agency",
+  "tags": [
+    "branding",
+    "studio",
+    "light",
+    "typography"
+  ],
+  "description": "Typographic branding studio page with case work and a considered tone.",
+  "theme": "linen",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

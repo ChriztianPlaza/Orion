@@ -1,0 +1,28 @@
+{
+  "name": "Evergreen — Wedding",
+  "slug": "wedding-day",
+  "category": "events",
+  "tags": [
+    "wedding",
+    "event",
+    "light",
+    "personal"
+  ],
+  "description": "Wedding site with schedule, venue details and RSVP.",
+  "theme": "blush",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

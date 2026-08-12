@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dispatch — Magazine</title>
+<meta name="description" content="Magazine-style index with a featured story and section grid.">
+<meta property="og:title" content="Dispatch — Magazine">
+<meta property="og:description" content="Magazine-style index with a featured story and section grid.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav nav-center" id="top">
+  <div class="wrap nav-inner">
+    <nav class="nav-links nav-left" aria-label="Main">
+      <a data-editable="nav.link1" href="#work">Latest</a><a data-editable="nav.link2" href="#work">Culture</a>
+    </nav>
+    <a class="brand brand-center" data-editable="nav.brand" href="#top">Dispatch</a>
+    <nav class="nav-links nav-right" aria-label="Secondary">
+      <a data-editable="nav.link3" href="#work">Cities</a><a data-editable="nav.link4" href="#contact">Subscribe</a>
+    </nav>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="hero hero-editorial">
+  <div class="wrap hero-grid">
+    <div class="hero-visual">
+      <img data-editable="hero.image" src="https://picsum.photos/seed/magazine-cover/900/1200" alt="Portrait" loading="lazy" width="900" height="1200">
+    </div>
+    <div class="hero-copy">
+      <p class="eyebrow" data-editable="hero.eyebrow">Issue 24</p>
+      <h1 data-editable="hero.title">The long way round</h1>
+      <p class="lede" data-editable="hero.subtitle">Independent magazine about places, the people who stay, and the ones who leave.</p>
+      <div class="hero-actions"><a class="btn btn-primary" data-editable="hero.cta" data-editable-label="Read the issue button" href="#work">Read the issue</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="section gallery" id="work">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="gallery.title">Selected work</h2>
+    </div>
+    <div class="gallery-grid">
+      <figure class="shot">
+        <img data-editable="gallery.image1" src="https://picsum.photos/seed/story-1/800/600" alt="The last ferry to Vestmanna" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption1">The last ferry to Vestmanna</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image2" src="https://picsum.photos/seed/story-2/800/600" alt="Twelve hours in a border town" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption2">Twelve hours in a border town</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image3" src="https://picsum.photos/seed/story-3/800/600" alt="The woman who rebuilt the lighthouse" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption3">The woman who rebuilt the lighthouse</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image4" src="https://picsum.photos/seed/story-4/800/600" alt="Notes from a shrinking city" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption4">Notes from a shrinking city</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image5" src="https://picsum.photos/seed/story-5/800/600" alt="What the river took" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption5">What the river took</figcaption>
+      </figure><figure class="shot">
+        <img data-editable="gallery.image6" src="https://picsum.photos/seed/story-6/800/600" alt="A year without a car" loading="lazy" width="800" height="600">
+        <figcaption data-editable="gallery.caption6">A year without a car</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section quotes" id="testimonials">
+  <div class="wrap">
+    <div class="section-head">
+      <h2 data-editable="quotes.title">What people say</h2>
+    </div>
+    <div class="grid grid-2">
+      <figure class="quote">
+        <blockquote data-editable="quotes.text1">The most beautiful thing arriving in my post box.</blockquote>
+        <figcaption>
+          <span class="avatar" aria-hidden="true" style="background:var(--accent)1f;color:var(--accent)">RE</span>
+          <span><strong data-editable="quotes.name1">Reader survey</strong><em data-editable="quotes.role1">2024</em></span>
+        </figcaption>
+      </figure><figure class="quote">
+        <blockquote data-editable="quotes.text2">Quietly one of the best magazines being made.</blockquote>
+        <figcaption>
+          <span class="avatar" aria-hidden="true" style="background:var(--accent)1f;color:var(--accent)">TH</span>
+          <span><strong data-editable="quotes.name2">The Press Review</strong><em data-editable="quotes.role2">Editor's pick</em></span>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-band" id="contact">
+  <div class="wrap cta-inner">
+    <h2 data-editable="cta.title">Four issues a year, printed properly</h2>
+    <p data-editable="cta.body">Subscribe and the next one arrives in March.</p>
+    <div class="hero-actions"><a class="btn btn-primary" data-editable="cta.button" data-editable-label="Read the issue button" href="#work">Read the issue</a></div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Dispatch</a>
+      <p data-editable="footer.note">Printed on recycled stock in Leipzig.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#work">Latest</a><a data-editable="footer.link2" href="#work">Culture</a><a data-editable="footer.link3" href="#work">Cities</a><a data-editable="footer.link4" href="#contact">Subscribe</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Dispatch. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

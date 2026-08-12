@@ -1,0 +1,28 @@
+{
+  "name": "Ledgerline — Exchange",
+  "slug": "ledgerline-crypto",
+  "category": "finance",
+  "tags": [
+    "crypto",
+    "trading",
+    "dark",
+    "fintech"
+  ],
+  "description": "Trading platform page with fees, security posture and asset coverage.",
+  "theme": "glacier",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

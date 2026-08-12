@@ -1,0 +1,28 @@
+{
+  "name": "Atlas — Startup Launch",
+  "slug": "atlas-launch",
+  "category": "startup",
+  "tags": [
+    "startup",
+    "launch",
+    "gradient",
+    "dark"
+  ],
+  "description": "Bold gradient-mesh launch page for a pre-seed or seed-stage company.",
+  "theme": "aurora",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

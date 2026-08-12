@@ -1,0 +1,28 @@
+{
+  "name": "Sharp — Barbershop",
+  "slug": "sharp-barbershop",
+  "category": "business",
+  "tags": [
+    "barber",
+    "grooming",
+    "dark",
+    "local"
+  ],
+  "description": "Barbershop page with services, barbers and online booking.",
+  "theme": "midnight",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

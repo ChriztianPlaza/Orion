@@ -1,0 +1,28 @@
+{
+  "name": "Pipeline — DevOps Portfolio",
+  "slug": "pipeline-devops-portfolio",
+  "category": "developer",
+  "tags": [
+    "devops",
+    "portfolio",
+    "dark",
+    "terminal"
+  ],
+  "description": "Infrastructure engineer portfolio with projects, stack and contact.",
+  "theme": "terminal",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}
