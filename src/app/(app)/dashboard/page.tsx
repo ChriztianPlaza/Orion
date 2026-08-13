@@ -5,6 +5,7 @@ import { Download, LayoutGrid, Plus, Rocket, Sparkles } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSessionUser } from "@/lib/auth/guards";
 import { limitsFor } from "@/lib/plans";
+import { isStripeConfigured } from "@/lib/env";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ProjectCard, type DashboardProject } from "@/components/app/project-card";
@@ -49,6 +50,7 @@ export default async function DashboardPage({
   if (!user) redirect("/login");
 
   const limits = limitsFor(user.plan);
+  const billingEnabled = isStripeConfigured();
   const projectLimitReached = projects.length >= limits.maxProjects;
 
   const cards: DashboardProject[] = projects.map((project) => ({
@@ -79,7 +81,7 @@ export default async function DashboardPage({
         </div>
 
         <div className="flex items-center gap-2.5">
-          {user.plan === "FREE" && (
+          {user.plan === "FREE" && billingEnabled && (
             <Link href="/pricing">
               <Button variant="secondary">
                 <Sparkles /> Upgrade to Pro
@@ -105,11 +107,9 @@ export default async function DashboardPage({
           icon={<Download className="size-4" />}
           label="Downloads"
           value={String(downloadCount)}
-          hint={
-            limits.downloadPeriodDays
-              ? `${Math.max(0, limits.maxDownloads - user.downloadCount)} left this week`
-              : `${Math.max(0, limits.maxDownloads - user.downloadCount)} remaining`
-          }
+          hint={`${Math.max(0, limits.maxDownloads - user.downloadCount)} left ${downloadWindowLabel(
+            limits.downloadPeriodDays,
+          )}`}
         />
         <Link href="/guides/deploy" className="contents">
           <Stat
@@ -140,7 +140,7 @@ export default async function DashboardPage({
         <>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {cards.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <ProjectCard key={project.id} project={project} billingEnabled={billingEnabled} />
             ))}
 
             {!projectLimitReached && (
@@ -161,19 +161,31 @@ export default async function DashboardPage({
                   <Badge variant="brand">Free plan limit</Badge>
                 </div>
                 <p className="mt-2 max-w-[52ch] text-[14px] text-ink-muted">
-                  You are using all {limits.maxProjects} of your free websites. Upgrade to Pro for
-                  50 projects and 50 downloads a week.
+                  You are using all {limits.maxProjects} of your free websites.{" "}
+                  {billingEnabled
+                    ? "Upgrade to Pro for 50 projects and 50 downloads a week."
+                    : "Delete one to start another — Pro is not open for sign-ups yet."}
                 </p>
               </div>
-              <Link href="/pricing">
-                <Button>Upgrade to Pro — $20/mo</Button>
-              </Link>
+              {billingEnabled && (
+                <Link href="/pricing">
+                  <Button>Upgrade to Pro — $20/mo</Button>
+                </Link>
+              )}
             </div>
           )}
         </>
       )}
     </div>
   );
+}
+
+/** "this week" / "this month" reads better than a raw day count. */
+function downloadWindowLabel(days: number | null): string {
+  if (!days) return "in total";
+  if (days === 7) return "this week";
+  if (days === 30 || days === 31) return "this month";
+  return `in the next ${days} days`;
 }
 
 function Stat({

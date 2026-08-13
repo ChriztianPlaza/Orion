@@ -20,7 +20,13 @@ export type DashboardProject = {
   templateSlug: string | null;
 };
 
-export function ProjectCard({ project }: { project: DashboardProject }) {
+export function ProjectCard({
+  project,
+  billingEnabled = true,
+}: {
+  project: DashboardProject;
+  billingEnabled?: boolean;
+}) {
   const router = useRouter();
   const { toast } = useToast();
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -202,6 +208,7 @@ export function ProjectCard({ project }: { project: DashboardProject }) {
       />
 
       <UpgradeDialog
+        billingEnabled={billingEnabled}
         open={Boolean(upgradeReason)}
         reason={upgradeReason ?? ""}
         onClose={() => setUpgradeReason(null)}

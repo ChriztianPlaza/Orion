@@ -5,6 +5,7 @@ import { ArrowRight, Download, Heart, LayoutGrid } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSessionUser } from "@/lib/auth/guards";
 import { limitsFor, PLAN_COPY } from "@/lib/plans";
+import { isStripeConfigured } from "@/lib/env";
 import { FREE_HOSTS } from "@/lib/guides/hosting";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -52,6 +53,7 @@ export default async function AccountPage() {
   if (!user) redirect("/login");
 
   const limits = limitsFor(user.plan);
+  const billingEnabled = isStripeConfigured();
   const copy = PLAN_COPY[user.plan];
 
   return (
@@ -96,7 +98,9 @@ export default async function AccountPage() {
                 <BillingPortalButton />
               ) : (
                 <Link href="/pricing">
-                  <Button>Upgrade to Pro</Button>
+                  <Button variant={billingEnabled ? "primary" : "secondary"}>
+                    {billingEnabled ? "Upgrade to Pro" : "See plans"}
+                  </Button>
                 </Link>
               )}
             </div>

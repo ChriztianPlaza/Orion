@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db";
 import { getSessionUser } from "@/lib/auth/guards";
 import { getOwnedProject, getTemplateSchema } from "@/lib/projects/service";
 import { limitsFor } from "@/lib/plans";
+import { isStripeConfigured } from "@/lib/env";
 import { EditorShell, type EditorProject } from "@/components/editor/editor-shell";
 import type { ProjectContent, ProjectMeta, ProjectTheme } from "@/lib/templates/types";
 
@@ -61,6 +62,7 @@ export default async function EditorPage({ params }: { params: Promise<{ id: str
       }))}
       plan={user.plan}
       downloadsLeft={Number.isFinite(downloadsLeft) ? downloadsLeft : 9999}
+      billingEnabled={isStripeConfigured()}
     />
   );
 }

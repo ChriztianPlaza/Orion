@@ -13,7 +13,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { CategoryStrip } from "@/components/marketing/category-strip";
 import { TemplateShowcase } from "@/components/marketing/template-showcase";
 import { PricingPlans } from "@/components/billing/pricing-plans";
@@ -126,15 +125,6 @@ export default async function LandingPage() {
         <div className="grid-bg mask-fade-b pointer-events-none absolute inset-x-0 top-0 h-[520px] opacity-40" aria-hidden="true" />
 
         <div className="container-page relative pb-16 pt-20 sm:pt-28">
-          <div className="animate-fade-up">
-            <Badge variant="outline" className="mb-8 gap-2 py-1 pl-1 pr-3">
-              <span className="rounded-full bg-white px-2 py-0.5 text-[10px] font-semibold text-black">
-                New
-              </span>
-              {templateCount} templates, every one editable
-            </Badge>
-          </div>
-
           <div className="grid items-end gap-10 lg:grid-cols-[1.35fr_1fr] lg:gap-16">
             <h1 className="text-balance-tight animate-fade-up text-[clamp(2.7rem,6.4vw,5.1rem)] font-semibold leading-[0.98]">
               <span className="text-gradient">Choose a template.</span>

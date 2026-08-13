@@ -16,10 +16,13 @@ export function UpgradeDialog({
   open,
   reason,
   onClose,
+  /** False while billing is switched off — no checkout to offer. */
+  billingEnabled = true,
 }: {
   open: boolean;
   reason: string;
   onClose: () => void;
+  billingEnabled?: boolean;
 }) {
   const { toast } = useToast();
   const [loading, setLoading] = React.useState(false);
@@ -52,22 +55,32 @@ export function UpgradeDialog({
       open={open}
       onClose={onClose}
       title="You've reached your free plan limit"
-      description={reason}
+      description={
+        billingEnabled
+          ? reason
+          : `${reason} Pro is not open for sign-ups yet, so this limit stands for now.`
+      }
       footer={
-        <>
-          <Button variant="ghost" onClick={onClose} disabled={loading}>
-            Not now
+        billingEnabled ? (
+          <>
+            <Button variant="ghost" onClick={onClose} disabled={loading}>
+              Not now
+            </Button>
+            <Button onClick={startCheckout} loading={loading} data-autofocus>
+              Upgrade to Pro — ${PRO_PRICE_USD}/mo
+            </Button>
+          </>
+        ) : (
+          <Button onClick={onClose} data-autofocus>
+            Got it
           </Button>
-          <Button onClick={startCheckout} loading={loading} data-autofocus>
-            Upgrade to Pro — ${PRO_PRICE_USD}/mo
-          </Button>
-        </>
+        )
       }
     >
       <div className="rounded-2xl border border-hairline bg-gradient-to-b from-white/[0.06] to-transparent p-5">
         <div className="flex items-center gap-2 text-[13px] font-medium text-white">
-          <Sparkles className="size-4 text-[#2997ff]" />
-          Everything in Pro
+          <Sparkles className="size-4 text-brand-soft" />
+          {billingEnabled ? "Everything in Pro" : "What Pro will add"}
         </div>
         <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
           {PLAN_COPY.PRO.features.slice(0, 6).map((feature) => (

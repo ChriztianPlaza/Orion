@@ -105,6 +105,16 @@ export function PricingPlans({ billingConfigured }: { billingConfigured: boolean
                   >
                     Your current plan
                   </button>
+                ) : isPro && !billingConfigured ? (
+                  // Billing is switched off: say so plainly rather than offer a
+                  // button that dead-ends in a 503.
+                  <button
+                    type="button"
+                    disabled
+                    className="h-10 w-full cursor-default rounded-full border border-hairline text-[14px] text-ink-muted"
+                  >
+                    Coming soon
+                  </button>
                 ) : isPro ? (
                   <Button className="h-10 w-full" loading={loading} onClick={upgrade}>
                     {copy.cta}
@@ -175,9 +185,14 @@ export function PricingPlans({ billingConfigured }: { billingConfigured: boolean
       </div>
 
       {!billingConfigured && (
-        <p className="mx-auto mt-5 max-w-[860px] rounded-xl border border-[#ffd60a]/20 bg-[#ffd60a]/[0.06] px-4 py-3 text-center text-[13px] text-[#ffd60a]">
-          Billing is not configured on this instance yet. Add your Stripe keys to enable Pro
-          checkout.
+        // Visitor-facing. The old copy told them to add Stripe keys, which is
+        // an instruction only the operator can act on.
+        <p className="mx-auto mt-6 max-w-[860px] text-center text-[13px] text-ink-muted">
+          Pro is not open for sign-ups yet — everything on the Free plan works today.{" "}
+          <a href={contactHref} className="text-ink underline decoration-white/25 underline-offset-2 hover:decoration-white">
+            Get in touch
+          </a>{" "}
+          if you need more than it allows.
         </p>
       )}
     </>

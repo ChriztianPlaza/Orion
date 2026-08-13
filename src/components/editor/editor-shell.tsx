@@ -66,11 +66,13 @@ export function EditorShell({
   pages,
   plan,
   downloadsLeft,
+  billingEnabled = true,
 }: {
   project: EditorProject;
   pages: SchemaPage[];
   plan: "FREE" | "PRO";
   downloadsLeft: number;
+  billingEnabled?: boolean;
 }) {
   const router = useRouter();
   const { toast } = useToast();
@@ -322,14 +324,18 @@ export function EditorShell({
         <div className="flex shrink-0 flex-wrap items-center justify-center gap-2 border-b border-hairline bg-white/[0.02] px-4 py-1.5 text-[12.5px] text-ink-muted">
           <Badge variant="outline">Free plan</Badge>
           {downloadsLeft > 0
-            ? `${downloadsLeft} download remaining · hosting your site is free either way`
-            : "Download used · upgrade for 50 downloads a week"}
-          <button
-            onClick={() => setUpgradeReason("Upgrade to Pro for 50 website projects and 50 downloads a week.")}
-            className="font-medium text-white underline decoration-white/25 underline-offset-2 hover:decoration-white"
-          >
-            Upgrade
-          </button>
+            ? `${downloadsLeft} ${downloadsLeft === 1 ? "download" : "downloads"} left this month · hosting your site is free either way`
+            : "Monthly downloads used · your allowance resets automatically"}
+          {billingEnabled && (
+            <button
+              onClick={() =>
+                setUpgradeReason("Upgrade to Pro for 50 website projects and 50 downloads a week.")
+              }
+              className="font-medium text-white underline decoration-white/25 underline-offset-2 hover:decoration-white"
+            >
+              Upgrade
+            </button>
+          )}
         </div>
       )}
 
@@ -431,6 +437,7 @@ export function EditorShell({
       />
 
       <UpgradeDialog
+        billingEnabled={billingEnabled}
         open={Boolean(upgradeReason)}
         reason={upgradeReason ?? ""}
         onClose={() => setUpgradeReason(null)}
