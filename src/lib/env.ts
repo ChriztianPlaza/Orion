@@ -39,14 +39,32 @@ export const env = {
     .filter(Boolean),
 } as const;
 
+/**
+ * Normalises a configured origin.
+ *
+ * `NEXT_PUBLIC_APP_URL` is typed by hand into a dashboard, so it arrives
+ * without a scheme often enough to matter — and a bare host fails `new URL()`,
+ * which took down a production build at "Collecting page data" with nothing
+ * but `ERR_INVALID_URL` to go on. Assume https, drop any trailing slash, and
+ * refuse anything still unparseable rather than propagate it.
+ */
+function normalizeOrigin(value: string | undefined): string | undefined {
+  if (!value) return undefined;
+
+  const withScheme = /^https?:\/\//i.test(value) ? value : `https://${value}`;
+  try {
+    return new URL(withScheme).origin;
+  } catch {
+    return undefined;
+  }
+}
+
 export function appUrl(): string {
   return (
-    read("NEXT_PUBLIC_APP_URL") ??
-    env.AUTH_URL ??
-    (read("VERCEL_PROJECT_PRODUCTION_URL")
-      ? `https://${read("VERCEL_PROJECT_PRODUCTION_URL")}`
-      : undefined) ??
-    (read("VERCEL_URL") ? `https://${read("VERCEL_URL")}` : undefined) ??
+    normalizeOrigin(read("NEXT_PUBLIC_APP_URL")) ??
+    normalizeOrigin(env.AUTH_URL) ??
+    normalizeOrigin(read("VERCEL_PROJECT_PRODUCTION_URL")) ??
+    normalizeOrigin(read("VERCEL_URL")) ??
     "http://localhost:3000"
   );
 }

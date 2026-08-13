@@ -234,16 +234,25 @@ textarea {
   color-scheme: dark;
 }
 
-select option,
-select optgroup {
-  background-color: #18181b;
-  color: #fafafa;
-}
+/*
+  Autofilled fields.
 
-select option:checked,
-select option:hover {
-  background-color: #27272a;
-  color: #ffffff;
+  Chrome paints its own pale blue over the field and there is no property that
+  simply turns it off. `background-clip: text` confines that paint to the glyph
+  boxes, and the absurd transition delay means the colour never finishes
+  animating in — together they are the only reliable way to keep an autofilled
+  input looking like the rest of the form.
+*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill {
+  -webkit-text-fill-color: var(--color-ink);
+  -webkit-background-clip: text;
+  background-clip: text;
+  caret-color: var(--color-ink);
+  transition: background-color 100000s ease-in-out 0s;
 }
 
 /* Date/time/colour pickers and the number spinner draw their own glyphs. */

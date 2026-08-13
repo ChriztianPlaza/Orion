@@ -34,27 +34,12 @@ export const Textarea = React.forwardRef<
 ));
 Textarea.displayName = "Textarea";
 
-export const Select = React.forwardRef<
-  HTMLSelectElement,
-  React.SelectHTMLAttributes<HTMLSelectElement>
->(({ className, children, ...props }, ref) => (
-  <select
-    ref={ref}
-    // `[color-scheme:dark]` is what makes the OS-drawn option list dark. Without
-    // it the popup renders in the system light theme regardless of our styling.
-    className={cn(base, "h-10 appearance-none pr-9 [color-scheme:dark]", className)}
-    style={{
-      backgroundImage:
-        "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' stroke='%23a1a1aa' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E\")",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "right 12px center",
-    }}
-    {...props}
-  >
-    {children}
-  </select>
-));
-Select.displayName = "Select";
+/*
+ * Re-exported so the 17 existing `import { Select } from "@/components/ui/input"`
+ * call sites keep working. The native control it replaced could not be styled:
+ * its popup is drawn by the OS.
+ */
+export { Select } from "./select";
 
 /**
  * An input with a leading icon.
