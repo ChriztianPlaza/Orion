@@ -13,10 +13,14 @@ import { VerifyStep, type DeliveryReason } from "./verify-step";
 
 const ERROR_COPY: Record<string, string> = {
   CredentialsSignin: "That email and password combination did not work.",
+  unverified_email: "Your email address has not been confirmed yet.",
   OAuthAccountNotLinked: "That email is already registered with a different sign-in method.",
   AccessDenied: "Access denied.",
   Configuration: "Sign-in is not configured correctly on this instance.",
 };
+
+/** The server only reports this once the password has already matched. */
+const UNVERIFIED = "unverified_email";
 
 export function AuthForm({
   mode,
@@ -43,6 +47,11 @@ export function AuthForm({
   const [oauthLoading, setOauthLoading] = React.useState<string | null>(null);
   const [error, setError] = React.useState<string | null>(
     params.get("error") ? (ERROR_COPY[params.get("error")!] ?? "Sign-in failed. Please try again.") : null,
+  );
+  // Only offered when the failure was specifically an unconfirmed address —
+  // showing it on every bad password made a typo look like an email problem.
+  const [needsVerification, setNeedsVerification] = React.useState(
+    params.get("error") === UNVERIFIED,
   );
 
   const isRegister = mode === "register";
@@ -112,7 +121,14 @@ export function AuthForm({
       const result = await signIn("credentials", { email, password, redirect: false });
 
       if (result?.error) {
-        setError(ERROR_COPY[result.error] ?? "That email and password combination did not work.");
+        // Auth.js reports a custom `code` alongside the generic error name.
+        const code = (result as { code?: string }).code ?? result.error;
+        setNeedsVerification(code === UNVERIFIED);
+        setError(
+          ERROR_COPY[code] ??
+            ERROR_COPY[result.error] ??
+            "That email and password combination did not work.",
+        );
         return;
       }
 
@@ -166,15 +182,12 @@ export function AuthForm({
             <AlertTriangle className="mt-0.5 size-4 shrink-0" />
             {error}
           </div>
-          {!isRegister && (
-            // Sign-in cannot say "your email is unverified" without confirming
-            // that the address has an account, so the hint is offered to
-            // everyone who fails to sign in.
+          {!isRegister && needsVerification && (
             <Link
               href={`/verify${email ? `?email=${encodeURIComponent(email)}` : ""}`}
               className="mt-2 block underline decoration-[#ff6961]/40 underline-offset-2 hover:decoration-[#ff6961]"
             >
-              Never confirmed your email? Verify it here.
+              Send me a new code
             </Link>
           )}
         </div>

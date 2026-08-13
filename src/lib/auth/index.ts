@@ -1,4 +1,4 @@
-import NextAuth from "next-auth";
+import NextAuth, { CredentialsSignin } from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import bcrypt from "bcryptjs";
@@ -16,6 +16,19 @@ const credentialsSchema = z.object({
 
 /** A real bcrypt hash of a random value, used only to equalise timing. */
 const DUMMY_HASH = "$2a$12$N9qo8uLOickgx2ZMRZoMyeIjZAgcfl7p92ldGxad68LJZdL17lhWy";
+
+/**
+ * Raised only once the password has already been checked and matched.
+ *
+ * Naming this reason is safe precisely because of that ordering: whoever sees
+ * it has supplied working credentials, so it tells them nothing they could not
+ * already establish. Every other failure — unknown address, wrong password —
+ * stays indistinguishable, so the endpoint is still not an oracle for which
+ * emails are registered.
+ */
+class UnverifiedEmailError extends CredentialsSignin {
+  code = "unverified_email";
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   ...authConfig,
@@ -59,7 +72,7 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         // The gate: an account whose address was never confirmed cannot sign
         // in. Checked here rather than in the UI so it cannot be skipped by
         // posting straight at the endpoint.
-        if (!user.emailVerified) return null;
+        if (!user.emailVerified) throw new UnverifiedEmailError();
 
         return {
           id: user.id,
