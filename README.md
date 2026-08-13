@@ -370,7 +370,7 @@ recorded in the admin activity log.
 | --- | --- | --- |
 | Website projects | 5 | Unlimited |
 | Marketplace, editor, live preview | ✓ | ✓ |
-| Downloads | 1 total | Unlimited |
+| Downloads | 5 per month | 50 per week |
 | Image upload size | 5 MB | 25 MB |
 | Images held while editing | 50 MB | 2 GB |
 | Version history | 3 | 50 |

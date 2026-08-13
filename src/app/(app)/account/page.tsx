@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { ArrowRight, Download, Heart, ImageIcon, LayoutGrid } from "lucide-react";
+import { ArrowRight, Download, Heart, LayoutGrid } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSessionUser } from "@/lib/auth/guards";
 import { limitsFor, PLAN_COPY } from "@/lib/plans";
-import { storageUsedBy } from "@/lib/storage/gc";
 import { FREE_HOSTS } from "@/lib/guides/hosting";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,7 +22,7 @@ export default async function AccountPage() {
   const sessionUser = await getSessionUser();
   if (!sessionUser) redirect("/login?next=%2Faccount");
 
-  const [user, subscription, downloads, storageUsed, favorites, projectCount] = await Promise.all([
+  const [user, subscription, downloads, favorites, projectCount] = await Promise.all([
     prisma.user.findUnique({
       where: { id: sessionUser.id },
       select: {
@@ -46,7 +45,6 @@ export default async function AccountPage() {
       take: 8,
       select: { id: true, createdAt: true, bytes: true, fileCount: true, project: { select: { name: true } } },
     }),
-    storageUsedBy(sessionUser.id),
     prisma.favorite.count({ where: { userId: sessionUser.id } }),
     prisma.project.count({ where: { userId: sessionUser.id } }),
   ]);
@@ -117,13 +115,8 @@ export default async function AccountPage() {
               used={user.downloadCount}
               max={limits.maxDownloads}
             />
-            <Usage
-              icon={<ImageIcon className="size-4" />}
-              label="Images"
-              used={storageUsed}
-              max={limits.maxStorageBytes}
-              format={formatBytes}
-            />
+            {/* No image meter: uploads are released on download, so a usage
+                bar here would read as an allowance the plan does not sell. */}
             <Usage
               icon={<Heart className="size-4" />}
               label="Favourites"

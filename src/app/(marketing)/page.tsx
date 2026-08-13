@@ -83,7 +83,7 @@ const FAQ = [
   },
   {
     q: "What is the difference between Free and Pro?",
-    a: "Free gives you five projects, the full editor, unlimited previews and one download a month. Pro raises that to 50 projects and 50 downloads a week, and unlocks the premium and animated templates. Hosting is free either way — you host the exported files yourself.",
+    a: "Free gives you five projects, the full editor, unlimited previews and five downloads a month. Pro raises that to 50 projects and 50 downloads a week, and unlocks the premium and animated templates. Hosting is free either way — you host the exported files yourself.",
   },
   {
     q: "Do I need to know how to code?",
@@ -162,7 +162,7 @@ export default async function LandingPage() {
                 </Link>
               </div>
               <p className="mt-4 text-[13px] text-ink-dim">
-                Free plan, no card required. Five websites and a download every month.
+                Free plan, no card required. Five websites and five downloads a month.
               </p>
             </div>
           </div>

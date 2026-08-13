@@ -118,8 +118,20 @@
 
 /* ---------------------------------------------------------------- base */
 
-* {
-  border-color: var(--color-hairline);
+/*
+  Default border colour, so `border` alone draws a hairline instead of
+  Tailwind v4's `currentColor`.
+
+  It has to sit in `@layer base`. Unlayered, this rule beat every
+  `border-*` utility in the app — layered styles always lose to unlayered
+  ones, whatever their specificity — so `hover:border-hairline-strong`,
+  `focus:border-white/45` and `border-danger` all silently resolved back to
+  the hairline and no border ever changed colour.
+*/
+@layer base {
+  * {
+    border-color: var(--color-hairline);
+  }
 }
 
 html {

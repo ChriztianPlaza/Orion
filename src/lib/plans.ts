@@ -23,8 +23,8 @@ export type PlanLimits = {
 export const PLAN_LIMITS: Record<Plan, PlanLimits> = {
   FREE: {
     maxProjects: 5,
-    maxDownloads: 1,
-    downloadPeriodDays: 30, // one download a month, rolling
+    maxDownloads: 5,
+    downloadPeriodDays: 30, // five downloads a month, rolling
     canUsePremiumTemplates: false,
     maxAssetBytes: 5 * 1024 * 1024,
     maxStorageBytes: 50 * 1024 * 1024,
@@ -52,7 +52,7 @@ export const PLAN_HIGHLIGHTS = {
   FREE: [
     { icon: "layout", label: "Five website projects" },
     { icon: "sparkles", label: "Full visual editor" },
-    { icon: "download", label: "One download a month" },
+    { icon: "download", label: "Five downloads a month" },
     { icon: "history", label: "Short version history" },
     { icon: "lock", label: "Free templates only" },
   ],
@@ -81,10 +81,10 @@ export const PLAN_COPY = {
       "Free template library",
       "Complete visual editor",
       "Live responsive preview",
-      "1 download per month",
+      "5 downloads per month",
       "Community support",
     ],
-    limits: ["One download a month", "No premium or animated templates"],
+    limits: ["Five downloads a month", "No premium or animated templates"],
   },
   PRO: {
     name: "Pro",

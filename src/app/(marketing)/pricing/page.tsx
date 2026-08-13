@@ -7,7 +7,7 @@ import { isStripeConfigured } from "@/lib/env";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Free forever for five websites and a download a month. Pro at $20/month for 50 projects, 50 downloads a week and the premium template library.",
+    "Free forever for five websites and five downloads a month. Pro at $20/month for 50 projects, 50 downloads a week and the premium template library.",
   alternates: { canonical: "/pricing" },
 };
 
@@ -15,7 +15,7 @@ type Cellish = string | boolean;
 
 const COMPARISON: { feature: string; free: Cellish; pro: Cellish; custom: Cellish }[] = [
   { feature: "Website projects", free: "5", pro: "50", custom: "Unlimited" },
-  { feature: "Website downloads", free: "1 per month", pro: "50 per week", custom: "Unlimited" },
+  { feature: "Website downloads", free: "5 per month", pro: "50 per week", custom: "Unlimited" },
   { feature: "Free templates", free: true, pro: true, custom: true },
   { feature: "Premium templates", free: false, pro: true, custom: true },
   { feature: "Animated templates", free: false, pro: true, custom: true },
@@ -35,7 +35,7 @@ const FAQ = [
   },
   {
     q: "How does the free download allowance work?",
-    a: "One download every 30 days, enforced on the server. The download you take is a complete, working website — you can host it anywhere, forever, at no cost, and it stays yours after the allowance resets.",
+    a: "Five downloads every 30 days, enforced on the server. The download you take is a complete, working website — you can host it anywhere, forever, at no cost, and it stays yours after the allowance resets.",
   },
   {
     q: "Does Orion host my website?",

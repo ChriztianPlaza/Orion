@@ -50,15 +50,24 @@ export { Select } from "./select";
  */
 export const InputGroup = React.forwardRef<
   HTMLInputElement,
-  React.InputHTMLAttributes<HTMLInputElement> & { icon: React.ReactNode }
->(({ className, icon, ...props }, ref) => (
+  React.InputHTMLAttributes<HTMLInputElement> & { icon: React.ReactNode; invalid?: boolean }
+>(({ className, icon, invalid, ...props }, ref) => (
   <div
-    // `field-shell` is what moves the focus ring onto the whole control —
-    // see the rule in globals.css.
+    /*
+     * `field-shell` moves the focus ring onto the whole control — see globals.css.
+     *
+     * The error border is a prop rather than something a caller layers on via
+     * `className`: passing `border-danger` alongside the default `border-hairline`
+     * left both classes on the element, because tailwind-merge does not treat
+     * them as conflicting, and CSS source order then picked the winner. Choosing
+     * one branch here means only ever emitting a single border-colour class.
+     */
     className={cn(
-      "field-shell flex h-12 items-center gap-2.5 rounded-md border border-hairline bg-surface-2 px-3.5",
+      "field-shell flex h-12 items-center gap-2.5 rounded-md border bg-surface-2 px-3.5",
       "transition-colors duration-150",
-      "focus-within:border-white/45",
+      invalid
+        ? "border-danger focus-within:border-danger"
+        : "border-hairline focus-within:border-white/45",
       "has-[input:disabled]:opacity-50",
       className,
     )}

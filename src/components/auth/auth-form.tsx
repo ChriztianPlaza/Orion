@@ -35,6 +35,10 @@ export function AuthForm({
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  // Only complain once they have left the field — flagging a mismatch on the
+  // first keystroke of a password nobody has finished typing is just noise.
+  const [confirmTouched, setConfirmTouched] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [oauthLoading, setOauthLoading] = React.useState<string | null>(null);
   const [error, setError] = React.useState<string | null>(
@@ -43,6 +47,10 @@ export function AuthForm({
 
   const isRegister = mode === "register";
   const hasOAuth = providers.github || providers.google;
+
+  const confirmRef = React.useRef<HTMLInputElement>(null);
+  const passwordsMatch = password === confirmPassword;
+  const showMismatch = isRegister && confirmTouched && confirmPassword.length > 0 && !passwordsMatch;
 
   // Sign-up is two steps: create the account, then confirm the emailed code.
   // The password is kept in state across the step so a successful verification
@@ -68,6 +76,16 @@ export function AuthForm({
   const submit = async (event: React.FormEvent) => {
     event.preventDefault();
     setError(null);
+
+    // Caught before the request so a typo costs nothing, and focus lands on the
+    // field that needs fixing rather than leaving the user to hunt for it.
+    if (isRegister && !passwordsMatch) {
+      setConfirmTouched(true);
+      setError("Both passwords must match.");
+      confirmRef.current?.focus();
+      return;
+    }
+
     setLoading(true);
 
     try {
@@ -226,6 +244,32 @@ export function AuthForm({
             </p>
           )}
         </div>
+
+        {isRegister && (
+          <div className="space-y-2">
+            <Label htmlFor="confirm-password">Confirm password</Label>
+            <InputGroup
+              ref={confirmRef}
+              id="confirm-password"
+              icon={<Lock />}
+              type="password"
+              required
+              value={confirmPassword}
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              onBlur={() => setConfirmTouched(true)}
+              autoComplete="new-password"
+              placeholder="Type your password again"
+              invalid={showMismatch}
+              aria-invalid={showMismatch}
+              aria-describedby={showMismatch ? "confirm-password-error" : undefined}
+            />
+            {showMismatch && (
+              <p id="confirm-password-error" role="alert" className="text-[12px] text-danger">
+                Both passwords must match.
+              </p>
+            )}
+          </div>
+        )}
 
         <Button type="submit" className="h-12 w-full text-[15px]" loading={loading}>
           {isRegister ? "Create account" : "Sign in"}
