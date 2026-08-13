@@ -372,7 +372,7 @@ recorded in the admin activity log.
 | Marketplace, editor, live preview | ✓ | ✓ |
 | Downloads | 1 total | Unlimited |
 | Image upload size | 5 MB | 25 MB |
-| Image storage | 50 MB | 2 GB |
+| Images held while editing | 50 MB | 2 GB |
 | Version history | 3 | 50 |
 | Premium templates | — | ✓ |
 | Hosting the exported site | free (your own host) | free (your own host) |

@@ -54,7 +54,9 @@ export function PricingPlans({ billingConfigured }: { billingConfigured: boolean
 
   return (
     <>
-      <div className="mx-auto grid max-w-[1060px] items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      {/* No `items-start` — the cards stretch so all three share a height
+          regardless of how many features each lists. */}
+      <div className="mx-auto grid max-w-[1060px] gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {(["FREE", "PRO"] as const).map((key) => {
           const copy = PLAN_COPY[key];
           const isPro = key === "PRO";
@@ -65,7 +67,7 @@ export function PricingPlans({ billingConfigured }: { billingConfigured: boolean
               key={key}
               aria-labelledby={`plan-${key}`}
               className={cn(
-                "relative flex flex-col rounded-[14px] border p-6 sm:p-7",
+                "relative flex h-full flex-col rounded-[14px] border p-6 sm:p-7",
                 // The featured plan is raised a step rather than outlined in a
                 // brand colour — same trick the reference uses.
                 isPro ? "border-hairline-strong bg-surface-2" : "border-hairline bg-surface",
@@ -135,7 +137,7 @@ export function PricingPlans({ billingConfigured }: { billingConfigured: boolean
         {/* Handled by hand — there is no CUSTOM plan in the database. */}
         <section
           aria-labelledby="plan-CUSTOM"
-          className="flex flex-col rounded-[14px] border border-hairline bg-surface p-6 sm:p-7"
+          className="flex h-full flex-col rounded-[14px] border border-hairline bg-surface p-6 sm:p-7"
         >
           <h2
             id="plan-CUSTOM"

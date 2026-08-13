@@ -11,7 +11,11 @@ export type PlanLimits = {
   canUsePremiumTemplates: boolean;
   /** Largest single upload. */
   maxAssetBytes: number;
-  /** Total image storage across all of a user's projects. */
+  /**
+   * Ceiling on images held at once while editing. This is a working buffer,
+   * not a storage allowance — uploads are released as soon as the project is
+   * downloaded, so it is never advertised as a plan benefit.
+   */
   maxStorageBytes: number;
   versionHistory: number;
 };
@@ -96,7 +100,6 @@ export const PLAN_COPY = {
       "50 downloads per week",
       "Premium and animated templates",
       "Version history (50 versions)",
-      "2 GB image storage",
       "Larger image uploads (25 MB)",
       "Priority support",
     ],

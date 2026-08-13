@@ -62,7 +62,7 @@ export async function POST(request: Request) {
           "storage_full",
           `You have used ${Math.round(after / 1024 / 1024)} MB of your ${Math.round(
             limitsFor(user.plan).maxStorageBytes / 1024 / 1024,
-          )} MB image storage. Delete a project or upgrade for more room.`,
+          )} MB of working image space. Download a project to release its images, or delete one.`,
         );
       }
     }

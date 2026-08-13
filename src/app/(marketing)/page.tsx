@@ -267,7 +267,7 @@ export default async function LandingPage() {
               Pricing
             </p>
             <h2 className="text-balance-tight text-[clamp(1.9rem,3.6vw,2.9rem)] font-semibold">
-              Free to build. Twenty dollars to go pro.
+              Start free. Upgrade when you outgrow it.
             </h2>
           </div>
 

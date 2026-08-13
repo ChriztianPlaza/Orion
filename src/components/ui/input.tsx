@@ -68,10 +68,12 @@ export const InputGroup = React.forwardRef<
   React.InputHTMLAttributes<HTMLInputElement> & { icon: React.ReactNode }
 >(({ className, icon, ...props }, ref) => (
   <div
+    // `field-shell` is what moves the focus ring onto the whole control —
+    // see the rule in globals.css.
     className={cn(
-      "flex h-12 items-center gap-2.5 rounded-md border border-hairline bg-surface-2 px-3.5",
-      "transition-[border-color,box-shadow] duration-150",
-      "focus-within:border-white/45 focus-within:shadow-[0_0_0_3px_rgba(255,255,255,0.14)]",
+      "field-shell flex h-12 items-center gap-2.5 rounded-md border border-hairline bg-surface-2 px-3.5",
+      "transition-colors duration-150",
+      "focus-within:border-white/45",
       "has-[input:disabled]:opacity-50",
       className,
     )}
@@ -81,14 +83,9 @@ export const InputGroup = React.forwardRef<
     </span>
     <input
       ref={ref}
-      /*
-       * `focus-visible:outline-none` is load-bearing. The global focus ring in
-       * globals.css targets every focusable element, so without this the input
-       * drew its own 2px outline *inside* the wrapper — and `outline-offset`
-       * pushed it past the wrapper's right edge. The wrapper's focus-within
-       * ring is the focus indicator here.
-       */
-      className="h-full w-full bg-transparent text-sm text-ink outline-none focus:outline-none focus-visible:outline-none placeholder:text-ink-dim disabled:cursor-not-allowed"
+      // The shell owns the focus ring; `.field-shell :focus-visible` in
+      // globals.css is what actually suppresses this one.
+      className="h-full w-full bg-transparent text-sm text-ink outline-none placeholder:text-ink-dim disabled:cursor-not-allowed"
       {...props}
     />
   </div>

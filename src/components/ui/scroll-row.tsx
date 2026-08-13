@@ -60,29 +60,41 @@ export function ScrollRow({
     el.scrollBy({ left: direction * distance, behavior: reduced ? "auto" : "smooth" });
   };
 
+  /*
+   * The arrows sit beside the strip rather than on top of it. Overlaying them
+   * meant chips slid underneath as you scrolled — padding on a scroll
+   * container stays with the content, so it stops protecting anything once
+   * you move. They also always render, disabled when they cannot act: showing
+   * and hiding them would resize the strip, which changes whether it overflows.
+   */
   return (
-    <div className="relative">
+    <div className="flex items-center gap-2">
+      <Arrow
+        side="left"
+        disabled={!overflowing || atStart}
+        onClick={() => nudge(-1)}
+        label={`Scroll ${label} left`}
+      />
+
       <div
         ref={viewport}
         onScroll={sync}
         role="group"
         aria-label={label}
         className={cn(
-          "scrollbar-none mask-fade-x -mx-1 flex gap-2 overflow-x-auto px-1 pb-1",
-          // Room for the arrows to sit over, only once they are showing.
-          overflowing && "pl-11 pr-11",
+          "scrollbar-none mask-fade-x -my-1 flex min-w-0 flex-1 gap-2 overflow-x-auto py-1",
           className,
         )}
       >
         {children}
       </div>
 
-      {overflowing && (
-        <>
-          <Arrow side="left" disabled={atStart} onClick={() => nudge(-1)} label={`Scroll ${label} left`} />
-          <Arrow side="right" disabled={atEnd} onClick={() => nudge(1)} label={`Scroll ${label} right`} />
-        </>
-      )}
+      <Arrow
+        side="right"
+        disabled={!overflowing || atEnd}
+        onClick={() => nudge(1)}
+        label={`Scroll ${label} right`}
+      />
     </div>
   );
 }
@@ -106,19 +118,18 @@ function Arrow({
       onClick={onClick}
       disabled={disabled}
       aria-label={label}
-      // 44px hit area around a 30px visual control, per touch-target guidance.
+      // 44px hit area around a 32px visual control, per touch-target guidance.
       className={cn(
-        "absolute top-1/2 z-10 grid size-11 -translate-y-1/2 place-items-center",
-        side === "left" ? "-left-2" : "-right-2",
+        "grid size-11 shrink-0 place-items-center",
         disabled ? "cursor-default" : "cursor-pointer",
       )}
     >
       <span
         className={cn(
-          "grid size-[30px] place-items-center rounded-full border backdrop-blur-md transition-all duration-200",
+          "grid size-8 place-items-center rounded-full border transition-colors duration-150",
           disabled
-            ? "border-hairline bg-black/40 text-ink-dim"
-            : "border-hairline-strong bg-black/70 text-ink hover:border-white/30 hover:bg-black hover:text-white active:scale-95",
+            ? "border-hairline text-ink-faint"
+            : "border-hairline text-ink-muted hover:border-hairline-strong hover:text-ink",
         )}
       >
         <Icon className="size-4" />

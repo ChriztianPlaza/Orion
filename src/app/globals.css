@@ -195,6 +195,29 @@ table,
 }
 
 /*
+  Composite fields — an icon and an input sharing one bordered shell.
+
+  The focusable element is the inner <input>, so the rule above drew the ring
+  around *that*: a box starting after the icon and, thanks to outline-offset,
+  spilling past the shell's right edge. The ring belongs to the whole control,
+  so it moves to the shell and the inner input gives its own up.
+
+  These live here rather than as Tailwind utilities on the component because
+  they have to outrank the unlayered rule above; a utility sits in
+  `@layer utilities`, and an unlayered rule beats a layered one whatever its
+  specificity. Same origin, so specificity decides — and both selectors below
+  are more specific than a bare `:focus-visible`.
+*/
+.field-shell:focus-within {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+.field-shell :focus-visible {
+  outline: none;
+}
+
+/*
   Native form controls.
 
   The closed <select> is ordinary CSS, but the popup list it opens is painted by

@@ -142,9 +142,11 @@ export function SiteHeader() {
           onPointerEnter={cancelClose}
           onPointerLeave={scheduleClose}
         >
+          {/* Nav hover is carried by text brightness, not a background pill —
+              a grey slab appearing under the cursor read as heavy here. */}
           <Link
             href="/"
-            className="rounded-md px-3 py-1.5 text-[13.5px] font-medium text-ink transition-colors hover:bg-surface-2"
+            className="rounded-md px-3 py-1.5 text-[13.5px] font-medium text-ink-muted transition-colors hover:text-ink"
           >
             Home
           </Link>
@@ -166,9 +168,7 @@ export function SiteHeader() {
                 onClick={() => setOpenMenu((current) => (current === menu.id ? null : menu.id))}
                 className={cn(
                   "flex items-center gap-1.5 rounded-md px-3 py-1.5 text-[13.5px] font-medium transition-colors",
-                  openMenu === menu.id
-                    ? "bg-surface-2 text-ink"
-                    : "text-ink hover:bg-surface-2",
+                  openMenu === menu.id ? "text-ink" : "text-ink-muted hover:text-ink",
                 )}
               >
                 {menu.label}
@@ -199,7 +199,7 @@ export function SiteHeader() {
         <div className="ml-auto hidden items-center gap-3 md:flex">
           <Link
             href="/pricing"
-            className="rounded-md px-2 py-1.5 text-[13.5px] font-medium text-ink transition-colors hover:bg-surface-2"
+            className="rounded-md px-2 py-1.5 text-[13.5px] font-medium text-ink-muted transition-colors hover:text-ink"
           >
             Pricing
           </Link>
@@ -234,7 +234,7 @@ export function SiteHeader() {
         </div>
 
         <button
-          className="-mr-2 ml-auto rounded-lg p-2 text-ink transition-colors hover:bg-surface-2 md:hidden"
+          className="-mr-2 ml-auto rounded-lg p-2 text-ink-muted transition-colors hover:text-ink md:hidden"
           onClick={() => setMobileOpen((value) => !value)}
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? "Close menu" : "Open menu"}

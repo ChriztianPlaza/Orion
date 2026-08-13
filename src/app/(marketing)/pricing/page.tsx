@@ -56,11 +56,11 @@ export default function PricingPage() {
     <div className="container-page py-16 sm:py-24">
       <header className="mx-auto mb-14 max-w-[52ch] text-center">
         <h1 className="text-balance-tight text-[clamp(2.2rem,4.5vw,3.4rem)] font-semibold">
-          Free to build. Twenty dollars to go pro.
+          Start free. Upgrade when you outgrow it.
         </h1>
         <p className="mt-5 text-[16px] leading-relaxed text-ink-muted">
-          Build and download a complete website without paying anything. Hosting is free on every
-          plan — upgrade when you want more projects and more downloads.
+          Every plan exports real HTML and CSS that you own and can host anywhere for nothing. You
+          are only ever paying for more projects and more downloads.
         </p>
       </header>
 
