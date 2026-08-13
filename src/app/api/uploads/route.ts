@@ -8,6 +8,7 @@ import {
   StorageNotConfiguredError,
   uploadObject,
 } from "@/lib/storage/blob";
+import { storageUsedBy, sweepOrphanedAssets } from "@/lib/storage/gc";
 
 /**
  * Image uploads for the editor.
@@ -42,6 +43,28 @@ export async function POST(request: Request) {
         "file_too_large",
         `Images must be under ${Math.round(maxBytes / 1024 / 1024)} MB on your plan.`,
       );
+    }
+
+    /*
+     * Total-storage quota. Before charging the user's allowance, reclaim
+     * anything they are no longer using — images they replaced, or uploaded
+     * and never placed. In the common case that frees enough room that the
+     * quota is never actually hit.
+     */
+    const used = await storageUsedBy(user.id);
+    if (used + file.size > limitsFor(user.plan).maxStorageBytes) {
+      await sweepOrphanedAssets({ userId: user.id, graceHours: 1 }).catch(() => {});
+      const after = await storageUsedBy(user.id);
+
+      if (after + file.size > limitsFor(user.plan).maxStorageBytes) {
+        throw new ApiError(
+          402,
+          "storage_full",
+          `You have used ${Math.round(after / 1024 / 1024)} MB of your ${Math.round(
+            limitsFor(user.plan).maxStorageBytes / 1024 / 1024,
+          )} MB image storage. Delete a project or upgrade for more room.`,
+        );
+      }
     }
 
     const bytes = new Uint8Array(await file.arrayBuffer());

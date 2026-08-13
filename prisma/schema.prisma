@@ -41,16 +41,6 @@ enum ProjectStatus {
   ARCHIVED
 }
 
-enum DeploymentStatus {
-  QUEUED
-  PREPARING
-  UPLOADING
-  BUILDING
-  SUCCESS
-  FAILED
-  DELETED
-}
-
 enum TemplateStatus {
   DRAFT
   PUBLISHED
@@ -76,6 +66,12 @@ model User {
 
   // Server-enforced free-tier meters.
   downloadCount Int @default(0)
+
+  /// Start of the current download allowance window. Plans with a rolling
+  /// quota (Pro: 50 a week) reset `downloadCount` once this is older than the
+  /// window. Null means the plan counts downloads for the lifetime of the
+  /// account, which is how the Free tier's single download works.
+  downloadPeriodStart DateTime?
   projectCount  Int @default(0)
 
   stripeCustomerId String? @unique
@@ -90,7 +86,6 @@ model User {
   subscriptions  Subscription[]
   payments       Payment[]
   downloads      Download[]
-  deployments    Deployment[]
   assets         ProjectAsset[]
   favorites      Favorite[]
   templateViews  TemplateView[]
@@ -330,10 +325,6 @@ model Project {
   status    ProjectStatus @default(DRAFT)
   thumbnail String?
 
-  /// Claimed Cloudflare Pages project name. Unique across the whole platform so
-  /// two users cannot fight over the same *.pages.dev host.
-  subdomain String? @unique
-
   // Editor state — the single source of truth for generated output.
   //   content: { "<editable key>": { text?, html?, src?, alt?, href?, hidden?, style? } }
   //   theme:   { vars: {...}, fontFamily, headingFont, radius }
@@ -349,10 +340,9 @@ model Project {
   updatedAt    DateTime  @updatedAt
   lastEditedAt DateTime?
 
-  deployments Deployment[]
-  downloads   Download[]
-  assets      ProjectAsset[]
-  versions    ProjectVersion[]
+  downloads Download[]
+  assets    ProjectAsset[]
+  versions  ProjectVersion[]
 
   @@unique([userId, slug])
   @@index([userId, updatedAt])
@@ -395,37 +385,6 @@ model ProjectAsset {
 
   @@index([userId, createdAt])
   @@index([projectId])
-}
-
-model Deployment {
-  id        String @id @default(cuid())
-  projectId String
-  project   Project @relation(fields: [projectId], references: [id], onDelete: Cascade)
-  userId    String
-  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  provider String           @default("cloudflare-pages")
-  status   DeploymentStatus @default(QUEUED)
-
-  projectName String // cloudflare pages project name
-  url         String?
-  aliasUrl    String?
-  externalId  String?
-
-  fileCount Int @default(0)
-  bytes     Int @default(0)
-
-  // Step-by-step progress shown in the deploy dialog:
-  // [{ step, status, at, detail? }]
-  steps Json    @default("[]")
-  error String? @db.Text
-
-  createdAt   DateTime  @default(now())
-  completedAt DateTime?
-
-  @@index([projectId, createdAt])
-  @@index([userId, createdAt])
-  @@index([status])
 }
 
 model Download {

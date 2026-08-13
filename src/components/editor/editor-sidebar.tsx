@@ -108,7 +108,7 @@ export function EditorSidebar({
   return (
     <div className="flex h-full flex-col bg-[#070707]">
       <nav
-        className="grid grid-cols-4 border-b border-white/[0.07]"
+        className="grid grid-cols-4 border-b border-hairline"
         role="tablist"
         aria-label="Editor panels"
       >
@@ -122,7 +122,7 @@ export function EditorSidebar({
               "flex flex-col items-center gap-1 py-2.5 text-[10.5px] transition-colors",
               tab === item.id
                 ? "bg-white/[0.05] text-white"
-                : "text-white/35 hover:bg-white/[0.02] hover:text-white/70",
+                : "text-ink-muted hover:bg-white/[0.02] hover:text-ink",
             )}
           >
             <item.icon className="size-4" />
@@ -133,7 +133,7 @@ export function EditorSidebar({
 
       {tab === "pages" && (
         <div className="flex-1 overflow-y-auto p-3">
-          <p className="mb-2 px-1 text-[11px] font-medium uppercase tracking-[0.12em] text-white/25">
+          <p className="mb-2 px-1 text-[11px] font-medium uppercase tracking-[0.12em] text-ink-dim">
             Pages in this template
           </p>
           <ul className="space-y-1">
@@ -145,14 +145,14 @@ export function EditorSidebar({
                     "flex w-full items-center justify-between rounded-lg px-2.5 py-2 text-left text-[13px] transition-colors",
                     activeFile === page.file
                       ? "bg-white/[0.08] text-white"
-                      : "text-white/50 hover:bg-white/[0.04] hover:text-white",
+                      : "text-ink-muted hover:bg-white/[0.04] hover:text-white",
                   )}
                 >
                   <span className="flex min-w-0 items-center gap-2">
                     <FileText className="size-3.5 shrink-0 opacity-50" />
                     <span className="truncate">{page.file}</span>
                   </span>
-                  <span className="ml-2 shrink-0 text-[11px] text-white/25">
+                  <span className="ml-2 shrink-0 text-[11px] text-ink-dim">
                     {page.elementCount}
                   </span>
                 </button>
@@ -160,16 +160,16 @@ export function EditorSidebar({
             ))}
           </ul>
           <FieldHint className="px-1">
-            Every page is exported and deployed together. Links between them keep working.
+            Every page is exported together. Links between them keep working.
           </FieldHint>
         </div>
       )}
 
       {tab === "elements" && (
         <>
-          <div className="space-y-2.5 border-b border-white/[0.07] p-3">
+          <div className="space-y-2.5 border-b border-hairline p-3">
             <div className="relative">
-              <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-white/25" />
+              <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-ink-dim" />
               <Input
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
@@ -188,7 +188,7 @@ export function EditorSidebar({
                     "rounded-full px-2.5 py-1 text-[11.5px] transition-colors",
                     typeFilter === filter.id
                       ? "bg-white text-black"
-                      : "bg-white/[0.05] text-white/45 hover:text-white",
+                      : "bg-white/[0.05] text-ink-muted hover:text-white",
                   )}
                 >
                   {filter.label}
@@ -199,16 +199,16 @@ export function EditorSidebar({
 
           <div className="flex-1 overflow-y-auto px-2 py-2">
             {grouped.length === 0 ? (
-              <p className="px-2 py-8 text-center text-[12.5px] text-white/30">
+              <p className="px-2 py-8 text-center text-[12.5px] text-ink-dim">
                 No elements match that search.
               </p>
             ) : (
               grouped.map(([group, items]) => (
                 <details key={group} open className="group mb-1">
-                  <summary className="flex cursor-pointer list-none items-center gap-1.5 rounded-lg px-2 py-1.5 text-[11px] font-medium uppercase tracking-[0.1em] text-white/30 hover:text-white/60">
+                  <summary className="flex cursor-pointer list-none items-center gap-1.5 rounded-lg px-2 py-1.5 text-[11px] font-medium uppercase tracking-[0.1em] text-ink-dim hover:text-ink-muted">
                     <ChevronRight className="size-3 transition-transform group-open:rotate-90" />
                     {group}
-                    <span className="ml-auto text-white/20">{items.length}</span>
+                    <span className="ml-auto text-ink-dim">{items.length}</span>
                   </summary>
                   <ul className="mt-0.5 space-y-px">
                     {items.map((element) => {
@@ -222,7 +222,7 @@ export function EditorSidebar({
                               "flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left text-[12.5px] transition-colors",
                               selectedKey === element.key
                                 ? "bg-[#0071e3]/15 text-white"
-                                : "text-white/50 hover:bg-white/[0.04] hover:text-white",
+                                : "text-ink-muted hover:bg-white/[0.04] hover:text-white",
                             )}
                           >
                             <Icon className="size-3.5 shrink-0 opacity-45" />
@@ -248,7 +248,7 @@ export function EditorSidebar({
       {tab === "theme" && (
         <div className="flex-1 space-y-5 overflow-y-auto p-4">
           <div>
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.12em] text-white/25">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.12em] text-ink-dim">
               Site colours
             </p>
             <div className="space-y-3">
@@ -278,8 +278,8 @@ export function EditorSidebar({
             </FieldHint>
           </div>
 
-          <div className="border-t border-white/[0.07] pt-4">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.12em] text-white/25">
+          <div className="border-t border-hairline pt-4">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.12em] text-ink-dim">
               Typography
             </p>
             <Label htmlFor="theme-body-font">Body font</Label>
@@ -332,7 +332,7 @@ export function EditorSidebar({
             </div>
           </div>
 
-          <div className="border-t border-white/[0.07] pt-4">
+          <div className="border-t border-hairline pt-4">
             <Label htmlFor="theme-css">Custom CSS</Label>
             <Textarea
               id="theme-css"
@@ -362,8 +362,8 @@ export function EditorSidebar({
             <FieldHint>Only you see this. It names the ZIP you download.</FieldHint>
           </div>
 
-          <div className="border-t border-white/[0.07] pt-4">
-            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.12em] text-white/25">
+          <div className="border-t border-hairline pt-4">
+            <p className="mb-3 text-[11px] font-medium uppercase tracking-[0.12em] text-ink-dim">
               Search and social
             </p>
             <Label htmlFor="set-title">Page title</Label>
@@ -443,7 +443,7 @@ function ThemeColor({
   return (
     <div className="flex items-center gap-2.5">
       <label
-        className="relative size-8 shrink-0 cursor-pointer overflow-hidden rounded-lg border border-white/10"
+        className="relative size-8 shrink-0 cursor-pointer overflow-hidden rounded-lg border border-hairline"
         style={{ background: value || "transparent" }}
       >
         <input
@@ -455,13 +455,13 @@ function ThemeColor({
         />
       </label>
       <div className="min-w-0 flex-1">
-        <p className="text-[12.5px] text-white/70">{label}</p>
-        <p className="truncate font-mono text-[11px] text-white/25">{value || "template default"}</p>
+        <p className="text-[12.5px] text-ink">{label}</p>
+        <p className="truncate font-mono text-[11px] text-ink-dim">{value || "template default"}</p>
       </div>
       {value && (
         <button
           onClick={() => onChange({ vars: { [variable]: "" } })}
-          className="text-[11px] text-white/30 hover:text-white"
+          className="text-[11px] text-ink-dim hover:text-white"
         >
           Reset
         </button>

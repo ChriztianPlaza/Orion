@@ -3,43 +3,31 @@
 import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  Copy,
-  CloudUpload,
-  ExternalLink,
-  Eye,
-  MoreHorizontal,
-  Pencil,
-  Trash2,
-} from "lucide-react";
+import { Copy, Eye, MoreHorizontal, Pencil, Rocket, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { ConfirmDialog } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/toast";
 import { UpgradeDialog } from "@/components/billing/upgrade-dialog";
-import { DeployDialog } from "@/components/editor/deploy-dialog";
+import { PublishDialog } from "@/components/editor/publish-dialog";
 import { relativeTime } from "@/lib/utils";
 
 export type DashboardProject = {
   id: string;
   name: string;
-  subdomain: string | null;
   status: string;
   updatedAt: string;
   templateName: string | null;
   templateSlug: string | null;
-  liveUrl: string | null;
-  deploymentCount: number;
 };
 
-export function ProjectCard({ project, canDeploy }: { project: DashboardProject; canDeploy: boolean }) {
+export function ProjectCard({ project }: { project: DashboardProject }) {
   const router = useRouter();
   const { toast } = useToast();
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [confirmDelete, setConfirmDelete] = React.useState(false);
   const [deleting, setDeleting] = React.useState(false);
   const [duplicating, setDuplicating] = React.useState(false);
-  const [deployOpen, setDeployOpen] = React.useState(false);
+  const [publishOpen, setPublishOpen] = React.useState(false);
   const [upgradeReason, setUpgradeReason] = React.useState<string | null>(null);
   const menuRef = React.useRef<HTMLDivElement>(null);
 
@@ -92,7 +80,7 @@ export function ProjectCard({ project, canDeploy }: { project: DashboardProject;
 
   return (
     <>
-      <article className="card-surface group relative flex flex-col overflow-hidden rounded-[18px] transition-all duration-500 [contain-intrinsic-size:auto_420px] [content-visibility:auto] hover:border-white/20">
+      <article className="card-surface card-interactive group relative flex flex-col overflow-hidden rounded-[12px] [contain-intrinsic-size:auto_420px] [content-visibility:auto]">
         <Link
           href={`/editor/${project.id}`}
           className="relative block aspect-[16/10] overflow-hidden bg-[#080808]"
@@ -114,7 +102,7 @@ export function ProjectCard({ project, canDeploy }: { project: DashboardProject;
           <div className="flex items-start justify-between gap-2">
             <div className="min-w-0">
               <h3 className="truncate text-[14.5px] font-medium text-white">{project.name}</h3>
-              <p className="mt-0.5 truncate text-[12.5px] text-white/35">
+              <p className="mt-0.5 truncate text-[12.5px] text-ink-muted">
                 {project.templateName ?? "Template removed"} · edited {relativeTime(project.updatedAt)}
               </p>
             </div>
@@ -138,7 +126,7 @@ export function ProjectCard({ project, canDeploy }: { project: DashboardProject;
                   <Link
                     role="menuitem"
                     href={`/editor/${project.id}`}
-                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] text-white/60 hover:bg-white/[0.06] hover:text-white"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] text-ink-muted hover:bg-white/[0.06] hover:text-white"
                   >
                     <Pencil className="size-3.5" /> Edit
                   </Link>
@@ -147,7 +135,7 @@ export function ProjectCard({ project, canDeploy }: { project: DashboardProject;
                     href={`/api/render/${project.id}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] text-white/60 hover:bg-white/[0.06] hover:text-white"
+                    className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] text-ink-muted hover:bg-white/[0.06] hover:text-white"
                   >
                     <Eye className="size-3.5" /> Preview
                   </a>
@@ -155,7 +143,7 @@ export function ProjectCard({ project, canDeploy }: { project: DashboardProject;
                     role="menuitem"
                     onClick={duplicate}
                     disabled={duplicating}
-                    className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[13px] text-white/60 hover:bg-white/[0.06] hover:text-white"
+                    className="flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[13px] text-ink-muted hover:bg-white/[0.06] hover:text-white"
                   >
                     <Copy className="size-3.5" /> {duplicating ? "Duplicating…" : "Duplicate"}
                   </button>
@@ -174,45 +162,21 @@ export function ProjectCard({ project, canDeploy }: { project: DashboardProject;
             </div>
           </div>
 
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-3 flex items-center gap-1.5 truncate text-[12.5px] text-[#2997ff] hover:underline"
-            >
-              <span className="size-1.5 shrink-0 rounded-full bg-[#30d158]" />
-              {project.liveUrl.replace(/^https?:\/\//, "")}
-              <ExternalLink className="size-3 shrink-0" />
-            </a>
-          )}
-
           <div className="mt-4 flex items-center gap-2">
             <Link href={`/editor/${project.id}`} className="flex-1">
-              <Button size="sm" variant="secondary" className="w-full">
+              <Button size="sm" className="w-full">
                 <Pencil /> Edit
               </Button>
             </Link>
             <Button
               size="sm"
+              variant="secondary"
               className="flex-1"
-              onClick={() => {
-                if (!canDeploy) {
-                  setUpgradeReason("Deploying to the web is a Pro feature.");
-                  return;
-                }
-                setDeployOpen(true);
-              }}
+              onClick={() => setPublishOpen(true)}
             >
-              <CloudUpload /> {project.liveUrl ? "Redeploy" : "Deploy"}
+              <Rocket /> Publish
             </Button>
           </div>
-
-          {project.status === "PUBLISHED" && (
-            <Badge variant="success" className="absolute right-3 top-3">
-              Live
-            </Badge>
-          )}
         </div>
       </article>
 
@@ -225,20 +189,16 @@ export function ProjectCard({ project, canDeploy }: { project: DashboardProject;
         description={
           <>
             <strong className="text-white">{project.name}</strong> and all of its edits will be
-            permanently removed. This cannot be undone.
-            {project.liveUrl && " The deployed site stays online until you delete it separately."}
+            permanently removed. This cannot be undone. Anything you have already downloaded and
+            hosted elsewhere is unaffected.
           </>
         }
       />
 
-      <DeployDialog
-        open={deployOpen}
-        onClose={() => setDeployOpen(false)}
-        projectId={project.id}
+      <PublishDialog
+        open={publishOpen}
+        onClose={() => setPublishOpen(false)}
         projectName={project.name}
-        currentSubdomain={project.subdomain}
-        canDeploy={canDeploy}
-        onDeployed={() => router.refresh()}
       />
 
       <UpgradeDialog

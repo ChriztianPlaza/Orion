@@ -37,6 +37,7 @@ type Bundle = {
 };
 
 const CATEGORIES = [
+  ["animated", "Animated", "Motion-led pages with scroll and pointer interaction", "sparkles", "#c084fc"],
   ["saas", "SaaS", "Software products sold by subscription", "cloud", "#2997ff"],
   ["startup", "Startup", "Launch pages for new companies", "rocket", "#bf5af2"],
   ["portfolio", "Portfolio", "Personal and studio showcases", "layout-grid", "#30d158"],

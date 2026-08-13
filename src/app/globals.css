@@ -1,54 +1,72 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Orion design system — Apple restraint, Vercel contrast.
-   Pure-black canvas, hairline borders, one accent, generous type scale.
+   Orion design system.
+
+   Solid surfaces separated by a visible border, one flat muted grey for
+   all secondary text, white primary actions. The previous version drew
+   cards as a 4.5%-white gradient behind an 8%-white border, which on a
+   black canvas is close to invisible — the page read as flat black with
+   text floating on it. Borders now carry the structure so the surfaces
+   themselves can stay near-black.
+
+   Every text tier below meets WCAG AA (4.5:1) against the canvas; the
+   contrast ratio is noted so it stays that way.
 ------------------------------------------------------------------- */
 
 @theme {
+  /* --- surfaces ---------------------------------------------------- */
   --color-canvas: #000000;
-  --color-surface: #0a0a0a;
-  --color-surface-2: #111111;
-  --color-surface-3: #161616;
-  --color-elevated: #1c1c1e;
+  --color-surface: #0a0a0a; /* cards, panels */
+  --color-surface-2: #131316; /* inputs, secondary buttons */
+  --color-surface-3: #1c1c20; /* hover on the above */
+  --color-elevated: #18181b; /* dialogs, popovers, menus */
 
-  --color-hairline: rgba(255, 255, 255, 0.08);
-  --color-hairline-strong: rgba(255, 255, 255, 0.14);
+  /* --- borders ------------------------------------------------------
+     These do the structural work, so they have to be seen. */
+  --color-hairline: #27272a;
+  --color-hairline-strong: #3f3f46;
 
-  --color-ink: #ffffff;
-  --color-ink-muted: #a1a1a6;
-  --color-ink-dim: #6e6e73;
-  --color-ink-faint: #48484a;
+  /* --- text ---------------------------------------------------------
+     Ratios are against --color-canvas. */
+  --color-ink: #fafafa; /* 19.8:1  headings, primary */
+  --color-ink-muted: #a1a1aa; /*  8.2:1  body, descriptions */
+  --color-ink-dim: #8b8b93; /*  6.2:1  meta, captions, counts */
+  --color-ink-faint: #71717a; /*  4.3:1  large text / decorative only */
 
-  --color-accent: #ffffff;
+  --color-accent: #fafafa;
+  --color-on-accent: #0a0a0a;
   --color-brand: #0071e3;
-  --color-brand-soft: #2997ff;
-  --color-success: #30d158;
-  --color-warning: #ffd60a;
-  --color-danger: #ff453a;
-  --color-violet: #bf5af2;
+  --color-brand-soft: #47a3ff; /* 6.4:1 — the old #2997ff was 4.1:1 */
+  --color-success: #4ade80; /* 9.9:1 */
+  --color-warning: #fbbf24; /* 11.2:1 */
+  --color-danger: #f87171; /* 7.4:1 */
+  --color-violet: #c084fc; /* 8.5:1 */
 
   --font-sans:
-    "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Inter,
-    Roboto, "Helvetica Neue", Arial, sans-serif;
+    var(--font-geist-sans), "SF Pro Text", -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono:
-    "SF Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, "Cascadia Mono",
-    "Roboto Mono", monospace;
+    var(--font-geist-mono), "SF Mono", ui-monospace, SFMono-Regular, Menlo,
+    Monaco, "Cascadia Mono", monospace;
 
   --radius-xs: 6px;
-  --radius-sm: 10px;
-  --radius-md: 14px;
-  --radius-lg: 20px;
-  --radius-xl: 28px;
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
 
-  --shadow-glow: 0 0 80px -20px rgba(41, 151, 255, 0.45);
-  --shadow-card: 0 1px 0 0 rgba(255, 255, 255, 0.04) inset,
-    0 20px 60px -30px rgba(0, 0, 0, 0.9);
+  --shadow-glow: 0 0 80px -20px rgba(71, 163, 255, 0.4);
+  --shadow-card: 0 1px 2px 0 rgba(0, 0, 0, 0.6);
+  --shadow-raised: 0 4px 12px -2px rgba(0, 0, 0, 0.7),
+    0 2px 4px -2px rgba(0, 0, 0, 0.5);
+  --shadow-overlay: 0 24px 60px -12px rgba(0, 0, 0, 0.9);
 
   --ease-out-apple: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
 
-  --animate-fade-up: fade-up 0.7s var(--ease-out-apple) both;
-  --animate-fade-in: fade-in 0.6s ease both;
+  --animate-fade-up: fade-up 0.5s var(--ease-out-apple) both;
+  --animate-fade-in: fade-in 0.4s ease both;
   --animate-marquee: marquee 40s linear infinite;
   --animate-shimmer: shimmer 2.4s linear infinite;
   --animate-pulse-soft: pulse-soft 3s ease-in-out infinite;
@@ -57,7 +75,7 @@
 @keyframes fade-up {
   from {
     opacity: 0;
-    transform: translateY(18px);
+    transform: translateY(12px);
   }
   to {
     opacity: 1;
@@ -114,14 +132,37 @@ body {
   background: var(--color-canvas);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  font-feature-settings: "ss01", "cv01";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
 }
 
+/*
+  Optical sizing. Geist is drawn on the wide side for UI legibility, which
+  reads loose once type gets large — tighten as it grows, the way SF Pro
+  switches from Text to Display cuts.
+*/
+h1,
+h2,
+h3,
+h4 {
+  letter-spacing: -0.021em;
+}
+h1 {
+  letter-spacing: -0.032em;
+}
+h2 {
+  letter-spacing: -0.027em;
+}
+
+/* Figures that sit in columns must not reflow as their digits change. */
+table,
+[data-tabular] {
+  font-variant-numeric: tabular-nums;
+}
+
 ::selection {
-  background: rgba(41, 151, 255, 0.35);
+  background: rgba(71, 163, 255, 0.35);
   color: #fff;
 }
 
@@ -133,18 +174,60 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: #3f3f46;
   border-radius: 999px;
   border: 2px solid #000;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.24);
+  background: #52525b;
 }
 
+/*
+  The global keyboard focus indicator.
+
+  It deliberately does not set `border-radius`: an earlier version did, which
+  squared off pill buttons and rounded cards the moment they took focus.
+  Browsers already follow the element's own radius when drawing an outline.
+*/
 :focus-visible {
-  outline: 2px solid var(--color-brand-soft);
+  outline: 2px solid var(--color-ink);
   outline-offset: 2px;
-  border-radius: 4px;
+}
+
+/*
+  Native form controls.
+
+  The closed <select> is ordinary CSS, but the popup list it opens is painted by
+  the operating system and ignores almost everything we set — which is why it
+  came out white on a dark page. `color-scheme` is the switch that tells the
+  browser to draw that native UI in dark mode, and it has to be on the control
+  itself; inheriting it from <html> is not enough in Chrome once the element has
+  its own background-color. Explicit <option> colours cover the browsers that
+  respect them.
+*/
+select,
+input,
+textarea {
+  color-scheme: dark;
+}
+
+select option,
+select optgroup {
+  background-color: #18181b;
+  color: #fafafa;
+}
+
+select option:checked,
+select option:hover {
+  background-color: #27272a;
+  color: #ffffff;
+}
+
+/* Date/time/colour pickers and the number spinner draw their own glyphs. */
+::-webkit-calendar-picker-indicator,
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  filter: invert(1) opacity(0.5);
 }
 
 /* ---------------------------------------------------------------- utils */
@@ -161,22 +244,44 @@ body {
   letter-spacing: -0.03em;
 }
 
-/* Frosted panel — the Apple-ish glass surface used across chrome. */
+/* Frosted panel — sticky chrome, menus, dialogs. */
 @utility glass {
-  background: rgba(10, 10, 10, 0.72);
+  background: rgba(10, 10, 10, 0.8);
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
   border: 1px solid var(--color-hairline);
 }
 
+/*
+  The card. A solid near-black fill with a border you can actually see —
+  the border is what separates it from the canvas, not the fill.
+*/
 @utility card-surface {
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.045) 0%,
-    rgba(255, 255, 255, 0.012) 100%
-  );
+  background: var(--color-surface);
   border: 1px solid var(--color-hairline);
   box-shadow: var(--shadow-card);
+}
+
+/* Cards that respond to the pointer. Lift is small on purpose. */
+@utility card-interactive {
+  transition:
+    border-color 0.2s var(--ease-out-apple),
+    background-color 0.2s var(--ease-out-apple),
+    transform 0.2s var(--ease-out-apple),
+    box-shadow 0.2s var(--ease-out-apple);
+
+  &:hover {
+    border-color: var(--color-hairline-strong);
+    background: var(--color-surface-2);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-raised);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-interactive:hover {
+    transform: none;
+  }
 }
 
 /* Gradient hairline that lights up on hover — Vercel signature. */

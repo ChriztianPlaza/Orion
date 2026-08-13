@@ -32,8 +32,14 @@ function hashCode(code: string): string {
 
 export type IssueResult = {
   sent: boolean;
-  /** Returned only in development when no mail provider is configured. */
+  /**
+   * Returned only outside production, and only when delivery did not happen —
+   * either no provider is configured or the provider refused the message. It
+   * keeps the flow testable locally without ever leaking a code in production.
+   */
   devCode?: string;
+  /** Why delivery failed, for an honest message in the UI. */
+  reason?: "not_configured" | "provider_error" | "network_error";
   cooldownSeconds?: number;
 };
 
@@ -71,16 +77,27 @@ export async function issueVerificationCode(user: {
   ]);
 
   const message = verificationEmail(code, user.name);
-  await sendMail({ to: user.email, ...message });
+  const delivery = await sendMail({ to: user.email, ...message });
 
-  if (!isMailConfigured() && process.env.NODE_ENV !== "production") {
-    // Local development without Resend: surface the code so the flow is still
-    // testable. Never in production, where it would defeat the whole point.
-    return { sent: false, devCode: code };
+  if (delivery.delivered) return { sent: true };
+
+  /*
+   * Delivery failed. An earlier version returned `sent: true` regardless, so a
+   * provider rejection — Resend's shared test sender refuses every recipient
+   * except the account owner — produced a screen saying "check your email"
+   * when nothing had been sent and no fallback code was shown. Report the
+   * failure instead, and outside production hand back the code so the flow
+   * stays testable.
+   */
+  const reason = (delivery.reason ?? "provider_error") as IssueResult["reason"];
+
+  if (process.env.NODE_ENV !== "production") {
+    return { sent: false, devCode: code, reason };
   }
-
-  return { sent: true };
+  return { sent: false, reason };
 }
+
+export { isMailConfigured };
 
 export type VerifyOutcome =
   | { ok: true }

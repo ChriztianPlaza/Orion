@@ -9,7 +9,7 @@ import type { ProjectContent, ProjectMeta, ProjectTheme } from "./types";
  * Everything the site needs ends up inside the output: template files with the
  * user's content applied, plus any images they uploaded — re-downloaded from
  * object storage into `assets/uploads/` and rewritten to relative paths. The
- * result runs from a file:// URL, a ZIP, or Cloudflare Pages with no Orion
+ * result runs from a file:// URL, a ZIP, or any static host with no Orion
  * runtime whatsoever.
  */
 

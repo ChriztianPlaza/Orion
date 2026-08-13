@@ -41,10 +41,10 @@ export default function ForgotPasswordPage() {
 
   if (sent) {
     return (
-      <div className="card-surface rounded-[22px] p-7 text-center">
+      <div className="card-surface rounded-[14px] p-7 text-center">
         <CheckCircle2 className="mx-auto size-8 text-[#30d158]" />
         <h1 className="mt-5 text-[19px] font-semibold tracking-[-0.02em]">Check your inbox</h1>
-        <p className="mt-3 text-[13.5px] leading-relaxed text-white/50">
+        <p className="mt-3 text-[13.5px] leading-relaxed text-ink-muted">
           If that address has an account, a reset link is on its way. It expires in one hour.
         </p>
         {!mailConfigured && (
@@ -63,9 +63,9 @@ export default function ForgotPasswordPage() {
   }
 
   return (
-    <div className="card-surface rounded-[22px] p-7">
+    <div className="card-surface rounded-[14px] p-7">
       <h1 className="text-[22px] font-semibold tracking-[-0.02em]">Reset your password</h1>
-      <p className="mt-2 text-[13.5px] text-white/45">
+      <p className="mt-2 text-[13.5px] text-ink-muted">
         Enter the email you signed up with and we will send you a link.
       </p>
 
@@ -93,7 +93,7 @@ export default function ForgotPasswordPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-[13px] text-white/40">
+      <p className="mt-6 text-center text-[13px] text-ink-muted">
         Remembered it?{" "}
         <Link href="/login" className="font-medium text-white underline decoration-white/25 underline-offset-2">
           Log in

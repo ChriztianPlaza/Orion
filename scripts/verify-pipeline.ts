@@ -3,9 +3,9 @@
  *
  *   analyze HTML → apply a content map → generate static files → zip → assert
  *
- * Run with `npm run verify:pipeline`. It exercises the exact code path used by
- * both the ZIP download and the Cloudflare deployment, including the sanitisers,
- * so a regression in patching or escaping fails here rather than in production.
+ * Run with `npm run verify:pipeline`. It exercises the exact code path the ZIP
+ * download uses, including the sanitisers, so a regression in patching or
+ * escaping fails here rather than in production.
  */
 
 import JSZip from "jszip";

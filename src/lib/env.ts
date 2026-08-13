@@ -29,10 +29,6 @@ export const env = {
   STRIPE_WEBHOOK_SECRET: read("STRIPE_WEBHOOK_SECRET"),
   STRIPE_PRICE_ID: read("STRIPE_PRICE_ID"),
 
-  CLOUDFLARE_API_TOKEN: read("CLOUDFLARE_API_TOKEN"),
-  CLOUDFLARE_ACCOUNT_ID: read("CLOUDFLARE_ACCOUNT_ID"),
-  CLOUDFLARE_PAGES_DOMAIN: read("CLOUDFLARE_PAGES_DOMAIN") ?? "pages.dev",
-
   BLOB_READ_WRITE_TOKEN: read("BLOB_READ_WRITE_TOKEN"),
 
   GITHUB_TOKEN: read("GITHUB_TOKEN"),
@@ -57,9 +53,6 @@ export function appUrl(): string {
 
 export const isStripeConfigured = () =>
   Boolean(env.STRIPE_SECRET_KEY && env.STRIPE_PRICE_ID);
-
-export const isCloudflareConfigured = () =>
-  Boolean(env.CLOUDFLARE_API_TOKEN && env.CLOUDFLARE_ACCOUNT_ID);
 
 export const isBlobConfigured = () => Boolean(env.BLOB_READ_WRITE_TOKEN);
 

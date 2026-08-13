@@ -1,5 +1,6 @@
 import type { SectionData, SectionKey } from "./sections";
 import { CATALOG_EXTRA } from "./catalog-extra";
+import { CATALOG_ANIMATED } from "./catalog-animated";
 
 /**
  * The bundled template catalog.
@@ -18,6 +19,8 @@ export type TemplateDef = {
   tags: string[];
   tier?: "FREE" | "PRO";
   featured?: boolean;
+  /** Ships the motion layer: scroll reveals, aurora, counters, pointer effects. */
+  animated?: boolean;
   layout: SectionKey[];
   data: Partial<SectionData> & Pick<SectionData, "brand" | "headline" | "subhead">;
 };
@@ -2546,4 +2549,4 @@ const CATALOG_CORE: TemplateDef[] = [
 ];
 
 /** The full bundled catalogue. */
-export const CATALOG: TemplateDef[] = [...CATALOG_CORE, ...CATALOG_EXTRA];
+export const CATALOG: TemplateDef[] = [...CATALOG_CORE, ...CATALOG_EXTRA, ...CATALOG_ANIMATED];

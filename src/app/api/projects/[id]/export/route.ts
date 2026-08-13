@@ -1,9 +1,11 @@
 import JSZip from "jszip";
 import { prisma } from "@/lib/db";
 import { ApiError, handleApiError, requireApiUser } from "@/lib/auth/guards";
-import { checkDownloadQuota, limitsFor } from "@/lib/plans";
+import { checkDownloadQuota, downloadWindowExpired, limitsFor } from "@/lib/plans";
 import { clientIp, consumeRateLimit, rateLimitResponse } from "@/lib/security/rate-limit";
 import { getOwnedProject } from "@/lib/projects/service";
+import { releaseProjectImages } from "@/lib/storage/gc";
+import { appUrl } from "@/lib/env";
 import { generateSite, totalGeneratedBytes } from "@/lib/templates/generate";
 import { slugify } from "@/lib/utils";
 import type { ProjectContent, ProjectMeta, ProjectTheme } from "@/lib/templates/types";
@@ -31,11 +33,38 @@ export async function GET(request: Request, { params }: Params) {
     if (!limit.ok) return rateLimitResponse(limit);
 
     // Authoritative plan + counter straight from the database.
-    const user = await prisma.user.findUnique({
+    let user = await prisma.user.findUnique({
       where: { id: sessionUser.id },
-      select: { id: true, plan: true, downloadCount: true },
+      select: { id: true, plan: true, downloadCount: true, downloadPeriodStart: true },
     });
     if (!user) throw new ApiError(401, "unauthorized", "Session no longer valid.");
+
+    /*
+     * Roll the allowance window before checking it.
+     *
+     * Plans with a rolling quota (Pro: 50 a week) keep a window start on the
+     * user. Once it is older than the window the counter is zeroed and a new
+     * window opens. The update is conditional on the same staleness test, so
+     * two downloads firing together cannot both roll it and hand out a double
+     * allowance — the second matches zero rows and reads the first one's result.
+     */
+    if (downloadWindowExpired(user.plan, user.downloadPeriodStart)) {
+      const cutoff = new Date(
+        Date.now() - (limitsFor(user.plan).downloadPeriodDays ?? 0) * 24 * 60 * 60 * 1000,
+      );
+      await prisma.user.updateMany({
+        where: {
+          id: user.id,
+          OR: [{ downloadPeriodStart: null }, { downloadPeriodStart: { lt: cutoff } }],
+        },
+        data: { downloadCount: 0, downloadPeriodStart: new Date() },
+      });
+
+      user = await prisma.user.findUniqueOrThrow({
+        where: { id: sessionUser.id },
+        select: { id: true, plan: true, downloadCount: true, downloadPeriodStart: true },
+      });
+    }
 
     const quota = checkDownloadQuota(user.plan, user.downloadCount);
     if (!quota.allowed) throw new ApiError(402, "upgrade_required", quota.reason);
@@ -123,6 +152,19 @@ export async function GET(request: Request, { params }: Params) {
       },
     });
 
+    /*
+     * Uploaded images are temporary by design: they exist so the editor can
+     * show them, and the archive above already contains every one of them under
+     * assets/uploads/ with the markup rewritten to relative paths. Holding the
+     * originals after that point grows object storage without end for no
+     * benefit, so they are released here.
+     *
+     * Never let this fail the response — the user's archive is built and paid
+     * for. A failure here leaves the images unreferenced, which the scheduled
+     * `storage:gc` sweep collects anyway.
+     */
+    const released = await releaseProjectImages(project.id).catch(() => null);
+
     const filename = `${slugify(project.name) || "website"}.zip`;
 
     return new Response(archive as unknown as BodyInit, {
@@ -132,6 +174,8 @@ export async function GET(request: Request, { params }: Params) {
         "Content-Length": String(archive.byteLength),
         "Cache-Control": "no-store",
         "X-Content-Type-Options": "nosniff",
+        // Lets the editor tell the user their images were handed back.
+        "X-Orion-Images-Released": String(released?.released ?? 0),
       },
     });
   } catch (error) {
@@ -152,9 +196,13 @@ dependency on Orion. Open index.html in a browser and it works.
 
 HOSTING IT
 ----------
-Upload the contents of this folder to any static host — Cloudflare Pages,
-Netlify, GitHub Pages, S3, or a plain web server. Keep the folder structure
-exactly as it is so relative paths keep resolving.
+Upload this folder to any static host. The fastest way is app.netlify.com/drop —
+drag the folder onto the page and it is live in about a minute, free. Cloudflare
+Pages, GitHub Pages, Vercel, S3 and any ordinary web server all work too.
+
+Step-by-step instructions for each: ${appUrl()}/guides/deploy
+
+Keep the folder structure exactly as it is so relative paths keep resolving.
 
 EDITING IT
 ----------

@@ -26,9 +26,6 @@ export const RATE_LIMITS = {
   "project.read": { limit: 400, windowSec: 300 },
 
   "download.export": { limit: 20, windowSec: 3600 },
-  "deploy.create": { limit: 12, windowSec: 3600 },
-  // Each check hits Cloudflare, so it is both a cost and an enumeration vector.
-  "deploy.checkName": { limit: 60, windowSec: 600 },
 
   "upload.asset": { limit: 60, windowSec: 3600 },
   "billing.session": { limit: 20, windowSec: 3600 },

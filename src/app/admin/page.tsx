@@ -1,8 +1,8 @@
 import Link from "next/link";
 import {
-  CloudUpload,
   Download,
   Eye,
+  Heart,
   LayoutGrid,
   LayoutTemplate,
   TrendingUp,
@@ -38,7 +38,7 @@ export default async function AdminOverviewPage() {
         <h1 className="text-[clamp(1.6rem,3vw,2.1rem)] font-semibold tracking-[-0.025em]">
           Platform overview
         </h1>
-        <p className="mt-2 text-[14px] text-white/45">
+        <p className="mt-2 text-[14px] text-ink-muted">
           Live figures from the database. Revenue comes from verified Stripe webhooks only.
         </p>
       </header>
@@ -92,10 +92,10 @@ export default async function AdminOverviewPage() {
           hint="Website ZIPs generated"
         />
         <Metric
-          icon={<CloudUpload className="size-4" />}
-          label="Deployments"
-          value={overview.activity.deployments.toLocaleString()}
-          hint="Successful Cloudflare publishes"
+          icon={<Heart className="size-4" />}
+          label="Favourites"
+          value={overview.activity.favorites.toLocaleString()}
+          hint="Templates saved by users"
         />
         <Metric
           icon={<Eye className="size-4" />}
@@ -106,17 +106,17 @@ export default async function AdminOverviewPage() {
       </div>
 
       <div className="mt-6 grid gap-4 lg:grid-cols-2">
-        <section className="card-surface rounded-[20px] p-6">
+        <section className="card-surface rounded-[14px] p-6">
           <div className="mb-5 flex items-center justify-between">
             <h2 className="text-[15px] font-semibold">Revenue by month</h2>
-            <Link href="/admin/revenue" className="text-[13px] text-white/40 hover:text-white">
+            <Link href="/admin/revenue" className="text-[13px] text-ink-muted hover:text-white">
               Full report →
             </Link>
           </div>
           <BarChart data={revenue.map((point) => ({ label: point.label, value: point.gross }))} />
         </section>
 
-        <section className="card-surface rounded-[20px] p-6">
+        <section className="card-surface rounded-[14px] p-6">
           <h2 className="mb-5 text-[15px] font-semibold">Sign-ups by month</h2>
           <BarChart
             data={signups.map((point) => ({ label: point.label, value: point.users }))}
@@ -127,41 +127,41 @@ export default async function AdminOverviewPage() {
       </div>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-        <section className="card-surface rounded-[20px] p-6">
+        <section className="card-surface rounded-[14px] p-6">
           <h2 className="mb-4 text-[15px] font-semibold">Recent activity</h2>
           {activity.length === 0 ? (
-            <p className="py-6 text-center text-[13.5px] text-white/30">Nothing has happened yet.</p>
+            <p className="py-6 text-center text-[13.5px] text-ink-dim">Nothing has happened yet.</p>
           ) : (
-            <ul className="divide-y divide-white/[0.06]">
+            <ul className="divide-y divide-hairline">
               {activity.map((entry) => (
                 <li key={entry.id} className="flex items-center justify-between gap-4 py-2.5">
                   <div className="min-w-0">
-                    <p className="truncate text-[13.5px] text-white/75">{entry.text}</p>
-                    <p className="truncate text-[12px] text-white/30">{entry.meta}</p>
+                    <p className="truncate text-[13.5px] text-ink">{entry.text}</p>
+                    <p className="truncate text-[12px] text-ink-dim">{entry.meta}</p>
                   </div>
-                  <span className="shrink-0 text-[12px] text-white/25">{relativeTime(entry.at)}</span>
+                  <span className="shrink-0 text-[12px] text-ink-dim">{relativeTime(entry.at)}</span>
                 </li>
               ))}
             </ul>
           )}
         </section>
 
-        <section className="card-surface rounded-[20px] p-6">
+        <section className="card-surface rounded-[14px] p-6">
           <h2 className="mb-4 text-[15px] font-semibold">Most used templates</h2>
           {topTemplates.length === 0 ? (
-            <p className="py-6 text-center text-[13.5px] text-white/30">No templates yet.</p>
+            <p className="py-6 text-center text-[13.5px] text-ink-dim">No templates yet.</p>
           ) : (
-            <ul className="divide-y divide-white/[0.06]">
+            <ul className="divide-y divide-hairline">
               {topTemplates.map((template) => (
                 <li key={template.id} className="flex items-center justify-between gap-4 py-2.5">
                   <div className="min-w-0">
                     <Link
                       href={`/templates/${template.slug}`}
-                      className="truncate text-[13.5px] text-white/75 hover:text-white"
+                      className="truncate text-[13.5px] text-ink hover:text-white"
                     >
                       {template.name}
                     </Link>
-                    <p className="text-[12px] text-white/30">
+                    <p className="text-[12px] text-ink-dim">
                       {template.category?.name ?? "Uncategorised"}
                     </p>
                   </div>
@@ -194,18 +194,18 @@ function Metric({
 }) {
   return (
     <div
-      className={`rounded-[16px] border p-4 ${
+      className={`rounded-[12px] border p-4 ${
         accent
-          ? "border-white/15 bg-gradient-to-b from-white/[0.07] to-transparent"
+          ? "border-hairline-strong bg-gradient-to-b from-white/[0.07] to-transparent"
           : "card-surface"
       }`}
     >
-      <div className="flex items-center gap-2 text-white/35">
+      <div className="flex items-center gap-2 text-ink-muted">
         {icon}
         <span className="text-[12.5px]">{label}</span>
       </div>
       <p className="mt-3 text-[26px] font-semibold leading-none tracking-[-0.02em]">{value}</p>
-      <p className="mt-1.5 truncate text-[12px] text-white/30">{hint}</p>
+      <p className="mt-1.5 truncate text-[12px] text-ink-dim">{hint}</p>
     </div>
   );
 }

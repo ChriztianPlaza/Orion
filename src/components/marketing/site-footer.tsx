@@ -5,9 +5,9 @@ const COLUMNS = [
   {
     title: "Product",
     links: [
-      { href: "/templates", label: "Template marketplace" },
+      { href: "/templates", label: "Templates" },
       { href: "/pricing", label: "Pricing" },
-      { href: "/#features", label: "Features" },
+      { href: "/guides/deploy", label: "Hosting guide" },
       { href: "/#how", label: "How it works" },
     ],
   },
@@ -33,14 +33,14 @@ const COLUMNS = [
 
 export function SiteFooter() {
   return (
-    <footer className="border-t border-white/[0.07] bg-black">
+    <footer className="border-t border-hairline bg-black">
       <div className="container-page py-16">
         <div className="grid gap-12 md:grid-cols-[1.6fr_repeat(3,1fr)]">
           <div>
             <Wordmark />
-            <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-white/40">
-              A template marketplace, a visual editor and a static site generator. Build a real
-              website, then take the files with you.
+            <p className="mt-4 max-w-[34ch] text-sm leading-relaxed text-ink-muted">
+              A template library, a visual editor and a static site generator. Build a real website,
+              then take the files with you.
             </p>
           </div>
 
@@ -52,7 +52,7 @@ export function SiteFooter() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="text-[13.5px] text-white/40 transition-colors hover:text-white"
+                      className="text-[13.5px] text-ink-muted transition-colors hover:text-white"
                     >
                       {link.label}
                     </Link>
@@ -63,7 +63,7 @@ export function SiteFooter() {
           ))}
         </div>
 
-        <div className="mt-14 flex flex-col gap-4 border-t border-white/[0.07] pt-7 text-[13px] text-white/35 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-14 flex flex-col gap-4 border-t border-hairline pt-7 text-[13px] text-ink-muted sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Orion. All rights reserved.</p>
           <p>
             Templates ship as plain HTML, CSS and JavaScript — no runtime, no lock-in.

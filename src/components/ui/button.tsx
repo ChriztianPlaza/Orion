@@ -3,22 +3,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] disabled:pointer-events-none disabled:opacity-40 [&_svg]:shrink-0 select-none active:scale-[0.98]",
+  // 150ms is the responsive end of the micro-interaction range; the old 300ms
+  // made every button feel a beat behind the pointer.
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap font-medium transition-all duration-150 ease-[cubic-bezier(0.16,1,0.3,1)] disabled:pointer-events-none disabled:opacity-40 [&_svg]:shrink-0 select-none active:scale-[0.97]",
   {
     variants: {
       variant: {
-        primary:
-          "bg-white text-black hover:bg-white/90 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset]",
+        primary: "bg-ink text-on-accent hover:bg-white",
         secondary:
-          "bg-white/[0.06] text-white border border-white/10 hover:bg-white/[0.1] hover:border-white/20",
-        ghost: "text-white/70 hover:text-white hover:bg-white/[0.06]",
-        outline:
-          "border border-white/15 text-white hover:bg-white/[0.05] hover:border-white/25",
-        brand:
-          "bg-[#0071e3] text-white hover:bg-[#0077ed] shadow-[0_0_24px_-6px_rgba(0,113,227,0.7)]",
+          "bg-surface-2 text-ink border border-hairline hover:bg-surface-3 hover:border-hairline-strong",
+        ghost: "text-ink-muted hover:text-ink hover:bg-surface-2",
+        outline: "border border-hairline text-ink hover:bg-surface-2 hover:border-hairline-strong",
+        brand: "bg-brand text-white hover:bg-[#0077ed]",
         danger:
-          "bg-[#ff453a]/10 text-[#ff6961] border border-[#ff453a]/25 hover:bg-[#ff453a]/20",
-        link: "text-white/70 hover:text-white underline-offset-4 hover:underline p-0 h-auto",
+          "bg-danger/10 text-danger border border-danger/30 hover:bg-danger/20 hover:border-danger/50",
+        link: "text-ink-muted hover:text-ink underline-offset-4 hover:underline p-0 h-auto",
       },
       size: {
         sm: "h-8 rounded-full px-3.5 text-[13px] [&_svg]:size-3.5",

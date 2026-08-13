@@ -9,15 +9,26 @@ import { OtpInput } from "./otp-input";
  * The code step. Shared by the inline signup flow and the standalone /verify
  * page, so both behave identically.
  */
+export type DeliveryReason = "not_configured" | "provider_error" | "network_error";
+
+const DELIVERY_COPY: Record<DeliveryReason, string> = {
+  not_configured: "Email delivery is not configured on this instance.",
+  provider_error:
+    "The email provider refused the message. On Resend's shared test sender you can only receive codes at the address your Resend account was created with — verify a domain to reach anyone else.",
+  network_error: "The email provider could not be reached.",
+};
+
 export function VerifyStep({
   email,
   devCode,
+  deliveryReason,
   onVerified,
   onBack,
   busyLabel = "Verifying…",
 }: {
   email: string;
   devCode?: string | null;
+  deliveryReason?: DeliveryReason | null;
   onVerified: () => void | Promise<void>;
   onBack?: () => void;
   busyLabel?: string;
@@ -28,6 +39,9 @@ export function VerifyStep({
   const [loading, setLoading] = React.useState(false);
   const [cooldown, setCooldown] = React.useState(0);
   const [localDevCode, setLocalDevCode] = React.useState<string | null>(devCode ?? null);
+  const [localReason, setLocalReason] = React.useState<DeliveryReason | null>(
+    deliveryReason ?? null,
+  );
   const submitted = React.useRef("");
 
   React.useEffect(() => {
@@ -99,31 +113,40 @@ export function VerifyStep({
       submitted.current = "";
       setCooldown(60);
       setLocalDevCode(payload.devCode ?? null);
-      setNotice("A new code is on its way.");
+      setLocalReason(payload.sent === false ? (payload.reason ?? "provider_error") : null);
+      if (payload.sent !== false) setNotice("A new code is on its way.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="card-surface rounded-[22px] p-7 text-center">
+    <div className="card-surface rounded-[14px] p-7 text-center">
       <span className="mx-auto flex size-12 items-center justify-center rounded-2xl bg-white/[0.06]">
-        <MailCheck className="size-5 text-white/70" />
+        <MailCheck className="size-5 text-ink" />
       </span>
 
       <h1 className="mt-5 text-[21px] font-semibold tracking-[-0.02em]">Check your email</h1>
-      <p className="mt-2.5 text-[13.5px] leading-relaxed text-white/50">
+      <p className="mt-2.5 text-[13.5px] leading-relaxed text-ink-muted">
         We sent a six-digit code to
         <br />
         <span className="font-medium text-white">{email}</span>
       </p>
 
-      {localDevCode && (
-        <div className="mt-5 rounded-xl border border-[#ffd60a]/25 bg-[#ffd60a]/[0.07] p-3 text-[12.5px] text-[#ffd60a]">
-          Email delivery is not configured, so here is the code for local testing:
-          <span className="mt-1.5 block font-mono text-[18px] tracking-[0.3em] text-white">
-            {localDevCode}
-          </span>
+      {(localDevCode || localReason) && (
+        <div className="mt-5 rounded-xl border border-[#ffd60a]/25 bg-[#ffd60a]/[0.07] p-3.5 text-left text-[12.5px] leading-relaxed text-[#ffd60a]">
+          <p className="font-medium">The email was not delivered</p>
+          <p className="mt-1 text-[#ffd60a]/80">
+            {DELIVERY_COPY[localReason ?? "not_configured"]}
+          </p>
+          {localDevCode && (
+            <>
+              <p className="mt-2.5 text-[#ffd60a]/80">Use this code to continue:</p>
+              <span className="mt-1 block font-mono text-[20px] tracking-[0.3em] text-white">
+                {localDevCode}
+              </span>
+            </>
+          )}
         </div>
       )}
 
@@ -165,16 +188,16 @@ export function VerifyStep({
         <button
           onClick={resend}
           disabled={loading || cooldown > 0}
-          className="text-white/45 transition-colors hover:text-white disabled:opacity-40"
+          className="text-ink-muted transition-colors hover:text-white disabled:opacity-40"
         >
           {cooldown > 0 ? `Resend in ${cooldown}s` : "Resend code"}
         </button>
         {onBack && (
           <>
-            <span className="text-white/15">·</span>
+            <span className="text-ink-faint">·</span>
             <button
               onClick={onBack}
-              className="flex items-center gap-1 text-white/45 transition-colors hover:text-white"
+              className="flex items-center gap-1 text-ink-muted transition-colors hover:text-white"
             >
               <ArrowLeft className="size-3" /> Use a different email
             </button>
@@ -182,7 +205,7 @@ export function VerifyStep({
         )}
       </div>
 
-      <p className="mt-6 text-[12px] leading-relaxed text-white/25">
+      <p className="mt-6 text-[12px] leading-relaxed text-ink-dim">
         The code expires in 10 minutes. Check your spam folder if it has not arrived.
       </p>
     </div>

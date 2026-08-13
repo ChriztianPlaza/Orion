@@ -32,14 +32,7 @@ export default async function EditorPage({ params }: { params: Promise<{ id: str
     redirect("/dashboard?error=template-removed");
   }
 
-  const [pages, latestDeployment] = await Promise.all([
-    getTemplateSchema(project.template),
-    prisma.deployment.findFirst({
-      where: { projectId: project.id, status: "SUCCESS" },
-      orderBy: { createdAt: "desc" },
-      select: { url: true },
-    }),
-  ]);
+  const pages = await getTemplateSchema(project.template);
 
   const limits = limitsFor(user.plan);
   const downloadsLeft = Number.isFinite(limits.maxDownloads)
@@ -49,7 +42,6 @@ export default async function EditorPage({ params }: { params: Promise<{ id: str
   const editorProject: EditorProject = {
     id: project.id,
     name: project.name,
-    subdomain: project.subdomain,
     content: (project.content ?? {}) as ProjectContent,
     theme: (project.theme ?? {}) as ProjectTheme,
     meta: (project.meta ?? {}) as ProjectMeta,
@@ -57,7 +49,6 @@ export default async function EditorPage({ params }: { params: Promise<{ id: str
     templateName: project.template.name,
     templateSlug: project.template.slug,
     entryFile: project.template.entryFile,
-    liveUrl: latestDeployment?.url ?? null,
   };
 
   return (

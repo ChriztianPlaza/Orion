@@ -1,0 +1,29 @@
+{
+  "name": "Vertex — Esports",
+  "slug": "vertex-gaming-motion",
+  "category": "animated",
+  "tags": [
+    "dark",
+    "colorful",
+    "bold",
+    "gaming"
+  ],
+  "description": "A high-energy team page: neon aurora, roster cards that light up under the cursor, counters for the trophy cabinet and a scrolling sponsor strip.",
+  "theme": "neon",
+  "colorScheme": "colorful",
+  "tier": "PRO",
+  "featured": false,
+  "animated": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -52,9 +52,9 @@ function ResetPasswordForm() {
 
   if (!token) {
     return (
-      <div className="card-surface rounded-[22px] p-7 text-center">
+      <div className="card-surface rounded-[14px] p-7 text-center">
         <h1 className="text-[19px] font-semibold tracking-[-0.02em]">This link is incomplete</h1>
-        <p className="mt-3 text-[13.5px] text-white/50">
+        <p className="mt-3 text-[13.5px] text-ink-muted">
           Open the link from your email again, or request a new one.
         </p>
         <Link href="/forgot-password" className="mt-6 block">
@@ -67,9 +67,9 @@ function ResetPasswordForm() {
   }
 
   return (
-    <div className="card-surface rounded-[22px] p-7">
+    <div className="card-surface rounded-[14px] p-7">
       <h1 className="text-[22px] font-semibold tracking-[-0.02em]">Choose a new password</h1>
-      <p className="mt-2 text-[13.5px] text-white/45">
+      <p className="mt-2 text-[13.5px] text-ink-muted">
         At least 8 characters, including a letter and a number.
       </p>
 
@@ -115,7 +115,7 @@ function ResetPasswordForm() {
 export default function ResetPasswordPage() {
   return (
     <React.Suspense
-      fallback={<div className="card-surface h-[320px] animate-pulse rounded-[22px]" />}
+      fallback={<div className="card-surface h-[320px] animate-pulse rounded-[14px]" />}
     >
       <ResetPasswordForm />
     </React.Suspense>

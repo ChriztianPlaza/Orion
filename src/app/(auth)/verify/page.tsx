@@ -55,9 +55,9 @@ function VerifyPage() {
   }
 
   return (
-    <div className="card-surface rounded-[22px] p-7">
+    <div className="card-surface rounded-[14px] p-7">
       <h1 className="text-[21px] font-semibold tracking-[-0.02em]">Verify your email</h1>
-      <p className="mt-2 text-[13.5px] text-white/45">
+      <p className="mt-2 text-[13.5px] text-ink-muted">
         Enter the address you signed up with and we will send a fresh code.
       </p>
 
@@ -85,7 +85,7 @@ function VerifyPage() {
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-[13px] text-white/40">
+      <p className="mt-6 text-center text-[13px] text-ink-muted">
         Already verified?{" "}
         <Link
           href="/login"
@@ -101,7 +101,7 @@ function VerifyPage() {
 export default function Page() {
   return (
     <React.Suspense
-      fallback={<div className="card-surface h-[320px] animate-pulse rounded-[22px]" />}
+      fallback={<div className="card-surface h-[320px] animate-pulse rounded-[14px]" />}
     >
       <VerifyPage />
     </React.Suspense>

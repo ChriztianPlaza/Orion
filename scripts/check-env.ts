@@ -72,8 +72,8 @@ async function main() {
     ["AUTH_GOOGLE_ID", "Sign in with Google"],
     ["AUTH_GOOGLE_SECRET", "Sign in with Google"],
     ["BLOB_READ_WRITE_TOKEN", "Image uploads"],
-    ["CLOUDFLARE_API_TOKEN", "One-click deployment"],
-    ["CLOUDFLARE_ACCOUNT_ID", "One-click deployment"],
+    ["RESEND_API_KEY", "Verification and transactional email"],
+    ["EMAIL_FROM", "Verification and transactional email"],
   ] as const;
 
   console.log("REQUIRED");

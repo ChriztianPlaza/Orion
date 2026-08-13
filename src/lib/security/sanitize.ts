@@ -140,26 +140,3 @@ export function styleMapToCss(style: Record<string, string>): string {
     .join(";");
 }
 
-/** Cloudflare Pages project names: lowercase letters, digits and hyphens. */
-export const PROJECT_NAME_PATTERN = /^[a-z0-9](?:[a-z0-9-]{1,56}[a-z0-9])$/;
-
-export function validateProjectName(input: string): { ok: true; value: string } | { ok: false; error: string } {
-  const value = input.trim().toLowerCase();
-  if (value.length < 3) return { ok: false, error: "Name must be at least 3 characters." };
-  if (value.length > 58) return { ok: false, error: "Name must be 58 characters or fewer." };
-  if (!PROJECT_NAME_PATTERN.test(value)) {
-    return {
-      ok: false,
-      error: "Use lowercase letters, numbers and hyphens. Must start and end with a letter or number.",
-    };
-  }
-  if (value.includes("--")) return { ok: false, error: "Consecutive hyphens are not allowed." };
-  if (RESERVED_PROJECT_NAMES.has(value)) return { ok: false, error: "That name is reserved." };
-  return { ok: true, value };
-}
-
-const RESERVED_PROJECT_NAMES = new Set([
-  "www", "api", "admin", "app", "dashboard", "cdn", "assets", "static", "mail",
-  "support", "help", "docs", "status", "blog", "orion", "cloudflare",
-  "pages", "workers", "vercel", "stripe", "login", "signup", "account",
-]);

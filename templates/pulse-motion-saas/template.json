@@ -1,0 +1,29 @@
+{
+  "name": "Pulse — Motion SaaS",
+  "slug": "pulse-motion-saas",
+  "category": "animated",
+  "tags": [
+    "dark",
+    "gradient",
+    "saas",
+    "bold"
+  ],
+  "description": "A launch page built around movement: an aurora hero, headline words that rise into place, counters that roll up as they scroll in, and cards that light up under the cursor.",
+  "theme": "midnight",
+  "colorScheme": "dark",
+  "tier": "PRO",
+  "featured": true,
+  "animated": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

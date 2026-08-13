@@ -35,7 +35,7 @@ export function TemplateCardItem({
       // content-visibility lets the browser skip layout, paint and compositing
       // for cards that are scrolled out of view. On a 24-card grid of live
       // previews that is the difference between smooth and unusable.
-      className="card-surface group relative flex flex-col overflow-hidden rounded-[18px] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] [contain-intrinsic-size:auto_420px] [content-visibility:auto] hover:-translate-y-1 hover:border-white/20"
+      className="card-surface card-interactive group relative flex flex-col overflow-hidden rounded-[12px] [contain-intrinsic-size:auto_420px] [content-visibility:auto]"
     >
       <Link
         href={`/templates/${template.slug}`}
@@ -61,7 +61,7 @@ export function TemplateCardItem({
               ready && "opacity-0",
             )}
           >
-            <span className="text-[28px] font-semibold tracking-[-0.03em] text-white/15">
+            <span className="text-[28px] font-semibold tracking-[-0.03em] text-ink-faint">
               {template.name.slice(0, 2).toUpperCase()}
             </span>
           </div>
@@ -102,14 +102,14 @@ export function TemplateCardItem({
         <div className="flex items-start justify-between gap-3">
           <div className="min-w-0">
             <h3 className="truncate text-[14.5px] font-medium text-white">{template.name}</h3>
-            <p className="mt-0.5 text-[12.5px] text-white/35">
+            <p className="mt-0.5 text-[12.5px] text-ink-muted">
               {template.categoryName ?? "Uncategorised"}
               {template.author ? ` · ${template.author}` : ""}
             </p>
           </div>
           {template.responsive && (
             <span
-              className="mt-0.5 shrink-0 text-white/25"
+              className="mt-0.5 shrink-0 text-ink-dim"
               title="Responsive on every screen size"
               aria-label="Responsive"
             >
@@ -118,7 +118,7 @@ export function TemplateCardItem({
           )}
         </div>
 
-        <p className="mt-2.5 line-clamp-2 text-[13px] leading-relaxed text-white/40">
+        <p className="mt-2.5 line-clamp-2 text-[13px] leading-relaxed text-ink-muted">
           {template.description}
         </p>
 
@@ -127,7 +127,7 @@ export function TemplateCardItem({
             {template.tags.slice(0, 3).map((tag) => (
               <span
                 key={tag}
-                className="rounded-md bg-white/[0.05] px-2 py-0.5 text-[11px] text-white/40"
+                className="rounded-md bg-white/[0.05] px-2 py-0.5 text-[11px] text-ink-muted"
               >
                 {tag}
               </span>
@@ -154,7 +154,7 @@ export function TemplateCardItem({
 
 export function TemplateCardSkeleton() {
   return (
-    <div className="card-surface overflow-hidden rounded-[18px]">
+    <div className="card-surface overflow-hidden rounded-[12px]">
       <div className="aspect-[4/3] animate-pulse bg-white/[0.04]" />
       <div className="space-y-2.5 p-4">
         <div className="h-3.5 w-2/3 animate-pulse rounded bg-white/[0.06]" />

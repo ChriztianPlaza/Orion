@@ -7,7 +7,7 @@ import { TemplateFilters } from "@/components/templates/template-filters";
 import { listCategories, listTemplates, type TemplateSort } from "@/lib/templates/queries";
 
 export const metadata: Metadata = {
-  title: "Template marketplace",
+  title: "Templates",
   description:
     "Browse production-ready website templates across SaaS, portfolio, restaurant, e-commerce and more. Preview each one live, then make it yours.",
   alternates: { canonical: "/templates" },
@@ -51,11 +51,11 @@ export default async function TemplatesPage({ searchParams }: { searchParams: Se
     <div className="container-page py-12 sm:py-16">
       <header className="mb-10 max-w-[60ch]">
         <h1 className="text-balance-tight text-[clamp(2rem,4vw,3rem)] font-semibold">
-          Template marketplace
+          Templates
         </h1>
-        <p className="mt-4 text-[15px] leading-relaxed text-white/50">
+        <p className="mt-4 text-[15px] leading-relaxed text-ink-muted">
           Every template previews as the real website. Pick one, edit it in the browser, then
-          download the files or deploy it live.
+          download the files and host them anywhere.
         </p>
       </header>
 
@@ -69,10 +69,10 @@ export default async function TemplatesPage({ searchParams }: { searchParams: Se
       <TemplateFilters categories={categories} total={result.total} />
 
       {result.items.length === 0 ? (
-        <div className="mt-16 flex flex-col items-center rounded-[20px] border border-dashed border-white/10 py-20 text-center">
-          <LayoutGrid className="size-7 text-white/20" />
+        <div className="mt-16 flex flex-col items-center rounded-[14px] border border-dashed border-hairline py-20 text-center">
+          <LayoutGrid className="size-7 text-ink-dim" />
           <h2 className="mt-5 text-[17px] font-medium">No templates match those filters</h2>
-          <p className="mt-2 max-w-[42ch] text-[14px] text-white/40">
+          <p className="mt-2 max-w-[42ch] text-[14px] text-ink-muted">
             Try a different category, clear the search, or browse everything we have.
           </p>
           <Link href="/templates" className="mt-6">
@@ -102,7 +102,7 @@ export default async function TemplatesPage({ searchParams }: { searchParams: Se
                   Previous
                 </Button>
               </Link>
-              <span className="px-3 text-[13px] text-white/40">
+              <span className="px-3 text-[13px] text-ink-muted">
                 Page {result.page} of {result.pageCount}
               </span>
               <Link

@@ -4,7 +4,7 @@
  *   npm run verify:security
  *
  * These are the functions every piece of untrusted input passes through —
- * archive paths, editor values, redirect targets, uploads, deployment names.
+ * archive paths, editor values, redirect targets and uploads.
  * A regression in any of them is a vulnerability rather than a bug, so they get
  * their own suite that runs without a database or network.
  */
@@ -17,7 +17,6 @@ import {
   sanitizeStyleMap,
   sanitizeUrl,
   stripTags,
-  validateProjectName,
 } from "@/lib/security/sanitize";
 import { safeNextPath } from "@/lib/security/redirects";
 import { sniffImage } from "@/lib/storage/blob";
@@ -113,18 +112,6 @@ check("blocks control characters", safeNextPath("/dash\u0000board") === "/dashbo
 check("blocks api routes", safeNextPath("/api/projects/x/export") === "/dashboard");
 check("allows a normal path", safeNextPath("/editor/abc123") === "/editor/abc123");
 check("allows a path with query", safeNextPath("/templates?category=saas") === "/templates?category=saas");
-
-section("Deployment names");
-// Uppercase is normalised rather than refused — Cloudflare only accepts
-// lowercase, and silently fixing the case is friendlier than an error.
-const cased = validateProjectName("MySite");
-check("lowercases rather than rejecting", cased.ok === true && cased.value === "mysite");
-check("rejects too short", validateProjectName("ab").ok === false);
-check("rejects double hyphen", validateProjectName("my--site").ok === false);
-check("rejects leading hyphen", validateProjectName("-site").ok === false);
-check("rejects reserved word", validateProjectName("admin").ok === false);
-check("rejects html injection", validateProjectName("<script>").ok === false);
-check("accepts a good name", validateProjectName("my-awesome-site").ok === true);
 
 section("Upload sniffing (MIME cannot be trusted)");
 const png = new Uint8Array([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0, 0, 0, 0, 0, 0, 0, 0]);

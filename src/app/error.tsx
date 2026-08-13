@@ -28,12 +28,12 @@ export default function Error({
       <h1 className="text-balance-tight mt-6 text-[clamp(1.6rem,3.4vw,2.2rem)] font-semibold">
         Something went wrong
       </h1>
-      <p className="mt-4 max-w-[46ch] text-[15px] leading-relaxed text-white/45">
+      <p className="mt-4 max-w-[46ch] text-[15px] leading-relaxed text-ink-muted">
         The page could not be loaded. Your work is saved — try again, and if it keeps happening
         please get in touch.
       </p>
       {error.digest && (
-        <p className="mt-3 font-mono text-[12px] text-white/25">Reference: {error.digest}</p>
+        <p className="mt-3 font-mono text-[12px] text-ink-dim">Reference: {error.digest}</p>
       )}
       <div className="mt-8 flex flex-wrap justify-center gap-3">
         <Button onClick={reset}>Try again</Button>

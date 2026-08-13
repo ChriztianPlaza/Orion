@@ -103,7 +103,12 @@ export async function PUT(request: Request) {
       );
     }
 
-    return Response.json({ ...generic, devCode: issued.devCode });
+    return Response.json({
+      ...generic,
+      sent: issued.sent,
+      reason: issued.reason,
+      devCode: issued.devCode,
+    });
   } catch (error) {
     return handleApiError(error);
   }

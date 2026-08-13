@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { CloudUpload, Download, Heart, LayoutGrid } from "lucide-react";
+import { ArrowRight, Download, Heart, ImageIcon, LayoutGrid } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSessionUser } from "@/lib/auth/guards";
 import { limitsFor, PLAN_COPY } from "@/lib/plans";
+import { storageUsedBy } from "@/lib/storage/gc";
+import { FREE_HOSTS } from "@/lib/guides/hosting";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { BillingPortalButton } from "@/components/billing/billing-portal-button";
@@ -21,7 +23,7 @@ export default async function AccountPage() {
   const sessionUser = await getSessionUser();
   if (!sessionUser) redirect("/login?next=%2Faccount");
 
-  const [user, subscription, downloads, deployments, favorites, projectCount] = await Promise.all([
+  const [user, subscription, downloads, storageUsed, favorites, projectCount] = await Promise.all([
     prisma.user.findUnique({
       where: { id: sessionUser.id },
       select: {
@@ -44,19 +46,7 @@ export default async function AccountPage() {
       take: 8,
       select: { id: true, createdAt: true, bytes: true, fileCount: true, project: { select: { name: true } } },
     }),
-    prisma.deployment.findMany({
-      where: { userId: sessionUser.id },
-      orderBy: { createdAt: "desc" },
-      take: 8,
-      select: {
-        id: true,
-        status: true,
-        url: true,
-        projectName: true,
-        createdAt: true,
-        project: { select: { name: true } },
-      },
-    }),
+    storageUsedBy(sessionUser.id),
     prisma.favorite.count({ where: { userId: sessionUser.id } }),
     prisma.project.count({ where: { userId: sessionUser.id } }),
   ]);
@@ -70,13 +60,13 @@ export default async function AccountPage() {
     <div className="container-page py-10 sm:py-14">
       <header className="mb-8">
         <h1 className="text-[clamp(1.7rem,3vw,2.3rem)] font-semibold tracking-[-0.025em]">Account</h1>
-        <p className="mt-2 text-[14.5px] text-white/45">
+        <p className="mt-2 text-[14.5px] text-ink-muted">
           {user.email} · member since {formatDate(user.createdAt)}
         </p>
       </header>
 
       <div className="grid gap-4 lg:grid-cols-[1.15fr_0.85fr]">
-        <section className="card-surface rounded-[20px] p-6">
+        <section className="card-surface rounded-[14px] p-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
               <div className="flex items-center gap-2.5">
@@ -85,10 +75,10 @@ export default async function AccountPage() {
                   {user.plan === "PRO" ? "Active" : "$0 / forever"}
                 </Badge>
               </div>
-              <p className="mt-2 max-w-[46ch] text-[14px] text-white/50">{copy.tagline}</p>
+              <p className="mt-2 max-w-[46ch] text-[14px] text-ink-muted">{copy.tagline}</p>
 
               {subscription && (
-                <p className="mt-3 text-[13px] text-white/40">
+                <p className="mt-3 text-[13px] text-ink-muted">
                   {subscription.cancelAtPeriodEnd
                     ? `Cancels on ${subscription.currentPeriodEnd ? formatDate(subscription.currentPeriodEnd) : "the end of the period"}.`
                     : subscription.currentPeriodEnd
@@ -128,10 +118,11 @@ export default async function AccountPage() {
               max={limits.maxDownloads}
             />
             <Usage
-              icon={<CloudUpload className="size-4" />}
-              label="Deployments"
-              used={deployments.length}
-              max={limits.canDeploy ? Number.POSITIVE_INFINITY : 0}
+              icon={<ImageIcon className="size-4" />}
+              label="Images"
+              used={storageUsed}
+              max={limits.maxStorageBytes}
+              format={formatBytes}
             />
             <Usage
               icon={<Heart className="size-4" />}
@@ -142,11 +133,11 @@ export default async function AccountPage() {
           </dl>
         </section>
 
-        <section className="card-surface rounded-[20px] p-6">
+        <section className="card-surface rounded-[14px] p-6">
           <h2 className="text-[15px] font-semibold">What Pro adds</h2>
           <ul className="mt-4 space-y-2.5">
             {PLAN_COPY.PRO.features.slice(0, 6).map((feature) => (
-              <li key={feature} className="flex items-start gap-2.5 text-[13.5px] text-white/55">
+              <li key={feature} className="flex items-start gap-2.5 text-[13.5px] text-ink-muted">
                 <span className="mt-1.5 size-1 shrink-0 rounded-full bg-white/30" />
                 {feature}
               </li>
@@ -163,25 +154,25 @@ export default async function AccountPage() {
       </div>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-2">
-        <section className="card-surface rounded-[20px] p-6">
+        <section className="card-surface rounded-[14px] p-6">
           <h2 className="text-[15px] font-semibold">Recent downloads</h2>
           {downloads.length === 0 ? (
-            <p className="mt-4 text-[13.5px] text-white/35">
+            <p className="mt-4 text-[13.5px] text-ink-muted">
               No downloads yet. Open a project and choose Download to get the files.
             </p>
           ) : (
-            <ul className="mt-4 divide-y divide-white/[0.06]">
+            <ul className="mt-4 divide-y divide-hairline">
               {downloads.map((download) => (
                 <li key={download.id} className="flex items-center justify-between gap-4 py-2.5">
                   <div className="min-w-0">
-                    <p className="truncate text-[13.5px] text-white/75">
+                    <p className="truncate text-[13.5px] text-ink">
                       {download.project?.name ?? "Deleted project"}
                     </p>
-                    <p className="text-[12px] text-white/30">
+                    <p className="text-[12px] text-ink-dim">
                       {download.fileCount} files · {formatBytes(download.bytes)}
                     </p>
                   </div>
-                  <span className="shrink-0 text-[12px] text-white/30">
+                  <span className="shrink-0 text-[12px] text-ink-dim">
                     {relativeTime(download.createdAt)}
                   </span>
                 </li>
@@ -190,50 +181,35 @@ export default async function AccountPage() {
           )}
         </section>
 
-        <section className="card-surface rounded-[20px] p-6">
-          <h2 className="text-[15px] font-semibold">Recent deployments</h2>
-          {deployments.length === 0 ? (
-            <p className="mt-4 text-[13.5px] text-white/35">
-              {limits.canDeploy
-                ? "No deployments yet. Open a project and choose Deploy."
-                : "Deployment is available on the Pro plan."}
-            </p>
-          ) : (
-            <ul className="mt-4 divide-y divide-white/[0.06]">
-              {deployments.map((deployment) => (
-                <li key={deployment.id} className="flex items-center justify-between gap-4 py-2.5">
-                  <div className="min-w-0">
-                    <p className="truncate text-[13.5px] text-white/75">
-                      {deployment.project?.name ?? deployment.projectName}
-                    </p>
-                    {deployment.url ? (
-                      <a
-                        href={deployment.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="truncate text-[12px] text-[#2997ff] hover:underline"
-                      >
-                        {deployment.url.replace(/^https?:\/\//, "")}
-                      </a>
-                    ) : (
-                      <p className="text-[12px] text-white/30">{deployment.projectName}</p>
-                    )}
-                  </div>
-                  <Badge
-                    variant={
-                      deployment.status === "SUCCESS"
-                        ? "success"
-                        : deployment.status === "FAILED"
-                          ? "danger"
-                          : "outline"
-                    }
-                  >
-                    {deployment.status.toLowerCase()}
-                  </Badge>
-                </li>
-              ))}
-            </ul>
-          )}
+        <section className="card-surface rounded-[14px] p-6">
+          <h2 className="text-[15px] font-semibold">Putting a site online</h2>
+          <p className="mt-2 text-[13.5px] leading-relaxed text-ink-muted">
+            Orion exports plain HTML and CSS, so hosting it costs nothing. These hosts are free
+            forever and take the folder as-is.
+          </p>
+          <ul className="mt-4 divide-y divide-hairline">
+            {FREE_HOSTS.map((host) => (
+              <li key={host.slug}>
+                <Link
+                  href={`/guides/deploy#${host.slug}`}
+                  className="flex items-center justify-between gap-4 py-2.5 text-[13.5px] text-ink-muted transition-colors hover:text-white"
+                >
+                  <span className="min-w-0 truncate">
+                    <span className="text-ink">{host.name}</span>
+                    <span className="text-ink-dim"> — {host.freeUrl}</span>
+                  </span>
+                  <span className="shrink-0 text-[12px] text-ink-dim">
+                    {host.minutes.replace("about ", "~")}
+                  </span>
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <Link href="/guides/deploy" className="mt-5 block">
+            <Button variant="secondary" className="w-full">
+              Read the hosting guide <ArrowRight />
+            </Button>
+          </Link>
         </section>
       </div>
     </div>
@@ -245,25 +221,29 @@ function Usage({
   label,
   used,
   max,
+  format,
 }: {
   icon: React.ReactNode;
   label: string;
   used: number;
   max: number;
+  /** Renders raw numbers by default; pass `formatBytes` for storage. */
+  format?: (value: number) => string;
 }) {
   const unlimited = !Number.isFinite(max);
   const percent = unlimited ? 0 : max === 0 ? 100 : Math.min(100, (used / max) * 100);
+  const show = format ?? String;
 
   return (
-    <div className="rounded-[14px] border border-white/[0.07] p-3.5">
-      <dt className="flex items-center gap-2 text-[12px] text-white/35">
+    <div className="rounded-[14px] border border-hairline p-3.5">
+      <dt className="flex items-center gap-2 text-[12px] text-ink-muted">
         {icon}
         {label}
       </dt>
       <dd className="mt-2.5 text-[20px] font-semibold leading-none">
-        {used}
-        <span className="ml-1 text-[13px] font-normal text-white/30">
-          {unlimited ? "· unlimited" : max === 0 ? "· Pro only" : `/ ${max}`}
+        {show(used)}
+        <span className="ml-1 text-[13px] font-normal text-ink-dim">
+          {unlimited ? "· unlimited" : max === 0 ? "· Pro only" : `/ ${show(max)}`}
         </span>
       </dd>
       {!unlimited && (

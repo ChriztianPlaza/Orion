@@ -4,27 +4,19 @@ import * as React from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import {
-  Download,
-  Globe,
-  History,
-  Infinity as InfinityIcon,
-  LayoutGrid,
-  Sparkles,
-} from "lucide-react";
+import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/toast";
-import { PLAN_COPY, PLAN_HIGHLIGHTS } from "@/lib/plans";
+import { CONTACT_PLAN, PLAN_COPY } from "@/lib/plans";
 import { cn } from "@/lib/utils";
 
-const ICONS = {
-  layout: LayoutGrid,
-  sparkles: Sparkles,
-  download: Download,
-  history: History,
-  infinity: InfinityIcon,
-  globe: Globe,
-} as const;
+/*
+ * Where the Custom plan's "Contact us" goes. Set NEXT_PUBLIC_CONTACT_EMAIL to
+ * a real inbox before launch — the fallback is deliberately obvious so an
+ * unconfigured deployment cannot look like it is quietly collecting enquiries.
+ */
+const CONTACT_EMAIL = process.env.NEXT_PUBLIC_CONTACT_EMAIL || "set-a-contact-email@example.com";
+const contactHref = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent("Orion — custom plan enquiry")}`;
 
 export function PricingPlans({ billingConfigured }: { billingConfigured: boolean }) {
   const { data: session, status } = useSession();
@@ -62,10 +54,9 @@ export function PricingPlans({ billingConfigured }: { billingConfigured: boolean
 
   return (
     <>
-      <div className="mx-auto grid max-w-[860px] gap-5 sm:grid-cols-2">
+      <div className="mx-auto grid max-w-[1060px] items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {(["FREE", "PRO"] as const).map((key) => {
           const copy = PLAN_COPY[key];
-          const highlights = PLAN_HIGHLIGHTS[key];
           const isPro = key === "PRO";
           const current = plan === key;
 
@@ -74,79 +65,111 @@ export function PricingPlans({ billingConfigured }: { billingConfigured: boolean
               key={key}
               aria-labelledby={`plan-${key}`}
               className={cn(
-                "relative flex min-h-[560px] flex-col rounded-[26px] border p-7 sm:p-8",
-                isPro
-                  ? "border-white/[0.14] bg-[#141414]"
-                  : "border-white/[0.08] bg-[#121212]",
+                "relative flex flex-col rounded-[14px] border p-6 sm:p-7",
+                // The featured plan is raised a step rather than outlined in a
+                // brand colour — same trick the reference uses.
+                isPro ? "border-hairline-strong bg-surface-2" : "border-hairline bg-surface",
               )}
             >
-              {isPro && (
-                <div
-                  className="pointer-events-none absolute inset-x-0 top-0 h-40 rounded-t-[26px] opacity-50"
-                  style={{
-                    background:
-                      "radial-gradient(120% 100% at 50% 0%, rgba(41,151,255,0.13), transparent 70%)",
-                  }}
-                  aria-hidden="true"
-                />
-              )}
-
-              <div className="relative flex flex-1 flex-col">
-                <p id={`plan-${key}`} className="text-[14px] font-semibold text-white">
+              <div className="flex items-center gap-2.5">
+                <h2
+                  id={`plan-${key}`}
+                  className="text-[20px] font-semibold tracking-[-0.02em] text-ink"
+                >
                   {copy.name}
-                </p>
-
-                <h2 className="mt-8 text-[26px] font-semibold leading-tight tracking-[-0.02em] text-white">
-                  {copy.heading}
                 </h2>
-                <p className="mt-2 text-[14.5px] leading-relaxed text-white/50">
-                  {copy.subheading}
-                </p>
-
-                <p className="mt-10 flex items-baseline gap-1.5">
-                  <span className="text-[46px] font-normal leading-none tracking-[-0.03em] text-white">
-                    {copy.price}
+                {isPro && (
+                  <span className="rounded-full bg-ink px-2.5 py-0.5 text-[11px] font-semibold text-on-accent">
+                    Most Popular
                   </span>
-                  <span className="text-[14px] text-white/45">/ month</span>
-                </p>
+                )}
+              </div>
 
-                <div className="mt-6">
-                  {current ? (
-                    <button
-                      type="button"
-                      disabled
-                      className="h-11 w-full cursor-default rounded-full border border-white/[0.09] text-[14px] text-white/35"
-                    >
-                      Your current plan
-                    </button>
-                  ) : isPro ? (
-                    <Button size="lg" className="h-11 w-full" loading={loading} onClick={upgrade}>
+              <p className="mt-1.5 text-[13.5px] text-ink-muted">{copy.blurb}</p>
+
+              <p className="mt-5 flex items-baseline gap-1.5">
+                <span className="text-[38px] font-semibold leading-none tracking-[-0.03em] text-ink">
+                  {copy.price}
+                </span>
+                <span className="text-[14px] text-ink-muted">/month</span>
+              </p>
+
+              <div className="mt-6">
+                {current ? (
+                  <button
+                    type="button"
+                    disabled
+                    className="h-10 w-full cursor-default rounded-full border border-hairline text-[14px] text-ink-muted"
+                  >
+                    Your current plan
+                  </button>
+                ) : isPro ? (
+                  <Button className="h-10 w-full" loading={loading} onClick={upgrade}>
+                    {copy.cta}
+                  </Button>
+                ) : (
+                  <Link href={status === "authenticated" ? "/dashboard" : "/register"}>
+                    <Button variant="outline" className="h-10 w-full">
                       {copy.cta}
                     </Button>
-                  ) : (
-                    <Link href={status === "authenticated" ? "/dashboard" : "/register"}>
-                      <Button variant="outline" size="lg" className="h-11 w-full">
-                        {copy.cta}
-                      </Button>
-                    </Link>
-                  )}
-                </div>
-
-                <ul className="mt-8 space-y-4">
-                  {highlights.map((item) => {
-                    const Icon = ICONS[item.icon as keyof typeof ICONS] ?? Sparkles;
-                    return (
-                      <li key={item.label} className="flex items-center gap-3.5">
-                        <Icon className="size-[18px] shrink-0 text-white/55" strokeWidth={1.5} />
-                        <span className="text-[14px] text-white/85">{item.label}</span>
-                      </li>
-                    );
-                  })}
-                </ul>
+                  </Link>
+                )}
               </div>
+
+              <ul className="mt-6 space-y-3">
+                {copy.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-2.5">
+                    <Check
+                      className="mt-[3px] size-3.5 shrink-0 text-ink-muted"
+                      strokeWidth={2.5}
+                      aria-hidden="true"
+                    />
+                    <span className="text-[13.5px] font-medium text-ink">{feature}</span>
+                  </li>
+                ))}
+              </ul>
             </section>
           );
         })}
+
+        {/* Handled by hand — there is no CUSTOM plan in the database. */}
+        <section
+          aria-labelledby="plan-CUSTOM"
+          className="flex flex-col rounded-[14px] border border-hairline bg-surface p-6 sm:p-7"
+        >
+          <h2
+            id="plan-CUSTOM"
+            className="text-[20px] font-semibold tracking-[-0.02em] text-ink"
+          >
+            {CONTACT_PLAN.name}
+          </h2>
+          <p className="mt-1.5 text-[13.5px] text-ink-muted">{CONTACT_PLAN.blurb}</p>
+
+          <p className="mt-5 text-[38px] font-semibold leading-none tracking-[-0.03em] text-ink">
+            {CONTACT_PLAN.price}
+          </p>
+
+          <div className="mt-6">
+            <a href={contactHref} className="block">
+              <Button variant="outline" className="h-10 w-full">
+                {CONTACT_PLAN.cta}
+              </Button>
+            </a>
+          </div>
+
+          <ul className="mt-6 space-y-3">
+            {CONTACT_PLAN.features.map((feature) => (
+              <li key={feature} className="flex items-start gap-2.5">
+                <Check
+                  className="mt-[3px] size-3.5 shrink-0 text-ink-muted"
+                  strokeWidth={2.5}
+                  aria-hidden="true"
+                />
+                <span className="text-[13.5px] font-medium text-ink">{feature}</span>
+              </li>
+            ))}
+          </ul>
+        </section>
       </div>
 
       {!billingConfigured && (

@@ -4,12 +4,12 @@ import * as React from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signIn } from "next-auth/react";
-import { AlertTriangle } from "lucide-react";
+import { AlertTriangle, Lock, Mail, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Input, Label } from "@/components/ui/input";
+import { InputGroup, Label } from "@/components/ui/input";
 import { useToast } from "@/components/ui/toast";
 import { safeNextPath } from "@/lib/security/redirects";
-import { VerifyStep } from "./verify-step";
+import { VerifyStep, type DeliveryReason } from "./verify-step";
 
 const ERROR_COPY: Record<string, string> = {
   CredentialsSignin: "That email and password combination did not work.",
@@ -49,6 +49,7 @@ export function AuthForm({
   // can sign the user straight in rather than bouncing them to the login form.
   const [step, setStep] = React.useState<"form" | "verify">("form");
   const [devCode, setDevCode] = React.useState<string | null>(null);
+  const [deliveryReason, setDeliveryReason] = React.useState<DeliveryReason | null>(null);
 
   const finishSignIn = React.useCallback(async () => {
     const result = await signIn("credentials", { email, password, redirect: false });
@@ -85,6 +86,7 @@ export function AuthForm({
 
         // The account exists but cannot sign in until the code is entered.
         setDevCode(payload.devCode ?? null);
+        setDeliveryReason(payload.sent === false ? (payload.reason ?? "provider_error") : null);
         setStep("verify");
         return;
       }
@@ -111,6 +113,7 @@ export function AuthForm({
       <VerifyStep
         email={email}
         devCode={devCode}
+        deliveryReason={deliveryReason}
         onVerified={finishSignIn}
         onBack={() => {
           setStep("form");
@@ -122,14 +125,12 @@ export function AuthForm({
   }
 
   return (
-    <div className="card-surface rounded-[22px] p-7">
-      <h1 className="text-[22px] font-semibold tracking-[-0.02em]">
+    <div className="card-surface rounded-[14px] p-7 sm:p-8">
+      <h1 className="text-[24px] font-semibold tracking-[-0.025em]">
         {isRegister ? "Create your account" : "Welcome back"}
       </h1>
-      <p className="mt-2 text-[13.5px] text-white/45">
-        {isRegister
-          ? "Free forever for one website. No card required."
-          : "Sign in to keep building."}
+      <p className="mt-2 text-[14px] text-ink-muted">
+        {isRegister ? "Five websites free, no card required." : "Sign in to keep building."}
       </p>
 
       {!isRegister && params.get("verified") === "1" && !error && (
@@ -161,51 +162,13 @@ export function AuthForm({
         </div>
       )}
 
-      {hasOAuth && (
-        <>
-          <div className="mt-6 space-y-2.5">
-            {providers.github && (
-              <Button
-                variant="secondary"
-                className="w-full"
-                loading={oauthLoading === "github"}
-                onClick={() => {
-                  setOauthLoading("github");
-                  void signIn("github", { callbackUrl: next });
-                }}
-              >
-                <GitHubIcon /> Continue with GitHub
-              </Button>
-            )}
-            {providers.google && (
-              <Button
-                variant="secondary"
-                className="w-full"
-                loading={oauthLoading === "google"}
-                onClick={() => {
-                  setOauthLoading("google");
-                  void signIn("google", { callbackUrl: next });
-                }}
-              >
-                <GoogleIcon /> Continue with Google
-              </Button>
-            )}
-          </div>
-
-          <div className="my-6 flex items-center gap-3">
-            <span className="h-px flex-1 bg-white/[0.08]" />
-            <span className="text-[11.5px] uppercase tracking-[0.1em] text-white/25">or</span>
-            <span className="h-px flex-1 bg-white/[0.08]" />
-          </div>
-        </>
-      )}
-
-      <form onSubmit={submit} className={hasOAuth ? "space-y-4" : "mt-6 space-y-4"}>
+      <form onSubmit={submit} className="mt-6 space-y-5">
         {isRegister && (
-          <div>
+          <div className="space-y-2">
             <Label htmlFor="name">Name</Label>
-            <Input
+            <InputGroup
               id="name"
+              icon={<User />}
               value={name}
               onChange={(event) => setName(event.target.value)}
               autoComplete="name"
@@ -215,61 +178,108 @@ export function AuthForm({
           </div>
         )}
 
-        <div>
+        <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
-          <Input
+          <InputGroup
             id="email"
+            icon={<Mail />}
             type="email"
             required
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             autoComplete="email"
-            placeholder="you@example.com"
+            placeholder="Enter your email"
             maxLength={200}
           />
         </div>
 
-        <div>
-          <div className="flex items-baseline justify-between">
-            <Label htmlFor="password">Password</Label>
+        <div className="space-y-2">
+          {/* Label and recovery link share a row — the link floating on its own
+              line below the field read as an orphan. */}
+          <div className="flex items-baseline justify-between gap-4">
+            <Label htmlFor="password" className="mb-0">
+              Password
+            </Label>
             {!isRegister && (
               <Link
                 href="/forgot-password"
-                className="mb-1.5 text-[12.5px] text-white/40 transition-colors hover:text-white"
+                className="text-[12.5px] text-ink-muted transition-colors hover:text-ink"
               >
                 Forgot password?
               </Link>
             )}
           </div>
-          <Input
+          <InputGroup
             id="password"
+            icon={<Lock />}
             type="password"
             required
             minLength={8}
             value={password}
             onChange={(event) => setPassword(event.target.value)}
             autoComplete={isRegister ? "new-password" : "current-password"}
-            placeholder={isRegister ? "At least 8 characters" : "Your password"}
+            placeholder={isRegister ? "At least 8 characters" : "Enter your password"}
           />
           {isRegister && (
-            <p className="mt-1.5 text-[12px] text-white/30">
+            <p className="text-[12px] text-ink-dim">
               At least 8 characters, including a letter and a number.
             </p>
           )}
         </div>
 
-        <Button type="submit" size="lg" className="w-full" loading={loading}>
-          {isRegister ? "Create account" : "Log in"}
+        <Button type="submit" className="h-12 w-full text-[15px]" loading={loading}>
+          {isRegister ? "Create account" : "Sign in"}
         </Button>
       </form>
 
-      <p className="mt-6 text-center text-[13px] text-white/40">
-        {isRegister ? "Already have an account? " : "New to Orion? "}
+      {hasOAuth && (
+        <>
+          <div className="my-6 flex items-center gap-3">
+            <span className="h-px flex-1 bg-hairline" />
+            <span className="text-[11px] uppercase tracking-[0.1em] text-ink-dim">
+              or continue with
+            </span>
+            <span className="h-px flex-1 bg-hairline" />
+          </div>
+
+          <div className="space-y-3">
+            {providers.google && (
+              <Button
+                variant="outline"
+                className="h-12 w-full"
+                loading={oauthLoading === "google"}
+                onClick={() => {
+                  setOauthLoading("google");
+                  void signIn("google", { callbackUrl: next });
+                }}
+              >
+                <GoogleIcon /> Continue with Google
+              </Button>
+            )}
+            {providers.github && (
+              <Button
+                variant="outline"
+                className="h-12 w-full"
+                loading={oauthLoading === "github"}
+                onClick={() => {
+                  setOauthLoading("github");
+                  void signIn("github", { callbackUrl: next });
+                }}
+              >
+                <GitHubIcon /> Continue with GitHub
+              </Button>
+            )}
+          </div>
+        </>
+      )}
+
+      <p className="mt-7 border-t border-hairline pt-6 text-center text-[13.5px] text-ink-muted">
+        {isRegister ? "Already have an account? " : "Don't have an account? "}
         <Link
           href={isRegister ? `/login?next=${encodeURIComponent(next)}` : `/register?next=${encodeURIComponent(next)}`}
-          className="font-medium text-white underline decoration-white/25 underline-offset-2 hover:decoration-white"
+          className="font-medium text-ink underline decoration-white/25 underline-offset-2 hover:decoration-white"
         >
-          {isRegister ? "Log in" : "Create one free"}
+          {isRegister ? "Sign in" : "Sign up"}
         </Link>
       </p>
     </div>

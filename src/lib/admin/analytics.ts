@@ -12,7 +12,7 @@ export type Overview = {
   users: { total: number; free: number; pro: number; newThisMonth: number };
   projects: { total: number; published: number; createdThisMonth: number };
   templates: { total: number; published: number; disabled: number };
-  activity: { downloads: number; deployments: number; templateViews: number };
+  activity: { downloads: number; favorites: number; templateViews: number };
   revenue: {
     grossAllTime: number;
     grossThisMonth: number;
@@ -46,7 +46,7 @@ export async function getOverview(): Promise<Overview> {
     publishedTemplates,
     disabledTemplates,
     downloads,
-    deployments,
+    favorites,
     templateViews,
     grossAllTime,
     grossThisMonth,
@@ -66,7 +66,7 @@ export async function getOverview(): Promise<Overview> {
     prisma.template.count({ where: { status: "PUBLISHED" } }),
     prisma.template.count({ where: { status: "DISABLED" } }),
     prisma.download.count(),
-    prisma.deployment.count({ where: { status: "SUCCESS" } }),
+    prisma.favorite.count(),
     prisma.templateView.count(),
     prisma.payment.aggregate({ where: { status: "succeeded" }, _sum: { amount: true } }),
     prisma.payment.aggregate({
@@ -107,7 +107,7 @@ export async function getOverview(): Promise<Overview> {
       published: publishedTemplates,
       disabled: disabledTemplates,
     },
-    activity: { downloads, deployments, templateViews },
+    activity: { downloads, favorites, templateViews },
     revenue: {
       grossAllTime: gross,
       grossThisMonth: grossThisMonth._sum.amount ?? 0,
@@ -195,17 +195,21 @@ export async function getSignupsByMonth(months = 12): Promise<SignupPoint[]> {
 }
 
 export async function getRecentActivity(take = 12) {
-  const [projects, deployments, payments, admin] = await Promise.all([
+  const [projects, downloads, payments, admin] = await Promise.all([
     prisma.project.findMany({
       orderBy: { createdAt: "desc" },
       take,
       select: { id: true, name: true, createdAt: true, user: { select: { email: true } } },
     }),
-    prisma.deployment.findMany({
-      where: { status: "SUCCESS" },
+    prisma.download.findMany({
       orderBy: { createdAt: "desc" },
       take,
-      select: { id: true, projectName: true, url: true, createdAt: true, user: { select: { email: true } } },
+      select: {
+        id: true,
+        createdAt: true,
+        project: { select: { name: true } },
+        user: { select: { email: true } },
+      },
     }),
     prisma.payment.findMany({
       orderBy: { createdAt: "desc" },
@@ -228,10 +232,10 @@ export async function getRecentActivity(take = 12) {
       meta: p.user?.email ?? "",
       at: p.createdAt,
     })),
-    ...deployments.map((d) => ({
+    ...downloads.map((d) => ({
       id: `d-${d.id}`,
-      kind: "deployment",
-      text: `Deployed ${d.projectName}`,
+      kind: "download",
+      text: `Downloaded ${d.project?.name ?? "a deleted project"}`,
       meta: d.user?.email ?? "",
       at: d.createdAt,
     })),

@@ -1,0 +1,29 @@
+{
+  "name": "Flux — Animated Portfolio",
+  "slug": "flux-portfolio-motion",
+  "category": "animated",
+  "tags": [
+    "dark",
+    "minimal",
+    "typography",
+    "personal"
+  ],
+  "description": "A personal portfolio where the type assembles itself, the project grid tilts under the pointer, and the experience list draws in as you reach it.",
+  "theme": "slate",
+  "colorScheme": "light",
+  "tier": "PRO",
+  "featured": false,
+  "animated": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

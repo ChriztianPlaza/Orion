@@ -1,14 +1,16 @@
 # Orion
 
-A production-ready website builder SaaS: a template marketplace, a visual editor, a static site
-generator and a deployment pipeline in one Next.js application.
+A production-ready website builder SaaS: a template marketplace, a visual editor and a static site
+generator in one Next.js application.
 
 ```
 Browse a template  →  preview it live  →  make it yours  →  edit content and images
-        →  save automatically  →  download real HTML/CSS/JS   or   deploy to a live URL
+        →  save automatically  →  download real HTML/CSS/JS  →  host it anywhere
 ```
 
-The output is always plain static files. Nothing a user downloads depends on Orion to run.
+The output is always plain static files. Nothing a user downloads depends on Orion to run — which
+is why Orion does not host anything itself. Users take the ZIP to any static host; the in-app
+[hosting guide](src/app/(marketing)/guides/deploy/page.tsx) walks them through four free ones.
 
 ---
 
@@ -20,7 +22,6 @@ The output is always plain static files. Nothing a user downloads depends on Ori
 - [Environment variables](#environment-variables)
 - [Deploying to Vercel](#deploying-to-vercel)
 - [Configuring Stripe](#configuring-stripe)
-- [Configuring Cloudflare Pages](#configuring-cloudflare-pages)
 - [Sign in with Google](#sign-in-with-google)
 - [Templates](#templates)
 - [Importing templates from GitHub](#importing-templates-from-github)
@@ -105,7 +106,7 @@ Generating a site re-applies that map onto the pristine template files
 
 - the original template is never mutated,
 - every edit is individually resettable,
-- and the same code path produces the preview, the ZIP and the deployment — they cannot drift apart.
+- and the same code path produces the preview and the ZIP — they cannot drift apart.
 
 ---
 
@@ -119,8 +120,8 @@ Generating a site re-applies that map onto the pristine template files
 | Auth            | Auth.js v5 (NextAuth)                     | Credentials + GitHub + Google, JWT sessions, edge-safe split config |
 | Payments        | Stripe Subscriptions                      | Checkout, billing portal, webhooks as the source of truth |
 | Object storage  | Vercel Blob                               | No bucket, IAM or region to configure |
-| Deployment      | Cloudflare Pages Direct Upload            | Real static hosting, custom project names, instant rollout |
-| Email           | Resend (HTTP, optional)                   | Password reset delivery without an SDK in the bundle |
+| Hosting output  | User's own static host                    | No infrastructure to run, no per-site cost, no lock-in for the user |
+| Email           | Resend (HTTP, optional)                   | Verification codes and password resets without an SDK in the bundle |
 
 Nothing requires a persistent local filesystem or a long-running process, which is what makes the
 whole thing deployable to Vercel unchanged.
@@ -160,9 +161,8 @@ See [`.env.example`](.env.example) for the annotated list. Only two are required
 | `DATABASE_URL` | yes      | Everything that persists |
 | `AUTH_SECRET`  | yes      | Sessions (`openssl rand -base64 32`) |
 | `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET` | no | The Pro plan |
-| `CLOUDFLARE_API_TOKEN`, `CLOUDFLARE_ACCOUNT_ID` | no | One-click deployment |
 | `BLOB_READ_WRITE_TOKEN` | no | Image uploads |
-| `RESEND_API_KEY`, `EMAIL_FROM` | no | Password reset emails |
+| `RESEND_API_KEY`, `EMAIL_FROM` | no | Sign-up verification codes and password resets |
 | `AUTH_GITHUB_*`, `AUTH_GOOGLE_*` | no | Social sign-in |
 
 Every optional integration degrades honestly: the feature explains that it needs configuration
@@ -189,7 +189,7 @@ instead of failing with a stack trace.
 6. **Register the Stripe webhook** (below) and set `NEXT_PUBLIC_APP_URL` to the production origin.
 
 Long-running routes declare `maxDuration = 60`, which is the ceiling on Vercel's Hobby plan —
-asking for more there fails the deployment. On Pro you can raise the deploy and template-upload
+asking for more there fails the deployment. On Pro you can raise the export and template-upload
 routes to 300.
 
 `next build` and `next dev` share `.next`, so building while a dev server is running corrupts it.
@@ -231,31 +231,25 @@ stripe listen --forward-to localhost:3000/api/stripe/webhook
 
 ---
 
-## Configuring Cloudflare Pages
+## How users publish
 
-1. Create an API token with the **Cloudflare Pages: Edit** permission.
-2. Set `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
+Orion deliberately does not host user sites. An earlier version deployed to Cloudflare Pages on the
+user's behalf; that was removed because it added an API token to protect, a per-site cost, a
+support surface, and a second thing that could break — while giving users less than they get by
+uploading the folder themselves.
 
-Deployment implements the same direct-upload flow wrangler uses:
+Instead:
 
-```
-ensure the Pages project exists
-        ↓
-mint a scoped upload token
-        ↓
-ask which content hashes are missing  (blake3 of base64 + extension, 32 hex chars)
-        ↓
-upload only those assets
-        ↓
-create the deployment from a path → hash manifest
-```
+- **Download** produces a self-contained ZIP (`/api/projects/[id]/export`), with a `README.txt`
+  inside pointing at the guide.
+- **`/guides/deploy`** is the guide: four free hosts with step-by-step walkthroughs, what a custom
+  domain actually costs, and a troubleshooting list. Its content lives in one module,
+  [`src/lib/guides/hosting.ts`](src/lib/guides/hosting.ts).
+- **`PublishDialog`** ([`src/components/editor/publish-dialog.tsx`](src/components/editor/publish-dialog.tsx))
+  summarises the fastest route. It opens automatically after a download, and from the Publish
+  button in the editor and on each dashboard card.
 
-The token is read only on the server, is never included in any response, and the browser only ever
-talks to `/api/projects/[id]/deploy`.
-
-Project names are validated against `^[a-z0-9][a-z0-9-]{1,56}[a-z0-9]$`, checked for reserved words,
-checked for collisions inside Orion, and then checked against Cloudflare before anything is
-uploaded.
+Editing `src/lib/guides/hosting.ts` updates the guide, the dialog and the account page together.
 
 ---
 
@@ -345,7 +339,7 @@ The importer:
    assets really are the media their extension claims,
 4. guesses a category and tags from the folder name and page content,
 5. records `license`, `author`, `source` and any required `attribution` — which is then shown on the
-   template page and preserved as a comment in every export and deployment.
+   template page and preserved as a comment in every export.
 
 If you have written permission for a repository whose license is not on the list, pass
 `--allow-license <SPDX-ID>`; the override is recorded on every template it creates.
@@ -374,18 +368,22 @@ recorded in the admin activity log.
 
 | | Free | Pro — $20/month |
 | --- | --- | --- |
-| Website projects | 1 | Unlimited |
+| Website projects | 5 | Unlimited |
 | Marketplace, editor, live preview | ✓ | ✓ |
 | Downloads | 1 total | Unlimited |
+| Image upload size | 5 MB | 25 MB |
+| Image storage | 50 MB | 2 GB |
 | Version history | 3 | 50 |
-| Cloudflare deployment | — | ✓ |
-| Custom deployment name, redeploy, logs | — | ✓ |
 | Premium templates | — | ✓ |
+| Hosting the exported site | free (your own host) | free (your own host) |
 
 Limits live in `src/lib/plans.ts` and are enforced **server-side** at the point of action. The
 download counter is incremented in the same transaction that records the download, and only after
 the archive has been built successfully — a failed export never burns a free user's single
 allowance. Hiding a button is presentation, never the control.
+
+Note that the free tier allows five projects but one download. That is intentional: building is
+free, taking the files out is the paid action.
 
 ---
 
@@ -408,12 +406,12 @@ Other measures:
 | XSS via the editor | Text is escaped, rich text is allow-listed, URLs reject `javascript:`/`data:`, CSS is property allow-listed |
 | Webhook spoofing | Stripe signatures verified before parsing; event ids recorded for idempotency |
 | Authorization bypass | Every protected page and API re-checks the session server-side. Middleware only avoids a wasted render |
-| Credential exposure | Cloudflare and Stripe secrets are read exclusively in server modules; `src/lib/env.ts` is never imported by a client component |
+| Credential exposure | Stripe, Blob and Resend secrets are read exclusively in server modules; `src/lib/env.ts` is never imported by a client component |
 | Credential stuffing | The credentials provider is rate limited twice — per account and per source address — and spends equal time on unknown accounts so timing does not reveal which emails are registered |
 | Open redirect | `?next=` is constrained to same-site paths by `safeNextPath`, so a crafted login link cannot bounce a freshly authenticated user off-site |
 | Quota bypass by racing | Download and project limits are claimed with a single conditional `UPDATE`, so two simultaneous requests cannot both pass the check. A failed build releases the claim |
 | Clickjacking | `frame-ancestors 'none'` plus `X-Frame-Options` |
-| API abuse | Durable sliding-window rate limiting across auth, reads, writes, uploads, exports, deploys, billing sessions, favourites, view tracking, deployment-name lookups and admin actions |
+| API abuse | Durable sliding-window rate limiting across auth, reads, writes, uploads, exports, billing sessions, favourites, view tracking and admin actions |
 | Secure headers | HSTS, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options` from middleware |
 
 Rate limiting is backed by Postgres rather than Redis so a fresh deployment needs no extra service.
@@ -426,16 +424,15 @@ Swapping in Upstash means reimplementing `consumeRateLimit` alone.
 ```
 src/
 ├── app/
-│   ├── (marketing)/          landing, marketplace, template detail, pricing
-│   ├── (auth)/               login, register, forgot/reset password
+│   ├── (marketing)/          landing, marketplace, template detail, pricing, hosting guide
+│   ├── (auth)/               login, register, verify, forgot/reset password
 │   ├── (app)/                dashboard, account
 │   ├── admin/                overview, templates, revenue, users, activity
 │   ├── editor/[id]/          the visual editor
 │   └── api/
-│       ├── auth/             registration, password reset, Auth.js handlers
-│       ├── projects/         CRUD, schema, versions, duplicate, export, deploy
+│       ├── auth/             registration, verification codes, password reset, Auth.js handlers
+│       ├── projects/         CRUD, schema, versions, duplicate, export
 │       ├── templates/        views, favourites
-│       ├── deployments/      status, delete, name availability
 │       ├── preview/          sandboxed template rendering
 │       ├── render/           sandboxed project rendering (+ editor bridge)
 │       ├── uploads/          image uploads
@@ -445,7 +442,7 @@ src/
 │   ├── ui/                   button, card, badge, input, dialog, toast
 │   ├── marketing/            header, footer, showcase
 │   ├── templates/            cards, filters, live preview, favourites
-│   ├── editor/               shell, sidebar, inspector, image picker, deploy dialog
+│   ├── editor/               shell, sidebar, inspector, image picker, publish dialog
 │   ├── billing/              pricing, upgrade dialog, portal button
 │   ├── app/                  app header, project card
 │   └── admin/                template manager, charts
@@ -455,15 +452,15 @@ src/
 │   ├── templates/            analyze, render, generate, serve, store, import-zip, queries
 │   ├── projects/             project service (business logic)
 │   ├── stripe/               client and helpers
-│   ├── cloudflare/           Pages direct upload
-│   ├── storage/              Blob wrapper and image sniffing
-│   ├── security/             paths, sanitisers, rate limiting
+│   ├── guides/               hosting guide content (guide page + publish dialog)
+│   ├── storage/              Blob wrapper, image sniffing, orphan sweeper
+│   ├── security/             paths, sanitisers, rate limiting, redirect guard
 │   ├── admin/                analytics and audit logging
 │   └── plans.ts              plan limits and quota checks
 ├── generated/                compiled template bundle (build artefact)
 └── middleware.ts             security headers + cheap auth redirect
 
-prisma/schema.prisma          17 models with indexes and foreign keys
+prisma/schema.prisma          models with indexes and foreign keys
 scripts/                      template generation, indexing, seeding, GitHub import
 templates/                    the 102 bundled templates (generated)
 ```
@@ -487,6 +484,8 @@ authorise, delegate and serialise.
 | `npm run templates:generate` | Write `/templates` from the section library |
 | `npm run templates:index` | Compile `/templates` into `src/generated` |
 | `npm run templates:import` | Import templates from a GitHub repository |
+| `npm run storage:gc` | Delete uploaded images nothing points at any more (`-- --dry-run` to preview) |
+| `npm run admin:promote` | Grant admin (and optionally Pro) to an existing account |
 | `NEXT_DIST_DIR=.next-build npx next build` | Build without disturbing a running `npm run dev` (they otherwise share `.next`) |
 | `npm run verify:security` | 61 adversarial checks against the sanitisers, path handling, redirect guard and upload sniffing. No database needed |
 | `npm run verify:ratelimit` | Proves the rate limiter refuses traffic at the configured limit. Needs DATABASE_URL |
@@ -502,12 +501,14 @@ authorise, delegate and serialise.
 - [ ] `npm run db:push` and `npm run db:seed` have run against production
 - [ ] Stripe webhook registered and `STRIPE_WEBHOOK_SECRET` set; a test payment appears in
       `/admin/revenue`
-- [ ] Cloudflare token has Pages: Edit and a test deployment returns a working URL
+- [ ] `RESEND_API_KEY` and `EMAIL_FROM` set with a verified sending domain; a sign-up code arrives
 - [ ] Blob store attached; an image upload succeeds in the editor
+- [ ] `npm run storage:gc -- --dry-run` runs clean, and the real sweep is scheduled
 - [ ] The first admin exists and `/admin` is unreachable for normal accounts
 - [ ] `ADMIN_EMAILS` removed once the first administrator is created
 - [ ] A template preview renders and its JavaScript cannot reach `document.cookie` from the frame
 - [ ] A downloaded ZIP opens correctly from `file://`
+- [ ] A downloaded ZIP has been dropped on Netlify Drop and the live site matches the editor
 
 ---
 

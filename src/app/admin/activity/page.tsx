@@ -30,17 +30,17 @@ export default async function AdminActivityPage() {
         <h1 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.025em]">
           Admin activity
         </h1>
-        <p className="mt-1.5 text-[13.5px] text-white/40">
+        <p className="mt-1.5 text-[13.5px] text-ink-muted">
           The last 200 privileged actions taken on this instance.
         </p>
       </header>
 
       {entries.length === 0 ? (
-        <div className="card-surface rounded-[18px] py-16 text-center text-[13.5px] text-white/30">
+        <div className="card-surface rounded-[12px] py-16 text-center text-[13.5px] text-ink-dim">
           No admin actions recorded yet.
         </div>
       ) : (
-        <ol className="card-surface divide-y divide-white/[0.06] rounded-[18px]">
+        <ol className="card-surface divide-y divide-hairline rounded-[12px]">
           {entries.map((entry) => (
             <li key={entry.id} className="flex flex-wrap items-center justify-between gap-3 px-5 py-3.5">
               <div className="min-w-0">
@@ -49,12 +49,12 @@ export default async function AdminActivityPage() {
                     {entry.action}
                   </Badge>
                   {entry.target && (
-                    <span className="truncate font-mono text-[12.5px] text-white/60">
+                    <span className="truncate font-mono text-[12.5px] text-ink-muted">
                       {entry.target}
                     </span>
                   )}
                 </div>
-                <p className="mt-1 truncate text-[12px] text-white/30">
+                <p className="mt-1 truncate text-[12px] text-ink-dim">
                   {entry.user?.email ?? "unknown"}
                   {entry.ip ? ` · ${entry.ip}` : ""}
                   {formatMetadata(entry.metadata) ? ` · ${formatMetadata(entry.metadata)}` : ""}
@@ -63,7 +63,7 @@ export default async function AdminActivityPage() {
               <time
                 dateTime={entry.createdAt.toISOString()}
                 title={formatDate(entry.createdAt, { hour: "numeric", minute: "2-digit" })}
-                className="shrink-0 text-[12px] text-white/25"
+                className="shrink-0 text-[12px] text-ink-dim"
               >
                 {relativeTime(entry.createdAt)}
               </time>

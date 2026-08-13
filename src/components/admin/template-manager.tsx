@@ -180,7 +180,7 @@ export function TemplateManager({
           <h1 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.025em]">
             Templates
           </h1>
-          <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[13.5px] text-white/40">
+          <p className="mt-1.5 flex flex-wrap items-center gap-2 text-[13.5px] text-ink-muted">
             {total} in the marketplace
             <button
               onClick={() => setParam({ tier: filters.tier === "FREE" ? null : "FREE" })}
@@ -188,7 +188,7 @@ export function TemplateManager({
                 "rounded-full border px-2 py-0.5 text-[12px] transition-colors",
                 filters.tier === "FREE"
                   ? "border-[#30d158]/40 bg-[#30d158]/10 text-[#30d158]"
-                  : "border-white/10 text-white/45 hover:text-white",
+                  : "border-hairline text-ink-muted hover:text-white",
               )}
             >
               {counts.free} free
@@ -199,7 +199,7 @@ export function TemplateManager({
                 "rounded-full border px-2 py-0.5 text-[12px] transition-colors",
                 filters.tier === "PRO"
                   ? "border-[#0071e3]/40 bg-[#0071e3]/12 text-[#2997ff]"
-                  : "border-white/10 text-white/45 hover:text-white",
+                  : "border-hairline text-ink-muted hover:text-white",
               )}
             >
               {counts.pro} pro
@@ -214,7 +214,7 @@ export function TemplateManager({
       {/* ─────────────────────────────────────────────────────────── filters */}
       <div className="mb-4 flex flex-wrap items-center gap-2.5">
         <div className="relative min-w-[220px] flex-1">
-          <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-white/25" />
+          <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-dim" />
           <Input
             value={search}
             onChange={(event) => setSearch(event.target.value)}
@@ -344,10 +344,10 @@ export function TemplateManager({
       )}
 
       {/* ──────────────────────────────────────────────────────────── table */}
-      <div className="card-surface overflow-x-auto rounded-[18px]">
+      <div className="card-surface overflow-x-auto rounded-[12px]">
         <table className="w-full min-w-[880px] text-[13.5px]">
           <thead>
-            <tr className="border-b border-white/[0.07] text-left text-white/35">
+            <tr className="border-b border-hairline text-left text-ink-muted">
               <th scope="col" className="w-10 px-4 py-3">
                 <input
                   type="checkbox"
@@ -393,14 +393,14 @@ export function TemplateManager({
                       )}
                       <div className="min-w-0">
                         <p className="truncate font-medium text-white">{template.name}</p>
-                        <p className="truncate font-mono text-[11.5px] text-white/30">
+                        <p className="truncate font-mono text-[11.5px] text-ink-dim">
                           {template.slug} · {template.fileCount} files ·{" "}
                           {relativeTime(template.updatedAt)}
                         </p>
                       </div>
                     </div>
                   </td>
-                  <td className="px-4 py-3 text-white/55">{template.categoryName ?? "—"}</td>
+                  <td className="px-4 py-3 text-ink-muted">{template.categoryName ?? "—"}</td>
                   <td className="px-4 py-3">
                     <Select
                       value={template.status}
@@ -429,8 +429,8 @@ export function TemplateManager({
                       <option value="PRO">Pro only</option>
                     </Select>
                   </td>
-                  <td className="px-4 py-3 text-right text-white/55">{template.usageCount}</td>
-                  <td className="px-4 py-3 text-right text-white/55">{template.viewCount}</td>
+                  <td className="px-4 py-3 text-right text-ink-muted">{template.usageCount}</td>
+                  <td className="px-4 py-3 text-right text-ink-muted">{template.viewCount}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-1">
                       <Button
@@ -468,13 +468,13 @@ export function TemplateManager({
         </table>
 
         {templates.length === 0 && (
-          <p className="py-14 text-center text-[13.5px] text-white/30">
+          <p className="py-14 text-center text-[13.5px] text-ink-dim">
             No templates match those filters.
           </p>
         )}
       </div>
 
-      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-[13px] text-white/35">
+      <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-[13px] text-ink-muted">
         <span>
           Showing {templates.length} of {matching}
           {matching !== total ? ` filtered (${total} total)` : ""}
@@ -619,7 +619,7 @@ function UploadDialog({
             accept=".zip,application/zip"
             required
             onChange={(event) => setFile(event.target.files?.[0] ?? null)}
-            className="block w-full rounded-[10px] border border-white/10 bg-white/[0.04] px-3 py-2 text-[13px] text-white/60 file:mr-3 file:rounded-full file:border-0 file:bg-white file:px-3 file:py-1 file:text-[12px] file:font-medium file:text-black"
+            className="block w-full rounded-[10px] border border-hairline bg-white/[0.04] px-3 py-2 text-[13px] text-ink-muted file:mr-3 file:rounded-full file:border-0 file:bg-white file:px-3 file:py-1 file:text-[12px] file:font-medium file:text-black"
           />
           <FieldHint>Up to 40 MB, 400 files. Executable and server-side file types are refused.</FieldHint>
         </div>
@@ -675,8 +675,8 @@ function UploadDialog({
           <FieldHint>Comma separated, up to twelve.</FieldHint>
         </div>
 
-        <fieldset className="rounded-xl border border-white/[0.08] p-4">
-          <legend className="px-1.5 text-[12px] text-white/40">Licensing and attribution</legend>
+        <fieldset className="rounded-xl border border-hairline p-4">
+          <legend className="px-1.5 text-[12px] text-ink-muted">Licensing and attribution</legend>
           <div className="grid gap-3 sm:grid-cols-2">
             <div>
               <Label htmlFor="tpl-license">License</Label>
@@ -700,7 +700,7 @@ function UploadDialog({
               placeholder="Design by … , used under CC BY 4.0"
             />
             <FieldHint>
-              Shown on the template page and preserved as a comment in every export and deployment.
+              Shown on the template page and preserved as a comment in every export.
             </FieldHint>
           </div>
         </fieldset>

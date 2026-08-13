@@ -2,6 +2,7 @@ import { prisma } from "@/lib/db";
 import { ApiError } from "@/lib/auth/guards";
 import { checkProjectQuota, limitsFor } from "@/lib/plans";
 import { slugify } from "@/lib/utils";
+import { deleteProjectAssets } from "@/lib/storage/gc";
 import { analyzeHtml } from "@/lib/templates/analyze";
 import { loadTemplateFiles } from "@/lib/templates/store";
 import {
@@ -413,6 +414,13 @@ export async function deleteProject(projectId: string, userId: string) {
   });
   if (!project) throw new ApiError(404, "not_found", "Project not found.");
   if (project.userId !== userId) throw new ApiError(403, "forbidden", "Not your project.");
+
+  // Remove the images first. The asset rows cascade away with the project, so
+  // doing this afterwards would leave the blobs in storage with nothing left
+  // pointing at them — paid-for bytes that could never be found again.
+  await deleteProjectAssets(projectId).catch((error: unknown) => {
+    console.error("[projects] could not remove assets for", projectId, error);
+  });
 
   await prisma.$transaction([
     prisma.project.delete({ where: { id: projectId } }),

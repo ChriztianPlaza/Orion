@@ -81,12 +81,12 @@ export function ImagePicker({
   return (
     <div className="space-y-3">
       {value && (
-        <div className="relative overflow-hidden rounded-xl border border-white/10 bg-white/[0.03]">
+        <div className="relative overflow-hidden rounded-xl border border-hairline bg-white/[0.03]">
           <img src={value} alt="" className="h-28 w-full object-cover" />
           {onClear && (
             <button
               onClick={onClear}
-              className="absolute right-2 top-2 rounded-lg bg-black/60 p-1.5 text-white/70 backdrop-blur transition-colors hover:bg-black/80 hover:text-white"
+              className="absolute right-2 top-2 rounded-lg bg-black/60 p-1.5 text-ink backdrop-blur transition-colors hover:bg-black/80 hover:text-white"
               aria-label="Remove image"
             >
               <Trash2 className="size-3.5" />
@@ -129,9 +129,9 @@ export function ImagePicker({
       </div>
 
       {showLibrary && (
-        <div className="rounded-xl border border-white/[0.08] bg-white/[0.02] p-2">
+        <div className="rounded-xl border border-hairline bg-white/[0.02] p-2">
           {assets.length === 0 ? (
-            <p className="px-1 py-3 text-center text-[12px] text-white/35">
+            <p className="px-1 py-3 text-center text-[12px] text-ink-muted">
               Nothing uploaded yet.
             </p>
           ) : (
@@ -141,7 +141,7 @@ export function ImagePicker({
                   key={asset.id}
                   onClick={() => onChange(asset.url)}
                   title={`${asset.name} · ${formatBytes(asset.size)}`}
-                  className="group relative aspect-square overflow-hidden rounded-lg border border-white/[0.08] transition-colors hover:border-white/30"
+                  className="group relative aspect-square overflow-hidden rounded-lg border border-hairline transition-colors hover:border-white/30"
                 >
                   <img src={asset.url} alt={asset.name} className="size-full object-cover" />
                 </button>

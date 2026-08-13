@@ -27,7 +27,7 @@ export default async function AdminUsersPage({
         downloadCount: true,
         createdAt: true,
         lastSeenAt: true,
-        _count: { select: { projects: true, deployments: true } },
+        _count: { select: { projects: true, favorites: true } },
       },
     }),
     prisma.user.count(),
@@ -37,19 +37,19 @@ export default async function AdminUsersPage({
     <div className="container-page py-10">
       <header className="mb-6">
         <h1 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.025em]">Users</h1>
-        <p className="mt-1.5 text-[13.5px] text-white/40">{total} registered</p>
+        <p className="mt-1.5 text-[13.5px] text-ink-muted">{total} registered</p>
       </header>
 
-      <div className="card-surface overflow-x-auto rounded-[18px]">
+      <div className="card-surface overflow-x-auto rounded-[12px]">
         <table className="w-full min-w-[760px] text-[13.5px]">
           <thead>
-            <tr className="border-b border-white/[0.07] text-left text-white/35">
+            <tr className="border-b border-hairline text-left text-ink-muted">
               <th scope="col" className="px-4 py-3 font-medium">User</th>
               <th scope="col" className="px-4 py-3 font-medium">Plan</th>
               <th scope="col" className="px-4 py-3 font-medium">Role</th>
               <th scope="col" className="px-4 py-3 text-right font-medium">Projects</th>
               <th scope="col" className="px-4 py-3 text-right font-medium">Downloads</th>
-              <th scope="col" className="px-4 py-3 text-right font-medium">Deployments</th>
+              <th scope="col" className="px-4 py-3 text-right font-medium">Favourites</th>
               <th scope="col" className="px-4 py-3 font-medium">Joined</th>
               <th scope="col" className="px-4 py-3 font-medium">Last seen</th>
             </tr>
@@ -59,7 +59,7 @@ export default async function AdminUsersPage({
               <tr key={user.id} className="border-b border-white/[0.05] last:border-0">
                 <td className="px-4 py-3">
                   <p className="truncate text-white">{user.name || user.email.split("@")[0]}</p>
-                  <p className="truncate text-[11.5px] text-white/30">{user.email}</p>
+                  <p className="truncate text-[11.5px] text-ink-dim">{user.email}</p>
                 </td>
                 <td className="px-4 py-3">
                   <Badge variant={user.plan === "PRO" ? "brand" : "outline"}>{user.plan}</Badge>
@@ -68,14 +68,14 @@ export default async function AdminUsersPage({
                   {user.role === "ADMIN" ? (
                     <Badge variant="violet">Admin</Badge>
                   ) : (
-                    <span className="text-white/40">User</span>
+                    <span className="text-ink-muted">User</span>
                   )}
                 </td>
-                <td className="px-4 py-3 text-right text-white/60">{user._count.projects}</td>
-                <td className="px-4 py-3 text-right text-white/60">{user.downloadCount}</td>
-                <td className="px-4 py-3 text-right text-white/60">{user._count.deployments}</td>
-                <td className="px-4 py-3 text-white/40">{formatDate(user.createdAt)}</td>
-                <td className="px-4 py-3 text-white/40">
+                <td className="px-4 py-3 text-right text-ink-muted">{user._count.projects}</td>
+                <td className="px-4 py-3 text-right text-ink-muted">{user.downloadCount}</td>
+                <td className="px-4 py-3 text-right text-ink-muted">{user._count.favorites}</td>
+                <td className="px-4 py-3 text-ink-muted">{formatDate(user.createdAt)}</td>
+                <td className="px-4 py-3 text-ink-muted">
                   {user.lastSeenAt ? relativeTime(user.lastSeenAt) : "—"}
                 </td>
               </tr>
@@ -84,7 +84,7 @@ export default async function AdminUsersPage({
         </table>
 
         {users.length === 0 && (
-          <p className="py-14 text-center text-[13.5px] text-white/30">No users yet.</p>
+          <p className="py-14 text-center text-[13.5px] text-ink-dim">No users yet.</p>
         )}
       </div>
     </div>

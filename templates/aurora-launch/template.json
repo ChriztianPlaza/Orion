@@ -1,0 +1,29 @@
+{
+  "name": "Aurora — Product Launch",
+  "slug": "aurora-launch",
+  "category": "animated",
+  "tags": [
+    "gradient",
+    "colorful",
+    "startup",
+    "bold"
+  ],
+  "description": "A single-goal launch page with a drifting gradient hero, sections that reveal as you scroll, and a pricing table that responds to the pointer.",
+  "theme": "aurora",
+  "colorScheme": "dark",
+  "tier": "PRO",
+  "featured": false,
+  "animated": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

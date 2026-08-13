@@ -41,11 +41,11 @@ export function Inspector({
   if (!element) {
     return (
       <div className="flex h-full flex-col items-center justify-center px-6 text-center">
-        <span className="flex size-11 items-center justify-center rounded-2xl bg-white/[0.05] text-white/30">
+        <span className="flex size-11 items-center justify-center rounded-2xl bg-white/[0.05] text-ink-dim">
           <TypeIcon className="size-[18px]" />
         </span>
-        <p className="mt-4 text-[13.5px] font-medium text-white/70">Nothing selected</p>
-        <p className="mt-1.5 max-w-[26ch] text-[12.5px] leading-relaxed text-white/35">
+        <p className="mt-4 text-[13.5px] font-medium text-ink">Nothing selected</p>
+        <p className="mt-1.5 max-w-[26ch] text-[12.5px] leading-relaxed text-ink-muted">
           Click any heading, image, button or block in the preview to edit it here.
         </p>
       </div>
@@ -68,11 +68,11 @@ export function Inspector({
 
   return (
     <div className="flex h-full flex-col">
-      <header className="border-b border-white/[0.07] px-4 py-3.5">
+      <header className="border-b border-hairline px-4 py-3.5">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
             <p className="truncate text-[13.5px] font-medium text-white">{element.label}</p>
-            <p className="mt-0.5 flex items-center gap-1.5 text-[11.5px] text-white/30">
+            <p className="mt-0.5 flex items-center gap-1.5 text-[11.5px] text-ink-dim">
               <Badge variant="outline" className="px-1.5 py-0 text-[10px]">
                 {EDITABLE_TYPE_LABEL[element.type]}
               </Badge>
@@ -152,8 +152,8 @@ export function Inspector({
           </section>
         )}
 
-        <section className="space-y-3 border-t border-white/[0.07] pt-4">
-          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-white/25">Style</p>
+        <section className="space-y-3 border-t border-hairline pt-4">
+          <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-ink-dim">Style</p>
 
           <div className="grid grid-cols-2 gap-2.5">
             <div>
@@ -223,8 +223,8 @@ export function Inspector({
                       aria-pressed={style["text-align"] === align}
                       className={`flex-1 rounded-lg border px-2 py-1.5 text-[12px] capitalize transition-colors ${
                         style["text-align"] === align
-                          ? "border-white/25 bg-white/10 text-white"
-                          : "border-white/[0.08] text-white/40 hover:text-white"
+                          ? "border-hairline-strong bg-white/10 text-white"
+                          : "border-hairline text-ink-muted hover:text-white"
                       }`}
                     >
                       {align}
@@ -236,10 +236,10 @@ export function Inspector({
           )}
         </section>
 
-        <section className="border-t border-white/[0.07] pt-4">
+        <section className="border-t border-hairline pt-4">
           <button
             onClick={() => onChange({ hidden: !value.hidden })}
-            className="flex w-full items-center justify-between rounded-lg px-1 py-2 text-[13px] text-white/60 transition-colors hover:text-white"
+            className="flex w-full items-center justify-between rounded-lg px-1 py-2 text-[13px] text-ink-muted transition-colors hover:text-white"
           >
             <span className="flex items-center gap-2">
               {value.hidden ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
@@ -257,7 +257,7 @@ export function Inspector({
               />
             </span>
           </button>
-          <FieldHint>Hidden elements are removed from the exported and deployed files.</FieldHint>
+          <FieldHint>Hidden elements are removed from the exported files.</FieldHint>
         </section>
       </div>
     </div>
@@ -278,7 +278,7 @@ function ColorField({
   return (
     <div className="flex items-center gap-1.5">
       <label
-        className="relative size-9 shrink-0 cursor-pointer overflow-hidden rounded-[10px] border border-white/10"
+        className="relative size-9 shrink-0 cursor-pointer overflow-hidden rounded-[10px] border border-hairline"
         style={{ background: value || "transparent" }}
       >
         <input

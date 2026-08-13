@@ -1,0 +1,29 @@
+{
+  "name": "Kinetic — Creative Studio",
+  "slug": "kinetic-studio",
+  "category": "animated",
+  "tags": [
+    "dark",
+    "editorial",
+    "bold",
+    "typography"
+  ],
+  "description": "A motion-forward studio portfolio. Oversized type that assembles word by word, work that tilts under the cursor, and a logo strip that never stops moving.",
+  "theme": "noir",
+  "colorScheme": "dark",
+  "tier": "PRO",
+  "featured": true,
+  "animated": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

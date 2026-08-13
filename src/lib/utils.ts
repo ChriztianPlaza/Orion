@@ -41,7 +41,7 @@ export function relativeTime(date: Date | string) {
   return formatDate(date);
 }
 
-/** URL-safe, DNS-safe slug. Used for template slugs and Cloudflare project names. */
+/** URL-safe, DNS-safe slug. Used for template slugs and export filenames. */
 export function slugify(input: string) {
   return input
     .normalize("NFKD")

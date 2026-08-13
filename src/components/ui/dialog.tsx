@@ -93,7 +93,7 @@ export function Dialog({
         ref={panelRef}
         tabIndex={-1}
         className={cn(
-          "glass relative w-full animate-[fade-up_.35s_cubic-bezier(0.16,1,0.3,1)] rounded-[22px] p-6 shadow-[0_40px_120px_-40px_rgba(0,0,0,1)] outline-none sm:p-7",
+          "glass relative w-full animate-[fade-up_.35s_cubic-bezier(0.16,1,0.3,1)] rounded-[14px] p-6 shadow-[0_40px_120px_-40px_rgba(0,0,0,1)] outline-none sm:p-7",
           size === "sm" && "max-w-md",
           size === "md" && "max-w-lg",
           size === "lg" && "max-w-2xl",
@@ -103,7 +103,7 @@ export function Dialog({
           <button
             onClick={onClose}
             aria-label="Close dialog"
-            className="absolute right-4 top-4 rounded-lg p-1.5 text-white/35 transition-colors hover:bg-white/5 hover:text-white"
+            className="absolute right-4 top-4 rounded-lg p-1.5 text-ink-muted transition-colors hover:bg-white/5 hover:text-white"
           >
             <X className="size-4" />
           </button>
@@ -113,7 +113,7 @@ export function Dialog({
           {title}
         </h2>
         {description && (
-          <div className="mt-2.5 text-[14px] leading-relaxed text-white/50">{description}</div>
+          <div className="mt-2.5 text-[14px] leading-relaxed text-ink-muted">{description}</div>
         )}
         {children && <div className="mt-6">{children}</div>}
         {footer && <div className="mt-7 flex flex-wrap justify-end gap-2.5">{footer}</div>}

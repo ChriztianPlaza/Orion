@@ -28,12 +28,6 @@ export async function GET() {
         updatedAt: true,
         createdAt: true,
         template: { select: { slug: true, name: true } },
-        deployments: {
-          where: { status: "SUCCESS" },
-          orderBy: { createdAt: "desc" },
-          take: 1,
-          select: { url: true, projectName: true, createdAt: true },
-        },
       },
     });
     return Response.json({ projects });

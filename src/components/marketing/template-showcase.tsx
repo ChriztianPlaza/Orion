@@ -41,8 +41,8 @@ export function TemplateShowcase({ templates }: { templates: TemplateCard[] }) {
               className={cn(
                 "shrink-0 rounded-full border px-3.5 py-1.5 text-[13px] transition-all duration-300",
                 index === active
-                  ? "border-white/20 bg-white/10 text-white"
-                  : "border-white/[0.07] text-white/45 hover:border-white/15 hover:text-white/80",
+                  ? "border-hairline-strong bg-white/10 text-white"
+                  : "border-hairline text-ink-muted hover:border-hairline-strong hover:text-ink",
               )}
             >
               {template.name}
@@ -52,7 +52,7 @@ export function TemplateShowcase({ templates }: { templates: TemplateCard[] }) {
         <DeviceSwitcher value={device} onChange={setDevice} />
       </div>
 
-      <div className="card-surface relative overflow-hidden rounded-[24px]">
+      <div className="card-surface relative overflow-hidden rounded-[14px]">
         <div
           className="pointer-events-none absolute inset-x-0 -top-24 h-48 opacity-60 blur-3xl"
           style={{ background: "radial-gradient(60% 100% at 50% 100%, rgba(41,151,255,.25), transparent)" }}
@@ -60,7 +60,7 @@ export function TemplateShowcase({ templates }: { templates: TemplateCard[] }) {
         />
         {!loaded && (
           <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#050505]">
-            <span className="size-5 animate-spin rounded-full border-2 border-white/15 border-t-white/60" />
+            <span className="size-5 animate-spin rounded-full border-2 border-hairline-strong border-t-white/60" />
           </div>
         )}
         <LivePreview
@@ -75,7 +75,7 @@ export function TemplateShowcase({ templates }: { templates: TemplateCard[] }) {
       <div className="mt-5 flex flex-wrap items-center justify-between gap-4">
         <div className="min-w-0">
           <p className="text-sm font-medium text-white">{current.name}</p>
-          <p className="mt-0.5 truncate text-[13px] text-white/40">{current.description}</p>
+          <p className="mt-0.5 truncate text-[13px] text-ink-muted">{current.description}</p>
         </div>
         <div className="flex gap-2">
           <Link href={`/templates/${current.slug}`}>

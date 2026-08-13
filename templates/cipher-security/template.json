@@ -13,6 +13,7 @@
   "colorScheme": "dark",
   "tier": "FREE",
   "featured": true,
+  "animated": false,
   "entryFile": "index.html",
   "pages": [
     "index.html",

@@ -1,0 +1,29 @@
+{
+  "name": "Orbit — Motion Agency",
+  "slug": "orbit-agency-motion",
+  "category": "animated",
+  "tags": [
+    "dark",
+    "b2b",
+    "services",
+    "gradient"
+  ],
+  "description": "A service page that earns its scroll: staged reveals, a counting results bar, alternating case studies and a contact block that feels alive.",
+  "theme": "cobalt",
+  "colorScheme": "dark",
+  "tier": "PRO",
+  "featured": false,
+  "animated": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -66,7 +66,12 @@ export function LivePreview({
   }, [width]);
 
   return (
-    <div ref={containerRef} className={cn("relative overflow-hidden bg-[#050505]", className)}>
+    // `min-w-0` + `contain` stop the 1440px-wide iframe inside from widening
+    // any flex/grid track this sits in.
+    <div
+      ref={containerRef}
+      className={cn("relative min-w-0 overflow-hidden bg-[#050505] [contain:layout_paint]", className)}
+    >
       <iframe
         key={src}
         src={src}
@@ -100,7 +105,7 @@ export function DeviceSwitcher({
 }) {
   return (
     <div
-      className={cn("flex items-center gap-0.5 rounded-full border border-white/10 bg-white/[0.04] p-0.5", className)}
+      className={cn("flex items-center gap-0.5 rounded-full border border-hairline bg-white/[0.04] p-0.5", className)}
       role="group"
       aria-label="Preview size"
     >
@@ -116,7 +121,7 @@ export function DeviceSwitcher({
             title={`${device[0].toUpperCase()}${device.slice(1)} — ${DEVICE_WIDTHS[device]}px`}
             className={cn(
               "flex size-7 items-center justify-center rounded-full transition-all duration-300",
-              active ? "bg-white text-black" : "text-white/45 hover:bg-white/[0.06] hover:text-white",
+              active ? "bg-white text-black" : "text-ink-muted hover:bg-white/[0.06] hover:text-white",
             )}
           >
             <Icon className="size-3.5" />
@@ -151,15 +156,15 @@ export function PreviewFrame({
   const source = nonce ? `${src}${src.includes("?") ? "&" : "?"}r=${nonce}` : src;
 
   return (
-    <div className={cn("card-surface flex flex-col overflow-hidden rounded-[20px]", className)}>
-      <div className="flex items-center gap-3 border-b border-white/[0.07] bg-white/[0.02] px-4 py-2.5">
+    <div className={cn("card-surface flex flex-col overflow-hidden rounded-[14px]", className)}>
+      <div className="flex items-center gap-3 border-b border-hairline bg-white/[0.02] px-4 py-2.5">
         <div className="flex gap-1.5" aria-hidden="true">
           <span className="size-2.5 rounded-full bg-white/12" />
           <span className="size-2.5 rounded-full bg-white/12" />
           <span className="size-2.5 rounded-full bg-white/12" />
         </div>
         <div className="mx-auto flex min-w-0 max-w-[420px] flex-1 items-center justify-center">
-          <span className="truncate rounded-full bg-white/[0.05] px-3 py-1 text-[11px] text-white/40">
+          <span className="truncate rounded-full bg-white/[0.05] px-3 py-1 text-[11px] text-ink-muted">
             {label ?? title}
           </span>
         </div>
@@ -191,7 +196,7 @@ export function PreviewFrame({
       <div className="relative flex-1">
         {loading && (
           <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#050505]">
-            <span className="size-5 animate-spin rounded-full border-2 border-white/20 border-t-white/70" />
+            <span className="size-5 animate-spin rounded-full border-2 border-hairline-strong border-t-white/70" />
           </div>
         )}
         <LivePreview

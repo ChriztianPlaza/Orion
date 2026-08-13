@@ -6,7 +6,6 @@ import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   Check,
-  CloudUpload,
   Download,
   ExternalLink,
   History,
@@ -14,6 +13,7 @@ import {
   PanelLeftClose,
   PanelLeftOpen,
   Redo2,
+  Rocket,
   Undo2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -24,7 +24,7 @@ import { UpgradeDialog } from "@/components/billing/upgrade-dialog";
 import { DeviceSwitcher, DEVICE_WIDTHS, type Device } from "@/components/templates/live-preview";
 import { EditorSidebar, type SchemaPage } from "./editor-sidebar";
 import { Inspector } from "./inspector";
-import { DeployDialog } from "./deploy-dialog";
+import { PublishDialog } from "./publish-dialog";
 import { useEditorState } from "./use-editor-state";
 import { cn, relativeTime } from "@/lib/utils";
 import type {
@@ -38,7 +38,6 @@ import type {
 export type EditorProject = {
   id: string;
   name: string;
-  subdomain: string | null;
   content: ProjectContent;
   theme: ProjectTheme;
   meta: ProjectMeta;
@@ -46,7 +45,6 @@ export type EditorProject = {
   templateName: string;
   templateSlug: string;
   entryFile: string;
-  liveUrl: string | null;
 };
 
 type BridgeMessage =
@@ -84,11 +82,10 @@ export function EditorShell({
   const [sidebarOpen, setSidebarOpen] = React.useState(true);
   const [frameLoading, setFrameLoading] = React.useState(true);
   const [projectName, setProjectName] = React.useState(project.name);
-  const [deployOpen, setDeployOpen] = React.useState(false);
+  const [publishOpen, setPublishOpen] = React.useState(false);
   const [historyOpen, setHistoryOpen] = React.useState(false);
   const [upgradeReason, setUpgradeReason] = React.useState<string | null>(null);
   const [downloading, setDownloading] = React.useState(false);
-  const [liveUrl, setLiveUrl] = React.useState(project.liveUrl);
   const [frameNonce, setFrameNonce] = React.useState(0);
 
   const state = useEditorState({
@@ -169,6 +166,25 @@ export function EditorShell({
     return () => clearTimeout(timer);
   }, [projectName, project.id, project.name]);
 
+  /** Replaces editor state with whatever the server currently holds. */
+  const resync = React.useCallback(async () => {
+    const response = await fetch(`/api/projects/${project.id}`);
+    if (!response.ok) return;
+    const payload = await response.json().catch(() => null);
+    const fresh = payload?.project;
+    if (!fresh) return;
+
+    state.replaceAll(
+      {
+        content: (fresh.content ?? {}) as ProjectContent,
+        theme: (fresh.theme ?? {}) as ProjectTheme,
+        meta: (fresh.meta ?? {}) as ProjectMeta,
+      },
+      fresh.revision,
+    );
+    setFrameNonce((value) => value + 1);
+  }, [project.id, state]);
+
   /* ---------------------------------------------------------- downloading */
   const download = async () => {
     setDownloading(true);
@@ -191,6 +207,9 @@ export function EditorShell({
         return;
       }
 
+      // The server hands uploaded images back once they are inside the archive.
+      const releasedCount = Number(response.headers.get("X-Orion-Images-Released") ?? "0");
+
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
       const anchor = document.createElement("a");
@@ -201,7 +220,24 @@ export function EditorShell({
       anchor.remove();
       URL.revokeObjectURL(url);
 
-      toast({ variant: "success", title: "Download ready", description: "Your website files are in your downloads folder." });
+      toast({
+        variant: "success",
+        title: "Download ready",
+        description:
+          releasedCount > 0
+            ? `Your files are in your downloads folder. ${releasedCount} uploaded ${
+                releasedCount === 1 ? "image is" : "images are"
+              } bundled inside the ZIP and have been cleared from storage.`
+            : "Your website files are in your downloads folder.",
+      });
+
+      // Those images are gone server-side, so the in-memory content map now
+      // points at URLs that no longer resolve. Pull the trimmed version back
+      // rather than letting the next autosave write the dead ones out again.
+      if (releasedCount > 0) await resync();
+
+      // The ZIP is only half the job — show them how to put it online.
+      setPublishOpen(true);
       router.refresh();
     } catch {
       toast({ variant: "error", title: "Download failed", description: "Check your connection." });
@@ -215,7 +251,7 @@ export function EditorShell({
   return (
     <div className="flex h-screen flex-col overflow-hidden bg-black">
       {/* ─────────────────────────────────────────────────────────── top bar */}
-      <header className="flex h-14 shrink-0 items-center gap-3 border-b border-white/[0.07] px-3">
+      <header className="flex h-14 shrink-0 items-center gap-3 border-b border-hairline px-3">
         <Link href="/dashboard" title="Back to dashboard">
           <Button variant="ghost" size="icon-sm">
             <ArrowLeft />
@@ -271,25 +307,25 @@ export function EditorShell({
           </Button>
         </a>
 
-        <Button variant="secondary" size="sm" onClick={download} loading={downloading}>
-          <Download />
-          <span className="hidden sm:inline">Download</span>
+        <Button variant="secondary" size="sm" onClick={() => setPublishOpen(true)}>
+          <Rocket />
+          <span className="hidden sm:inline">Publish</span>
         </Button>
 
-        <Button size="sm" onClick={() => setDeployOpen(true)}>
-          <CloudUpload />
-          <span className="hidden sm:inline">{liveUrl ? "Redeploy" : "Deploy"}</span>
+        <Button size="sm" onClick={download} loading={downloading}>
+          <Download />
+          <span className="hidden sm:inline">Download</span>
         </Button>
       </header>
 
       {plan === "FREE" && (
-        <div className="flex shrink-0 flex-wrap items-center justify-center gap-2 border-b border-white/[0.07] bg-white/[0.02] px-4 py-1.5 text-[12.5px] text-white/45">
+        <div className="flex shrink-0 flex-wrap items-center justify-center gap-2 border-b border-hairline bg-white/[0.02] px-4 py-1.5 text-[12.5px] text-ink-muted">
           <Badge variant="outline">Free plan</Badge>
           {downloadsLeft > 0
-            ? `${downloadsLeft} download remaining · deployment is a Pro feature`
-            : "Download used · upgrade for unlimited downloads and deployment"}
+            ? `${downloadsLeft} download remaining · hosting your site is free either way`
+            : "Download used · upgrade for 50 downloads a week"}
           <button
-            onClick={() => setUpgradeReason("Upgrade for unlimited websites, downloads and one-click deployment.")}
+            onClick={() => setUpgradeReason("Upgrade to Pro for 50 website projects and 50 downloads a week.")}
             className="font-medium text-white underline decoration-white/25 underline-offset-2 hover:decoration-white"
           >
             Upgrade
@@ -300,7 +336,7 @@ export function EditorShell({
       {/* ─────────────────────────────────────────────────────────── layout */}
       <div className="flex min-h-0 flex-1">
         {sidebarOpen && (
-          <aside className="hidden w-[264px] shrink-0 border-r border-white/[0.07] lg:block">
+          <aside className="hidden w-[264px] shrink-0 border-r border-hairline lg:block">
             <EditorSidebar
               pages={pages}
               activeFile={activeFile}
@@ -325,12 +361,12 @@ export function EditorShell({
 
         <main className="relative flex min-w-0 flex-1 items-start justify-center overflow-auto bg-[#050505] p-4 sm:p-6">
           <div
-            className="relative w-full overflow-hidden rounded-xl border border-white/[0.08] bg-white shadow-[0_30px_100px_-40px_rgba(0,0,0,1)] transition-[max-width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
+            className="relative w-full overflow-hidden rounded-xl border border-hairline bg-white shadow-[0_30px_100px_-40px_rgba(0,0,0,1)] transition-[max-width] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]"
             style={{ maxWidth: device === "desktop" ? "100%" : `${DEVICE_WIDTHS[device]}px`, height: "100%" }}
           >
             {frameLoading && (
               <div className="absolute inset-0 z-10 flex items-center justify-center bg-[#080808]">
-                <Loader2 className="size-5 animate-spin text-white/40" />
+                <Loader2 className="size-5 animate-spin text-ink-muted" />
               </div>
             )}
             <iframe
@@ -346,7 +382,7 @@ export function EditorShell({
           </div>
         </main>
 
-        <aside className="hidden w-[300px] shrink-0 border-l border-white/[0.07] bg-[#070707] xl:block">
+        <aside className="hidden w-[300px] shrink-0 border-l border-hairline bg-[#070707] xl:block">
           <Inspector
             projectId={project.id}
             element={selected}
@@ -359,7 +395,7 @@ export function EditorShell({
 
       {/* mobile inspector */}
       {selected && (
-        <div className="fixed inset-x-0 bottom-0 z-40 max-h-[62vh] overflow-y-auto border-t border-white/10 bg-[#070707] xl:hidden">
+        <div className="fixed inset-x-0 bottom-0 z-40 max-h-[62vh] overflow-y-auto border-t border-hairline bg-[#070707] xl:hidden">
           <Inspector
             projectId={project.id}
             element={selected}
@@ -370,17 +406,10 @@ export function EditorShell({
         </div>
       )}
 
-      <DeployDialog
-        open={deployOpen}
-        onClose={() => setDeployOpen(false)}
-        projectId={project.id}
+      <PublishDialog
+        open={publishOpen}
+        onClose={() => setPublishOpen(false)}
         projectName={projectName}
-        currentSubdomain={project.subdomain}
-        canDeploy={plan === "PRO"}
-        onDeployed={(deployment) => {
-          setLiveUrl(deployment.url);
-          router.refresh();
-        }}
       />
 
       <VersionHistoryDialog
@@ -432,7 +461,7 @@ function SaveIndicator({
     <span
       className={cn(
         "hidden items-center gap-1.5 rounded-full px-2.5 py-1 text-[12px] sm:flex",
-        state === "error" ? "text-[#ff6961]" : "text-white/35",
+        state === "error" ? "text-[#ff6961]" : "text-ink-muted",
       )}
       role="status"
       aria-live="polite"
@@ -539,10 +568,10 @@ function VersionHistoryDialog({
     >
       {loading ? (
         <div className="flex justify-center py-8">
-          <Loader2 className="size-5 animate-spin text-white/30" />
+          <Loader2 className="size-5 animate-spin text-ink-dim" />
         </div>
       ) : versions.length === 0 ? (
-        <p className="py-6 text-center text-[13.5px] text-white/35">
+        <p className="py-6 text-center text-[13.5px] text-ink-muted">
           No versions yet. One is saved automatically as you keep editing.
         </p>
       ) : (
@@ -550,11 +579,11 @@ function VersionHistoryDialog({
           {versions.map((version) => (
             <li
               key={version.id}
-              className="flex items-center justify-between gap-3 rounded-xl border border-white/[0.07] px-3.5 py-2.5"
+              className="flex items-center justify-between gap-3 rounded-xl border border-hairline px-3.5 py-2.5"
             >
               <div className="min-w-0">
-                <p className="truncate text-[13px] text-white/80">{version.label ?? `Revision ${version.revision}`}</p>
-                <p className="text-[11.5px] text-white/30">{relativeTime(version.createdAt)}</p>
+                <p className="truncate text-[13px] text-ink">{version.label ?? `Revision ${version.revision}`}</p>
+                <p className="text-[11.5px] text-ink-dim">{relativeTime(version.createdAt)}</p>
               </div>
               <Button
                 variant="secondary"

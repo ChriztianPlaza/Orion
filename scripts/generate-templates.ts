@@ -13,6 +13,7 @@ import path from "node:path";
 import { CATALOG, type TemplateDef } from "./templates/catalog";
 import { THEMES } from "./templates/themes";
 import { baseCss, baseJs, esc, renderSection, type SectionData } from "./templates/sections";
+import { motionCss, motionJs } from "./templates/motion";
 
 const ROOT = path.resolve(process.cwd(), "templates");
 
@@ -151,9 +152,11 @@ function main() {
     const dir = path.join(ROOT, def.slug);
 
     const title = `${data.brand} — ${def.name.split("—").pop()?.trim() ?? def.name}`;
+    // Animated templates layer motion on top of the same base output, so the
+    // page is complete and readable before a single animation runs.
     write(path.join(dir, "index.html"), page(def, body, title, def.description));
-    write(path.join(dir, "style.css"), baseCss(theme));
-    write(path.join(dir, "script.js"), baseJs());
+    write(path.join(dir, "style.css"), baseCss(theme) + (def.animated ? motionCss() : ""));
+    write(path.join(dir, "script.js"), baseJs() + (def.animated ? motionJs() : ""));
     write(path.join(dir, "thumbnail.svg"), poster(def));
 
     const pages = ["index.html"];
@@ -177,6 +180,7 @@ function main() {
           colorScheme: theme.scheme,
           tier: def.tier ?? "FREE",
           featured: def.featured ?? false,
+          animated: def.animated ?? false,
           entryFile: "index.html",
           pages,
           thumbnail: "thumbnail.svg",

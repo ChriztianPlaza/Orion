@@ -51,14 +51,20 @@ export default async function TemplateDetailPage({ params, searchParams }: Props
 
       <Link
         href={template.categorySlug ? `/templates?category=${template.categorySlug}` : "/templates"}
-        className="mb-8 inline-flex items-center gap-1.5 text-[13px] text-white/40 transition-colors hover:text-white"
+        className="mb-8 inline-flex items-center gap-1.5 text-[13px] text-ink-muted transition-colors hover:text-white"
       >
         <ArrowLeft className="size-3.5" />
         {template.categoryName ? `Back to ${template.categoryName}` : "Back to templates"}
       </Link>
 
-      <div className="grid gap-10 lg:grid-cols-[1fr_330px] lg:gap-12">
-        <div className="order-2 lg:order-1">
+      <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_330px] lg:gap-12">
+        {/*
+          min-w-0 is load-bearing. The preview iframe is laid out at 1440px and
+          only visually shrunk by a transform, so without it this grid column
+          cannot shrink below that width — the track blows out and pushes the
+          sidebar past the right edge of the screen.
+        */}
+        <div className="order-2 min-w-0 lg:order-1">
           <PreviewFrame
             src={`/api/preview/${template.slug}`}
             title={`${template.name} live preview`}
@@ -68,14 +74,14 @@ export default async function TemplateDetailPage({ params, searchParams }: Props
 
           {template.pages.length > 1 && (
             <div className="mt-4 flex flex-wrap items-center gap-2">
-              <span className="text-[13px] text-white/35">Pages in this template:</span>
+              <span className="text-[13px] text-ink-muted">Pages in this template:</span>
               {template.pages.map((page) => (
                 <a
                   key={page}
                   href={`/api/preview/${template.slug}/${page}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="rounded-full border border-white/[0.08] px-3 py-1 text-[12.5px] text-white/50 transition-colors hover:border-white/20 hover:text-white"
+                  className="rounded-full border border-hairline px-3 py-1 text-[12.5px] text-ink-muted transition-colors hover:border-hairline-strong hover:text-white"
                 >
                   {page}
                 </a>
@@ -95,7 +101,7 @@ export default async function TemplateDetailPage({ params, searchParams }: Props
             <h1 className="text-balance-tight mt-4 text-[clamp(1.7rem,3vw,2.3rem)] font-semibold">
               {template.name}
             </h1>
-            <p className="mt-3 text-[14.5px] leading-relaxed text-white/50">{template.description}</p>
+            <p className="mt-3 text-[14.5px] leading-relaxed text-ink-muted">{template.description}</p>
 
             <div className="mt-7 flex flex-col gap-2.5">
               <UseTemplateButton slug={template.slug} size="lg" autoStart={autoStart} />
@@ -114,7 +120,7 @@ export default async function TemplateDetailPage({ params, searchParams }: Props
               </div>
             </div>
 
-            <dl className="mt-8 space-y-0 divide-y divide-white/[0.07] border-y border-white/[0.07] text-[13.5px]">
+            <dl className="mt-8 space-y-0 divide-y divide-hairline border-y border-hairline text-[13.5px]">
               <Row icon={<Layers className="size-3.5" />} label="Pages">
                 {template.pages.length}
               </Row>
@@ -146,9 +152,9 @@ export default async function TemplateDetailPage({ params, searchParams }: Props
             </dl>
 
             {template.attribution && (
-              <p className="mt-4 rounded-xl border border-white/[0.08] bg-white/[0.02] p-3.5 text-[12.5px] leading-relaxed text-white/45">
-                <strong className="font-medium text-white/70">Attribution required.</strong>{" "}
-                {template.attribution} This credit is preserved in every export and deployment.
+              <p className="mt-4 rounded-xl border border-hairline bg-white/[0.02] p-3.5 text-[12.5px] leading-relaxed text-ink-muted">
+                <strong className="font-medium text-ink">Attribution required.</strong>{" "}
+                {template.attribution} This credit is preserved in every export.
               </p>
             )}
 
@@ -158,7 +164,7 @@ export default async function TemplateDetailPage({ params, searchParams }: Props
                   <Link
                     key={tag}
                     href={`/templates?q=${encodeURIComponent(tag)}`}
-                    className="rounded-md bg-white/[0.05] px-2 py-1 text-[11.5px] text-white/45 transition-colors hover:bg-white/10 hover:text-white"
+                    className="rounded-md bg-white/[0.05] px-2 py-1 text-[11.5px] text-ink-muted transition-colors hover:bg-white/10 hover:text-white"
                   >
                     {tag}
                   </Link>
@@ -170,7 +176,7 @@ export default async function TemplateDetailPage({ params, searchParams }: Props
       </div>
 
       {similar.length > 0 && (
-        <section className="mt-20 border-t border-white/[0.07] pt-12">
+        <section className="mt-20 border-t border-hairline pt-12">
           <h2 className="mb-6 text-[19px] font-semibold tracking-[-0.02em]">Similar templates</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {similar.map((item) => (
@@ -194,11 +200,11 @@ function Row({
 }) {
   return (
     <div className="flex items-center justify-between gap-4 py-3">
-      <dt className="flex items-center gap-2 text-white/35">
+      <dt className="flex items-center gap-2 text-ink-muted">
         {icon}
         {label}
       </dt>
-      <dd className="text-right text-white/70">{children}</dd>
+      <dd className="text-right text-ink">{children}</dd>
     </div>
   );
 }

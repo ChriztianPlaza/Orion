@@ -21,7 +21,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         {children}
       </main>
 
-      <p className="relative mt-10 text-center text-[12.5px] text-white/25">
+      <p className="relative mt-10 text-center text-[12.5px] text-ink-dim">
         By continuing you agree that your projects are yours to download and host anywhere.
       </p>
     </div>

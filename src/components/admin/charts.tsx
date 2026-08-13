@@ -33,7 +33,7 @@ export function BarChart({
           const ratio = point.value / max;
           return (
             <div key={point.label} className="group flex flex-1 flex-col items-center justify-end gap-2">
-              <span className="text-[10.5px] text-white/0 transition-colors group-hover:text-white/70">
+              <span className="text-[10.5px] text-white/0 transition-colors group-hover:text-ink">
                 {format(point.value)}
               </span>
               <div
@@ -53,7 +53,7 @@ export function BarChart({
       </div>
       <div className="mt-2 flex gap-1.5 sm:gap-2">
         {data.map((point) => (
-          <span key={point.label} className="flex-1 text-center text-[10.5px] text-white/25">
+          <span key={point.label} className="flex-1 text-center text-[10.5px] text-ink-dim">
             {point.label}
           </span>
         ))}

@@ -42,13 +42,13 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         }
       />
 
-      <div className="border-b border-white/[0.07]">
+      <div className="border-b border-hairline">
         <nav className="container-page scrollbar-none flex gap-1 overflow-x-auto py-2" aria-label="Admin sections">
           {TABS.map((tab) => (
             <Link
               key={tab.href}
               href={tab.href}
-              className="shrink-0 rounded-full px-3.5 py-1.5 text-[13.5px] text-white/50 transition-colors hover:bg-white/[0.06] hover:text-white"
+              className="shrink-0 rounded-full px-3.5 py-1.5 text-[13.5px] text-ink-muted transition-colors hover:bg-white/[0.06] hover:text-white"
             >
               {tab.label}
             </Link>

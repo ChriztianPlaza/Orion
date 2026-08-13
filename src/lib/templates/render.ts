@@ -256,7 +256,7 @@ function injectHead(html: string, options: RenderOptions): string {
 /**
  * The editor bridge. Runs *inside* the sandboxed preview frame, which has an
  * opaque origin — it can post messages out but cannot touch app cookies,
- * storage or DOM. Never included in exported or deployed output.
+ * storage or DOM. Never included in exported output.
  */
 function injectEditorBridge(html: string): string {
   const script = `

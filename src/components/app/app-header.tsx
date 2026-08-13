@@ -53,7 +53,7 @@ export function AppHeader({
                   "rounded-full px-3 py-1.5 text-[13.5px] transition-colors",
                   pathname === link.href
                     ? "bg-white/[0.08] text-white"
-                    : "text-white/50 hover:bg-white/[0.05] hover:text-white",
+                    : "text-ink-muted hover:bg-white/[0.05] hover:text-white",
                 )}
               >
                 {link.label}
@@ -66,7 +66,7 @@ export function AppHeader({
                   "flex items-center gap-1.5 rounded-full px-3 py-1.5 text-[13.5px] transition-colors",
                   pathname.startsWith("/admin")
                     ? "bg-white/[0.08] text-white"
-                    : "text-white/50 hover:bg-white/[0.05] hover:text-white",
+                    : "text-ink-muted hover:bg-white/[0.05] hover:text-white",
                 )}
               >
                 <Shield className="size-3.5" /> Admin
@@ -98,7 +98,7 @@ export function AppHeader({
                   initials(user.name, user.email)
                 )}
               </span>
-              <ChevronDown className="size-3.5 text-white/35" />
+              <ChevronDown className="size-3.5 text-ink-muted" />
             </button>
 
             {menuOpen && (
@@ -106,11 +106,11 @@ export function AppHeader({
                 role="menu"
                 className="glass absolute right-0 top-[calc(100%+8px)] w-60 overflow-hidden rounded-2xl p-1.5 shadow-[0_30px_80px_-30px_rgba(0,0,0,1)]"
               >
-                <div className="border-b border-white/[0.07] px-3 pb-3 pt-2">
+                <div className="border-b border-hairline px-3 pb-3 pt-2">
                   <p className="truncate text-[13px] font-medium text-white">
                     {user.name || user.email.split("@")[0]}
                   </p>
-                  <p className="truncate text-[12px] text-white/35">{user.email}</p>
+                  <p className="truncate text-[12px] text-ink-muted">{user.email}</p>
                   <Badge variant={user.plan === "PRO" ? "brand" : "outline"} className="mt-2">
                     {user.plan === "PRO" ? "Pro plan" : "Free plan"}
                   </Badge>
@@ -131,7 +131,7 @@ export function AppHeader({
                 <button
                   role="menuitem"
                   onClick={() => void signOut({ callbackUrl: "/" })}
-                  className="mt-1 flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[13px] text-white/55 transition-colors hover:bg-white/[0.06] hover:text-white"
+                  className="mt-1 flex w-full items-center gap-2.5 rounded-lg px-3 py-2 text-left text-[13px] text-ink-muted transition-colors hover:bg-white/[0.06] hover:text-white"
                 >
                   <LogOut className="size-4" /> Sign out
                 </button>
@@ -157,7 +157,7 @@ function MenuLink({
     <Link
       role="menuitem"
       href={href}
-      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] text-white/55 transition-colors hover:bg-white/[0.06] hover:text-white"
+      className="flex items-center gap-2.5 rounded-lg px-3 py-2 text-[13px] text-ink-muted transition-colors hover:bg-white/[0.06] hover:text-white"
     >
       <Icon className="size-4" />
       {children}

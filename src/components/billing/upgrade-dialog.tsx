@@ -64,15 +64,15 @@ export function UpgradeDialog({
         </>
       }
     >
-      <div className="rounded-2xl border border-white/10 bg-gradient-to-b from-white/[0.06] to-transparent p-5">
+      <div className="rounded-2xl border border-hairline bg-gradient-to-b from-white/[0.06] to-transparent p-5">
         <div className="flex items-center gap-2 text-[13px] font-medium text-white">
           <Sparkles className="size-4 text-[#2997ff]" />
           Everything in Pro
         </div>
         <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
           {PLAN_COPY.PRO.features.slice(0, 6).map((feature) => (
-            <li key={feature} className="flex items-start gap-2 text-[13.5px] text-white/60">
-              <Check className="mt-0.5 size-3.5 shrink-0 text-white/30" />
+            <li key={feature} className="flex items-start gap-2 text-[13.5px] text-ink-muted">
+              <Check className="mt-0.5 size-3.5 shrink-0 text-ink-dim" />
               {feature}
             </li>
           ))}

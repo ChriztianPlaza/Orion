@@ -47,7 +47,7 @@ export default async function AdminRevenuePage() {
         <h1 className="text-[clamp(1.5rem,3vw,2rem)] font-semibold tracking-[-0.025em]">
           Revenue
         </h1>
-        <p className="mt-2 text-[13.5px] text-white/45">
+        <p className="mt-2 text-[13.5px] text-ink-muted">
           Every figure below is derived from Stripe webhook events. Nothing is estimated.
         </p>
       </header>
@@ -72,22 +72,22 @@ export default async function AdminRevenuePage() {
         <Figure label="Free → Pro" value={`${overview.conversion.freeToProRate.toFixed(1)}%`} />
       </div>
 
-      <section className="card-surface mt-6 rounded-[20px] p-6">
+      <section className="card-surface mt-6 rounded-[14px] p-6">
         <h2 className="mb-5 text-[15px] font-semibold">Gross revenue, last 12 months</h2>
         <BarChart data={byMonth.map((point) => ({ label: point.label, value: point.gross }))} height={200} />
       </section>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-[1.2fr_0.8fr]">
-        <section className="card-surface overflow-x-auto rounded-[20px] p-6">
+        <section className="card-surface overflow-x-auto rounded-[14px] p-6">
           <h2 className="mb-4 text-[15px] font-semibold">Recent payments</h2>
           {payments.length === 0 ? (
-            <p className="py-8 text-center text-[13.5px] text-white/30">
+            <p className="py-8 text-center text-[13.5px] text-ink-dim">
               No payments recorded yet.
             </p>
           ) : (
             <table className="w-full min-w-[520px] text-[13px]">
               <thead>
-                <tr className="border-b border-white/[0.07] text-left text-white/35">
+                <tr className="border-b border-hairline text-left text-ink-muted">
                   <th scope="col" className="py-2 font-medium">Customer</th>
                   <th scope="col" className="py-2 font-medium">Description</th>
                   <th scope="col" className="py-2 text-right font-medium">Amount</th>
@@ -97,10 +97,10 @@ export default async function AdminRevenuePage() {
               <tbody>
                 {payments.map((payment) => (
                   <tr key={payment.id} className="border-b border-white/[0.05] last:border-0">
-                    <td className="max-w-[200px] truncate py-2.5 text-white/70">
+                    <td className="max-w-[200px] truncate py-2.5 text-ink">
                       {payment.user?.email ?? "—"}
                     </td>
-                    <td className="max-w-[220px] truncate py-2.5 text-white/45">
+                    <td className="max-w-[220px] truncate py-2.5 text-ink-muted">
                       {payment.description ?? "Subscription"}
                     </td>
                     <td className="py-2.5 text-right">
@@ -108,12 +108,12 @@ export default async function AdminRevenuePage() {
                         {formatCurrency(payment.amount, payment.currency)}
                       </span>
                       {payment.refunded > 0 && (
-                        <span className="ml-1.5 text-[11px] text-white/35">
+                        <span className="ml-1.5 text-[11px] text-ink-muted">
                           −{formatCurrency(payment.refunded, payment.currency)}
                         </span>
                       )}
                     </td>
-                    <td className="py-2.5 text-right text-white/35">{formatDate(payment.createdAt)}</td>
+                    <td className="py-2.5 text-right text-ink-muted">{formatDate(payment.createdAt)}</td>
                   </tr>
                 ))}
               </tbody>
@@ -121,19 +121,19 @@ export default async function AdminRevenuePage() {
           )}
         </section>
 
-        <section className="card-surface rounded-[20px] p-6">
+        <section className="card-surface rounded-[14px] p-6">
           <h2 className="mb-4 text-[15px] font-semibold">Subscriptions</h2>
           {subscriptions.length === 0 ? (
-            <p className="py-8 text-center text-[13.5px] text-white/30">No subscriptions yet.</p>
+            <p className="py-8 text-center text-[13.5px] text-ink-dim">No subscriptions yet.</p>
           ) : (
-            <ul className="divide-y divide-white/[0.06]">
+            <ul className="divide-y divide-hairline">
               {subscriptions.map((subscription) => (
                 <li key={subscription.id} className="flex items-center justify-between gap-3 py-2.5">
                   <div className="min-w-0">
-                    <p className="truncate text-[13px] text-white/75">
+                    <p className="truncate text-[13px] text-ink">
                       {subscription.user?.email ?? "Unknown"}
                     </p>
-                    <p className="text-[11.5px] text-white/30">
+                    <p className="text-[11.5px] text-ink-dim">
                       {subscription.currentPeriodEnd
                         ? `${subscription.cancelAtPeriodEnd ? "Ends" : "Renews"} ${formatDate(subscription.currentPeriodEnd)}`
                         : formatDate(subscription.createdAt)}
@@ -163,11 +163,11 @@ export default async function AdminRevenuePage() {
 function Figure({ label, value, accent }: { label: string; value: string; accent?: boolean }) {
   return (
     <div
-      className={`rounded-[16px] border p-4 ${
-        accent ? "border-white/15 bg-gradient-to-b from-white/[0.07] to-transparent" : "card-surface"
+      className={`rounded-[12px] border p-4 ${
+        accent ? "border-hairline-strong bg-gradient-to-b from-white/[0.07] to-transparent" : "card-surface"
       }`}
     >
-      <p className="text-[12.5px] text-white/35">{label}</p>
+      <p className="text-[12.5px] text-ink-muted">{label}</p>
       <p className="mt-2.5 text-[26px] font-semibold leading-none tracking-[-0.02em]">{value}</p>
     </div>
   );

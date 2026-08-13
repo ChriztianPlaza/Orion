@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { CloudUpload, Download, LayoutGrid, Plus, Sparkles } from "lucide-react";
+import { Download, LayoutGrid, Plus, Rocket, Sparkles } from "lucide-react";
 import { prisma } from "@/lib/db";
 import { getSessionUser } from "@/lib/auth/guards";
 import { limitsFor } from "@/lib/plans";
@@ -27,7 +27,7 @@ export default async function DashboardPage({
 
   const params = await searchParams;
 
-  const [user, projects, deploymentCount, downloadCount] = await Promise.all([
+  const [user, projects, downloadCount] = await Promise.all([
     prisma.user.findUnique({
       where: { id: sessionUser.id },
       select: { plan: true, downloadCount: true, name: true },
@@ -38,20 +38,11 @@ export default async function DashboardPage({
       select: {
         id: true,
         name: true,
-        subdomain: true,
         status: true,
         updatedAt: true,
         template: { select: { name: true, slug: true } },
-        deployments: {
-          where: { status: "SUCCESS" },
-          orderBy: { createdAt: "desc" },
-          take: 1,
-          select: { url: true },
-        },
-        _count: { select: { deployments: true } },
       },
     }),
-    prisma.deployment.count({ where: { userId: sessionUser.id, status: "SUCCESS" } }),
     prisma.download.count({ where: { userId: sessionUser.id } }),
   ]);
 
@@ -63,13 +54,10 @@ export default async function DashboardPage({
   const cards: DashboardProject[] = projects.map((project) => ({
     id: project.id,
     name: project.name,
-    subdomain: project.subdomain,
     status: project.status,
     updatedAt: project.updatedAt.toISOString(),
     templateName: project.template?.name ?? null,
     templateSlug: project.template?.slug ?? null,
-    liveUrl: project.deployments[0]?.url ?? null,
-    deploymentCount: project._count.deployments,
   }));
 
   return (
@@ -81,7 +69,7 @@ export default async function DashboardPage({
           <h1 className="text-[clamp(1.7rem,3vw,2.3rem)] font-semibold tracking-[-0.025em]">
             My websites
           </h1>
-          <p className="mt-2 text-[14.5px] text-white/45">
+          <p className="mt-2 text-[14.5px] text-ink-muted">
             {projects.length === 0
               ? "Nothing here yet — pick a template and make it yours."
               : `${projects.length} ${projects.length === 1 ? "website" : "websites"}${
@@ -118,28 +106,31 @@ export default async function DashboardPage({
           label="Downloads"
           value={String(downloadCount)}
           hint={
-            Number.isFinite(limits.maxDownloads)
-              ? `${Math.max(0, limits.maxDownloads - user.downloadCount)} remaining`
-              : "Unlimited"
+            limits.downloadPeriodDays
+              ? `${Math.max(0, limits.maxDownloads - user.downloadCount)} left this week`
+              : `${Math.max(0, limits.maxDownloads - user.downloadCount)} remaining`
           }
         />
-        <Stat
-          icon={<CloudUpload className="size-4" />}
-          label="Deployments"
-          value={String(deploymentCount)}
-          hint={limits.canDeploy ? "Cloudflare Pages" : "Pro feature"}
-        />
+        <Link href="/guides/deploy" className="contents">
+          <Stat
+            icon={<Rocket className="size-4" />}
+            label="Hosting"
+            value="Free"
+            hint="Read the guide →"
+            interactive
+          />
+        </Link>
       </div>
 
       {projects.length === 0 ? (
-        <div className="flex flex-col items-center rounded-[22px] border border-dashed border-white/10 px-6 py-20 text-center">
-          <span className="flex size-12 items-center justify-center rounded-2xl bg-white/[0.05] text-white/35">
+        <div className="flex flex-col items-center rounded-[14px] border border-dashed border-hairline px-6 py-20 text-center">
+          <span className="flex size-12 items-center justify-center rounded-2xl bg-white/[0.05] text-ink-muted">
             <LayoutGrid className="size-5" />
           </span>
           <h2 className="mt-5 text-[18px] font-medium">You haven&apos;t created a website yet</h2>
-          <p className="mt-2 max-w-[44ch] text-[14px] leading-relaxed text-white/40">
+          <p className="mt-2 max-w-[44ch] text-[14px] leading-relaxed text-ink-muted">
             Choose a template and start building. You can change every word, image and colour, then
-            download the files or deploy it live.
+            download the files and host them anywhere.
           </p>
           <Link href="/templates" className="mt-7">
             <Button size="lg">Browse templates</Button>
@@ -149,13 +140,13 @@ export default async function DashboardPage({
         <>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {cards.map((project) => (
-              <ProjectCard key={project.id} project={project} canDeploy={limits.canDeploy} />
+              <ProjectCard key={project.id} project={project} />
             ))}
 
             {!projectLimitReached && (
               <Link
                 href="/templates"
-                className="flex min-h-[260px] flex-col items-center justify-center rounded-[18px] border border-dashed border-white/10 text-white/35 transition-colors hover:border-white/25 hover:text-white"
+                className="flex min-h-[260px] flex-col items-center justify-center rounded-[12px] border border-dashed border-hairline text-ink-muted transition-colors hover:border-hairline-strong hover:text-white"
               >
                 <Plus className="size-6" />
                 <span className="mt-3 text-[13.5px]">New website</span>
@@ -164,14 +155,14 @@ export default async function DashboardPage({
           </div>
 
           {projectLimitReached && user.plan === "FREE" && (
-            <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-[18px] border border-white/[0.09] bg-gradient-to-r from-white/[0.05] to-transparent p-5">
+            <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-[12px] border border-hairline bg-gradient-to-r from-white/[0.05] to-transparent p-5">
               <div>
                 <div className="flex items-center gap-2">
                   <Badge variant="brand">Free plan limit</Badge>
                 </div>
-                <p className="mt-2 max-w-[52ch] text-[14px] text-white/55">
-                  You are using your one free website. Upgrade to Pro for unlimited projects,
-                  unlimited downloads and one-click deployment.
+                <p className="mt-2 max-w-[52ch] text-[14px] text-ink-muted">
+                  You are using all {limits.maxProjects} of your free websites. Upgrade to Pro for
+                  50 projects and 50 downloads a week.
                 </p>
               </div>
               <Link href="/pricing">
@@ -190,20 +181,27 @@ function Stat({
   label,
   value,
   hint,
+  interactive,
 }: {
   icon: React.ReactNode;
   label: string;
   value: string;
   hint: string;
+  interactive?: boolean;
 }) {
   return (
-    <div className="card-surface rounded-[16px] p-4">
-      <div className="flex items-center gap-2 text-white/35">
+    <div
+      className={
+        "card-surface rounded-[12px] p-4" +
+        (interactive ? " transition-colors hover:border-hairline-strong" : "")
+      }
+    >
+      <div className="flex items-center gap-2 text-ink-muted">
         {icon}
         <span className="text-[12.5px]">{label}</span>
       </div>
       <p className="mt-3 text-[26px] font-semibold leading-none tracking-[-0.02em]">{value}</p>
-      <p className="mt-1.5 text-[12px] text-white/30">{hint}</p>
+      <p className="mt-1.5 text-[12px] text-ink-dim">{hint}</p>
     </div>
   );
 }
