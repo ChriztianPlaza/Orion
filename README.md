@@ -1,130 +1,69 @@
 # Orion
 
-A production-ready website builder SaaS: a template marketplace, a visual editor and a static site
-generator in one Next.js application.
+**A website builder that gives you the files.**
+
+Most website builders rent you a page. You design it inside their editor, it lives on their
+servers, and the day you stop paying it disappears. Orion is the opposite: you pick a template,
+edit it in the browser, and download a folder of ordinary HTML, CSS and JavaScript that is yours
+to keep. Put it on any host — several are free forever — and it will still be running long after
+you have forgotten this app exists.
 
 ```
-Browse a template  →  preview it live  →  make it yours  →  edit content and images
-        →  save automatically  →  download real HTML/CSS/JS  →  host it anywhere
+Browse 108 templates  →  preview the real site  →  edit by clicking the page
+        →  autosaves as you work  →  download a ZIP  →  host it anywhere
 ```
 
-The output is always plain static files. Nothing a user downloads depends on Orion to run — which
-is why Orion does not host anything itself. Users take the ZIP to any static host; the in-app
-[hosting guide](src/app/(marketing)/guides/deploy/page.tsx) walks them through four free ones.
+There is no build step, no framework and no runtime dependency on Orion in what you download.
+Orion deliberately does not host anything: the in-app [hosting guide](src/app/(marketing)/guides/deploy/page.tsx)
+walks users through four free hosts instead.
 
 ---
 
 ## Contents
 
-- [How it works](#how-it-works)
-- [Stack](#stack)
-- [Quick start](#quick-start)
-- [Environment variables](#environment-variables)
-- [Deploying to Vercel](#deploying-to-vercel)
-- [Configuring Stripe](#configuring-stripe)
-- [Sign in with Google](#sign-in-with-google)
-- [Templates](#templates)
-- [Importing templates from GitHub](#importing-templates-from-github)
-- [Plans and limits](#plans-and-limits)
-- [Security model](#security-model)
-- [Project structure](#project-structure)
-- [Scripts](#scripts)
-- [Production checklist](#production-checklist)
+- [How it works](#how-it-works) · [Quick start](#quick-start) · [Environment](#environment)
+- [Deploying](#deploying) · [Optional integrations](#optional-integrations)
+- [Plans](#plans) · [Templates](#templates) · [Security](#security)
+- [Scripts](#scripts) · [Structure](#structure)
 
 ---
 
 ## How it works
 
-### The template format
-
-A template is a folder of ordinary static files plus a small manifest:
+### Templates are just folders
 
 ```
 templates/nova-ai-platform/
-├── index.html
-├── about.html
-├── contact.html
-├── style.css
-├── script.js
-├── thumbnail.svg
-└── template.json
+├── index.html   about.html   contact.html
+├── style.css    script.js    thumbnail.svg
+└── template.json      ← name, category, tags, tier, license
 ```
 
-```json
-{
-  "name": "Nova — AI Platform",
-  "slug": "nova-ai-platform",
-  "category": "saas",
-  "tags": ["ai", "dark", "startup"],
-  "entryFile": "index.html",
-  "pages": ["index.html", "about.html", "contact.html"],
-  "license": "MIT",
-  "author": "Orion",
-  "attribution": null
-}
-```
+### Anything becomes editable
 
-### Making content editable
+Two addressing schemes, so hand-written and imported HTML both work:
 
-The editor addresses elements in two ways, so **any** HTML works — hand-authored or imported.
+1. **Authored keys** — `<h1 data-editable="hero.title">` stays stable across template updates.
+2. **Automatic ordinals** — anything else gets a key from a deterministic walk of the document
+   (`e17`), so third-party templates are editable without touching their markup.
 
-1. **Authored keys.** Templates can opt in explicitly, which keeps addresses stable across template
-   updates:
+`src/lib/templates/analyze.ts` turns that into the schema the editor's sidebar renders.
 
-   ```html
-   <h1 data-editable="hero.title">Build something amazing</h1>
-   <img data-editable="hero.image" src="assets/hero.jpg" alt="Hero" />
-   <a data-editable="hero.button" href="/contact">Get started</a>
-   ```
-
-2. **Automatic ordinals.** Anything without a key gets one from a deterministic depth-first walk of
-   the document (`e17`). Imported third-party templates become fully editable without touching their
-   markup.
-
-`src/lib/templates/analyze.ts` produces the schema the editor's sidebar renders from.
-
-### The editor state
-
-The editor never stores HTML. It stores a **content map** of addressable values:
+### The editor stores values, never HTML
 
 ```jsonc
 {
   "index.html": {
     "hero.title": { "text": "Ship faster" },
-    "hero.image": { "src": "https://…/photo.jpg", "alt": "Our team" },
-    "e42":         { "hidden": true },
-    "e77":         { "style": { "color": "#2997ff", "font-size": "48px" } }
+    "e42":        { "hidden": true },
+    "e77":        { "style": { "color": "#47a3ff" } }
   }
 }
 ```
 
-Plus a `theme` (CSS variable overrides, fonts, custom CSS) and `meta` (title, description, favicon,
-share image).
-
-Generating a site re-applies that map onto the pristine template files
-(`src/lib/templates/render.ts`), so:
-
-- the original template is never mutated,
-- every edit is individually resettable,
-- and the same code path produces the preview and the ZIP — they cannot drift apart.
-
----
-
-## Stack
-
-| Concern         | Choice                                    | Why |
-| --------------- | ----------------------------------------- | --- |
-| Framework       | Next.js 15 (App Router) + React 19 + TS   | First-class on Vercel; server actions and route handlers where each fits |
-| Styling         | Tailwind CSS v4                           | Design tokens live in CSS, no config file to drift |
-| Database        | PostgreSQL + Prisma                       | Relational data with real foreign keys and indexes |
-| Auth            | Auth.js v5 (NextAuth)                     | Credentials + GitHub + Google, JWT sessions, edge-safe split config |
-| Payments        | Stripe Subscriptions                      | Checkout, billing portal, webhooks as the source of truth |
-| Object storage  | Vercel Blob                               | No bucket, IAM or region to configure |
-| Hosting output  | User's own static host                    | No infrastructure to run, no per-site cost, no lock-in for the user |
-| Email           | Resend (HTTP, optional)                   | Verification codes and password resets without an SDK in the bundle |
-
-Nothing requires a persistent local filesystem or a long-running process, which is what makes the
-whole thing deployable to Vercel unchanged.
+Generating a site replays that map onto the pristine template files. The original is never
+mutated, every edit is individually resettable, and the same code path produces the preview and
+the ZIP — so they cannot drift apart.
 
 ---
 
@@ -132,68 +71,56 @@ whole thing deployable to Vercel unchanged.
 
 ```bash
 npm install
-cp .env.example .env.local     # fill in DATABASE_URL and AUTH_SECRET at minimum
-npm run check:env              # confirm .env.local is filled in and the database is reachable
-npm run db:push                # create the schema
-npm run templates:generate     # write the 102 bundled templates to /templates
+cp .env.example .env.local     # DATABASE_URL and AUTH_SECRET at minimum
+npm run check:env              # verifies the file and the database connection
+npm run db:push                # create tables
+npm run templates:generate     # write the 108 bundled templates to /templates
 npm run templates:index        # compile them into src/generated
-npm run db:seed                # categories, tags and the template catalogue
+npm run db:seed                # categories, tags, template catalogue
 npm run dev
 ```
 
-Open http://localhost:3000.
+The marketplace renders from the compiled bundle even with no database, so a fresh clone shows the
+full catalogue immediately. Anything that writes — accounts, projects, billing — needs Postgres.
 
-To create the first administrator, set `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD` before seeding,
-or list the address in `ADMIN_EMAILS` and sign up normally.
-
-> The marketplace renders from the compiled bundle even with no database configured, so a fresh
-> clone shows a full catalogue immediately. Anything that writes — accounts, projects, billing —
-> needs Postgres.
+For the first admin, set `SEED_ADMIN_EMAIL` / `SEED_ADMIN_PASSWORD` before seeding, or list the
+address in `ADMIN_EMAILS` and sign up normally.
 
 ---
 
-## Environment variables
+## Environment
 
-See [`.env.example`](.env.example) for the annotated list. Only two are required:
+Only two are required. Everything else switches a feature on; when unset, that feature explains
+itself in the UI instead of erroring.
 
-| Variable       | Required | Enables |
-| -------------- | -------- | ------- |
-| `DATABASE_URL` | yes      | Everything that persists |
-| `AUTH_SECRET`  | yes      | Sessions (`openssl rand -base64 32`) |
-| `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET` | no | The Pro plan |
+| Variable | Required | Enables |
+| --- | --- | --- |
+| `DATABASE_URL`, `DIRECT_URL` | yes | Everything that persists |
+| `AUTH_SECRET` | yes | Sessions — `openssl rand -base64 32` |
+| `NEXT_PUBLIC_APP_URL` | prod | Canonical origin for OG tags, sitemap, emails |
+| `AUTH_GOOGLE_ID` / `_SECRET` | no | Sign in with Google |
+| `AUTH_GITHUB_ID` / `_SECRET` | no | Sign in with GitHub |
+| `RESEND_API_KEY`, `EMAIL_FROM` | no | Sign-up codes and password resets |
 | `BLOB_READ_WRITE_TOKEN` | no | Image uploads |
-| `RESEND_API_KEY`, `EMAIL_FROM` | no | Sign-up verification codes and password resets |
-| `AUTH_GITHUB_*`, `AUTH_GOOGLE_*` | no | Social sign-in |
+| `STRIPE_*` | no | The Pro plan |
 
-Every optional integration degrades honestly: the feature explains that it needs configuration
-instead of failing with a stack trace.
+See [`.env.example`](.env.example) for the annotated list.
 
 ---
 
-## Deploying to Vercel
+## Deploying
 
-1. **Create a Postgres database.** Neon, Supabase and Vercel Postgres all work. Set `DATABASE_URL`
-   to the pooled connection string and `DIRECT_URL` to the direct one.
-2. **Import the repository** into Vercel. The framework preset is Next.js; the build command in
-   `vercel.json` already runs `prisma generate`, compiles the template index and builds.
-3. **Add the environment variables** from `.env.example` to the project.
-4. **Add a Blob store** (Storage → Blob) if you want image uploads. Vercel injects
-   `BLOB_READ_WRITE_TOKEN` automatically.
-5. **Deploy**, then run the schema push and seed once against production:
+1. Create a Postgres database (Neon, Supabase and Vercel Postgres all work). `DATABASE_URL` is the
+   pooled string, `DIRECT_URL` the direct one.
+2. Import the repo into Vercel. `vercel.json` already sets the build command — leave it alone.
+3. Add the environment variables, then deploy.
+4. Set `NEXT_PUBLIC_APP_URL` to the URL Vercel gives you and redeploy.
+5. Run `db:push` and `db:seed` once against production, unless it is the same database you
+   developed on.
 
-   ```bash
-   DATABASE_URL="…" DIRECT_URL="…" npm run db:push
-   DATABASE_URL="…" DIRECT_URL="…" npm run db:seed
-   ```
+Long-running routes declare `maxDuration = 60`, the ceiling on Vercel's Hobby plan.
 
-6. **Register the Stripe webhook** (below) and set `NEXT_PUBLIC_APP_URL` to the production origin.
-
-Long-running routes declare `maxDuration = 60`, which is the ceiling on Vercel's Hobby plan —
-asking for more there fails the deployment. On Pro you can raise the export and template-upload
-routes to 300.
-
-`next build` and `next dev` share `.next`, so building while a dev server is running corrupts it.
-Build into a separate directory instead:
+`next build` and `next dev` share `.next`, so building while the dev server runs corrupts it:
 
 ```bash
 NEXT_DIST_DIR=.next-build npx next build
@@ -201,272 +128,99 @@ NEXT_DIST_DIR=.next-build npx next build
 
 ---
 
-## Configuring Stripe
+## Optional integrations
 
-1. Create a **recurring product** at $20/month and copy its price id into `STRIPE_PRICE_ID`.
-2. Add a webhook endpoint pointing at `https://your-domain/api/stripe/webhook`, subscribed to:
+**Google / GitHub sign-in.** Create an OAuth client, set the callback to
+`https://<your-domain>/api/auth/callback/google` (or `/github`), and set the two variables. The
+button appears on its own. OAuth accounts skip the email code — the provider has already proven
+the address.
 
-   ```
-   checkout.session.completed
-   customer.subscription.created
-   customer.subscription.updated
-   customer.subscription.deleted
-   invoice.paid
-   invoice.payment_failed
-   charge.refunded
-   ```
+**Email.** Resend over HTTP, no SDK. The shared `onboarding@resend.dev` sender only delivers to
+the address that owns the Resend account, so verify a domain before real sign-ups.
 
-3. Copy the signing secret into `STRIPE_WEBHOOK_SECRET`.
+**Images.** Add a Vercel Blob store and the token is injected automatically. Uploads are working
+files, not storage: they are bundled into the ZIP on download and then released. `npm run
+storage:gc` sweeps anything left unreferenced.
 
-The webhook is the **only** writer of subscription state and revenue. Signatures are verified before
-the body is read, and every event id is recorded so a replay cannot double-count money. The frontend
-never reports a payment as successful on its own — after checkout it polls the session until the
-webhook has landed.
-
-Test locally with:
-
-```bash
-stripe listen --forward-to localhost:3000/api/stripe/webhook
-```
+**Stripe.** Set the three `STRIPE_*` variables and register a webhook at `/api/stripe/webhook` for
+`checkout.session.completed`, `customer.subscription.*` and `invoice.*`. The webhook is the
+only thing that grants Pro. Until it is configured the whole plan reads "Coming soon" rather than
+offering a checkout that cannot work.
 
 ---
 
-## How users publish
+## Plans
 
-Orion deliberately does not host user sites. An earlier version deployed to Cloudflare Pages on the
-user's behalf; that was removed because it added an API token to protect, a per-site cost, a
-support surface, and a second thing that could break — while giving users less than they get by
-uploading the folder themselves.
+| | Free | Pro — $20/mo | Custom |
+| --- | --- | --- | --- |
+| Projects | 5 | 50 | by arrangement |
+| Downloads | 5 per 30 days | 50 per 7 days | by arrangement |
+| Templates | free only | + the 6 animated ones | all |
+| Version history | 3 | 50 | 50 |
+| Image upload size | 5 MB | 25 MB | — |
+| Hosting the result | free, your own host | same | same |
 
-Instead:
+Limits live in `src/lib/plans.ts` and are enforced **server-side at the point of action**. Download
+allowances roll on a window stored per user; the counter is claimed with a single conditional
+`UPDATE`, so two simultaneous requests cannot both pass, and a failed build releases the claim.
+Hiding a button is presentation, never the control.
 
-- **Download** produces a self-contained ZIP (`/api/projects/[id]/export`), with a `README.txt`
-  inside pointing at the guide.
-- **`/guides/deploy`** is the guide: four free hosts with step-by-step walkthroughs, what a custom
-  domain actually costs, and a troubleshooting list. Its content lives in one module,
-  [`src/lib/guides/hosting.ts`](src/lib/guides/hosting.ts).
-- **`PublishDialog`** ([`src/components/editor/publish-dialog.tsx`](src/components/editor/publish-dialog.tsx))
-  summarises the fastest route. It opens automatically after a download, and from the Publish
-  button in the editor and on each dashboard card.
-
-Editing `src/lib/guides/hosting.ts` updates the guide, the dialog and the account page together.
-
----
-
-## Sign in with Google
-
-Optional — email and password works without it. The provider only appears on the
-sign-in page once both variables are set.
-
-1. [console.cloud.google.com](https://console.cloud.google.com) → create or pick a project
-2. **APIs & Services → OAuth consent screen** → External → fill in app name, support email and
-   developer email → add your domain under Authorised domains
-3. **APIs & Services → Credentials → Create credentials → OAuth client ID** → Web application
-4. **Authorised redirect URIs** — add one per environment, exactly:
-
-   ```
-   http://localhost:3000/api/auth/callback/google
-   https://your-domain.vercel.app/api/auth/callback/google
-   ```
-
-5. Copy the client ID and secret into the environment:
-
-   ```
-   AUTH_GOOGLE_ID     = ....apps.googleusercontent.com
-   AUTH_GOOGLE_SECRET = ...
-   ```
-
-6. Redeploy. A "Continue with Google" button appears on `/login` and `/register`.
-
-GitHub works the same way — `AUTH_GITHUB_ID` / `AUTH_GITHUB_SECRET`, with the callback URL
-`https://your-domain/api/auth/callback/github`.
-
-**On account linking.** Both providers run with `allowDangerousEmailAccountLinking`, so signing in
-with Google attaches to an existing account that has the same address rather than failing with
-`OAuthAccountNotLinked`. That is only safe while the provider has verified the address, so the
-`signIn` callback refuses any Google account whose `email_verified` is false. Do not add a provider
-that does not verify email without removing that flag.
+Custom is presentational only — there is no `CUSTOM` value in the `Plan` enum, and enquiries go to
+`NEXT_PUBLIC_CONTACT_EMAIL`.
 
 ---
 
 ## Templates
 
-102 templates ship with the app, across 23 categories — SaaS, portfolio, agency, restaurant,
-e-commerce, blog, healthcare, education, travel, fitness, gaming and more. They are generated from a
-composable section library so they genuinely differ rather than being one layout recoloured:
+108 ship with the app across 24 categories. All are original work, MIT licensed.
 
-- `scripts/templates/themes.ts` — 15 complete visual identities (palette, type pairing, radius,
-  texture, button shape)
-- `scripts/templates/sections.ts` — navigation, hero, feature, pricing, menu, gallery, team, FAQ,
-  contact and footer variants
-- `scripts/templates/catalog.ts` and `catalog-extra.ts` — the catalogue: which theme, which sections, and its own copy
+Six of them are **animated**: an aurora hero, headline words that stagger in, scroll reveals,
+counters that roll up, pointer-tracked cards and a looping logo strip — all plain CSS and vanilla
+JavaScript, because an exported site has to run from a folder with nothing installed. Everything
+degrades to a static, readable page under `prefers-reduced-motion`.
 
-Regenerate after editing any of those:
+Those six are the only Pro-gated templates out of the box. Admins can mark any template Pro from
+`/admin/templates`, individually or in bulk; the gate is enforced in `createProjectFromTemplate`,
+so posting a Pro template id straight at the API returns 402 rather than a project.
+
+To edit or add templates, change `scripts/templates/catalog*.ts`, then:
 
 ```bash
 npm run templates:generate && npm run templates:index && npm run db:seed
 ```
 
-All bundled templates are original work released under the MIT license.
-
-### Where template files live
-
-| `storage`  | Source | Used by |
-| ---------- | ------ | ------- |
-| `bundled`  | Compiled into `src/generated/templates.json` at build time | The shipped catalogue |
-| `db`       | `TemplateFile` rows, binaries in Blob | Admin ZIP uploads and GitHub imports |
-| `blob`     | A manifest in object storage | Large imported libraries |
-
-Compiling the bundled set into the build output is deliberate: Vercel's serverless functions do not
-ship the repository working tree, and `public/` lives on the CDN rather than in the function, so
-reading templates from disk at runtime would work locally and 404 in production.
+`npm run templates:import -- --repo owner/name` pulls templates from GitHub. It refuses any
+repository whose license does not clearly permit redistribution, normalises every path, drops
+executable file types, and records the original license and attribution. **A public repository is
+not the same as a permissive license.**
 
 ---
 
-## Importing templates from GitHub
+## Security
 
-```bash
-npm run templates:import -- --repo owner/name --dry-run
-npm run templates:import -- --repo owner/name --path templates --limit 50
-```
-
-The importer:
-
-1. reads the repository's license and **refuses anything that does not clearly permit
-   redistribution** (MIT, Apache-2.0, BSD, ISC, Unlicense, CC0, 0BSD, MPL-2.0, CC-BY-4.0),
-2. downloads the zipball once and treats every folder containing an `index.html` as a template,
-3. normalises every path, drops executable and server-side file types, and verifies that binary
-   assets really are the media their extension claims,
-4. guesses a category and tags from the folder name and page content,
-5. records `license`, `author`, `source` and any required `attribution` — which is then shown on the
-   template page and preserved as a comment in every export.
-
-If you have written permission for a repository whose license is not on the list, pass
-`--allow-license <SPDX-ID>`; the override is recorded on every template it creates.
-
-**Do not import templates you do not have the right to redistribute.** A public repository is not
-the same as a permissive license.
-
----
-
-## Managing template access
-
-Every template is either **Free** (anyone) or **Pro only** (subscribers). Set it from
-`/admin/templates`:
-
-- the **Access** dropdown on any row changes one template,
-- tick the checkboxes and use **Set Pro only** / **Set Free** to change up to 500 at once,
-- filter by tier, status, category or name to line up the selection first.
-
-The gate is enforced server-side in `createProjectFromTemplate` — a Free user who posts a Pro
-template id straight at the API gets a 402 and the upgrade dialog, not a project. Bulk changes are
-recorded in the admin activity log.
-
----
-
-## Plans and limits
-
-| | Free | Pro — $20/month |
-| --- | --- | --- |
-| Website projects | 5 | Unlimited |
-| Marketplace, editor, live preview | ✓ | ✓ |
-| Downloads | 5 per month | 50 per week |
-| Image upload size | 5 MB | 25 MB |
-| Images held while editing | 50 MB | 2 GB |
-| Version history | 3 | 50 |
-| Premium templates | — | ✓ |
-| Hosting the exported site | free (your own host) | free (your own host) |
-
-Limits live in `src/lib/plans.ts` and are enforced **server-side** at the point of action. The
-download counter is incremented in the same transaction that records the download, and only after
-the archive has been built successfully — a failed export never burns a free user's single
-allowance. Hiding a button is presentation, never the control.
-
-Note that the free tier allows five projects but one download. That is intentional: building is
-free, taking the files out is the paid action.
-
----
-
-## Security model
-
-**Template code is untrusted.** Every preview is served with
+Template code is untrusted. Every preview is served with
 `Content-Security-Policy: sandbox allow-scripts allow-popups allow-forms allow-modals` — note the
-absence of `allow-same-origin`. The document gets an opaque origin, so template JavaScript runs
-normally but cannot read Orion cookies, `localStorage`, the parent DOM or any API. The editor
-bridge communicates by `postMessage` only.
-
-Other measures:
+missing `allow-same-origin`. The document gets an opaque origin, so template JavaScript runs but
+cannot read cookies, `localStorage`, the parent DOM or any API. The editor talks to it by
+`postMessage` only.
 
 | Risk | Mitigation |
 | --- | --- |
-| Path traversal / zip slip | `src/lib/security/paths.ts` normalises every untrusted path; `..`, absolute paths, drive letters, NUL bytes and over-deep paths are rejected |
-| Malicious uploads | Magic-number sniffing decides the type; the client's MIME and extension are ignored. SVGs carrying `<script>`, `javascript:` or event handlers are refused |
-| Zip bombs | Entry count, per-file size, total uncompressed size and compression-ratio limits |
-| Arbitrary file execution | `.php`, `.jsp`, `.asp`, `.exe`, `.sh`, `.htaccess` and friends are dropped at extraction; nothing extracted is ever executed |
-| XSS via the editor | Text is escaped, rich text is allow-listed, URLs reject `javascript:`/`data:`, CSS is property allow-listed |
+| Path traversal / zip slip | `src/lib/security/paths.ts` rejects `..`, absolute paths, drive letters, NUL bytes, over-deep paths |
+| Malicious uploads | Magic-number sniffing; the client's MIME and extension are ignored. SVGs with `<script>`, `javascript:` or event handlers are refused |
+| Zip bombs | Entry count, per-file size, total size and compression-ratio limits |
+| XSS via the editor | Text escaped, rich text allow-listed, URLs reject `javascript:`/`data:`, CSS property allow-listed |
 | Webhook spoofing | Stripe signatures verified before parsing; event ids recorded for idempotency |
-| Authorization bypass | Every protected page and API re-checks the session server-side. Middleware only avoids a wasted render |
-| Credential exposure | Stripe, Blob and Resend secrets are read exclusively in server modules; `src/lib/env.ts` is never imported by a client component |
-| Credential stuffing | The credentials provider is rate limited twice — per account and per source address — and spends equal time on unknown accounts so timing does not reveal which emails are registered |
-| Open redirect | `?next=` is constrained to same-site paths by `safeNextPath`, so a crafted login link cannot bounce a freshly authenticated user off-site |
-| Quota bypass by racing | Download and project limits are claimed with a single conditional `UPDATE`, so two simultaneous requests cannot both pass the check. A failed build releases the claim |
+| Authorization bypass | Every protected page and API re-checks the session server-side; middleware only avoids a wasted render |
+| Credential stuffing | Rate limited per account *and* per source address, with equal time spent on unknown accounts so timing reveals nothing |
+| Account enumeration | Sign-in reasons stay generic until a correct password has been supplied |
+| Open redirect | `?next=` constrained to same-site paths by `safeNextPath` |
+| Quota bypass by racing | Conditional `UPDATE` claims the allowance atomically |
 | Clickjacking | `frame-ancestors 'none'` plus `X-Frame-Options` |
-| API abuse | Durable sliding-window rate limiting across auth, reads, writes, uploads, exports, billing sessions, favourites, view tracking and admin actions |
-| Secure headers | HSTS, `nosniff`, `Referrer-Policy`, `Permissions-Policy`, `X-Frame-Options` from middleware |
 
-Rate limiting is backed by Postgres rather than Redis so a fresh deployment needs no extra service.
-Swapping in Upstash means reimplementing `consumeRateLimit` alone.
-
----
-
-## Project structure
-
-```
-src/
-├── app/
-│   ├── (marketing)/          landing, marketplace, template detail, pricing, hosting guide
-│   ├── (auth)/               login, register, verify, forgot/reset password
-│   ├── (app)/                dashboard, account
-│   ├── admin/                overview, templates, revenue, users, activity
-│   ├── editor/[id]/          the visual editor
-│   └── api/
-│       ├── auth/             registration, verification codes, password reset, Auth.js handlers
-│       ├── projects/         CRUD, schema, versions, duplicate, export
-│       ├── templates/        views, favourites
-│       ├── preview/          sandboxed template rendering
-│       ├── render/           sandboxed project rendering (+ editor bridge)
-│       ├── uploads/          image uploads
-│       ├── stripe/           checkout, portal, webhook
-│       └── admin/            template management
-├── components/
-│   ├── ui/                   button, card, badge, input, dialog, toast
-│   ├── marketing/            header, footer, showcase
-│   ├── templates/            cards, filters, live preview, favourites
-│   ├── editor/               shell, sidebar, inspector, image picker, publish dialog
-│   ├── billing/              pricing, upgrade dialog, portal button
-│   ├── app/                  app header, project card
-│   └── admin/                template manager, charts
-├── lib/
-│   ├── auth/                 config (edge-safe), providers, guards
-│   ├── db.ts                 Prisma singleton
-│   ├── templates/            analyze, render, generate, serve, store, import-zip, queries
-│   ├── projects/             project service (business logic)
-│   ├── stripe/               client and helpers
-│   ├── guides/               hosting guide content (guide page + publish dialog)
-│   ├── storage/              Blob wrapper, image sniffing, orphan sweeper
-│   ├── security/             paths, sanitisers, rate limiting, redirect guard
-│   ├── admin/                analytics and audit logging
-│   └── plans.ts              plan limits and quota checks
-├── generated/                compiled template bundle (build artefact)
-└── middleware.ts             security headers + cheap auth redirect
-
-prisma/schema.prisma          models with indexes and foreign keys
-scripts/                      template generation, indexing, seeding, GitHub import
-templates/                    the 102 bundled templates (generated)
-```
-
-Business logic lives in `src/lib`, not in components or route handlers. Route handlers parse,
-authorise, delegate and serialise.
+Rate limiting is Postgres-backed rather than Redis, so a fresh deployment needs no extra service.
+`npm run verify:security` runs 54 adversarial checks against these primitives with no database or
+network.
 
 ---
 
@@ -474,45 +228,47 @@ authorise, delegate and serialise.
 
 | Command | What it does |
 | --- | --- |
-| `npm run dev` | Development server |
-| `npm run build` | `prisma generate` → compile template index → `next build` |
-| `npm run lint` | ESLint |
-| `npm run check:env` | Reports what is missing from .env.local and tests the database connection |
-| `npm run db:push` | Create the tables. Runs through `scripts/with-env.mjs` because the Prisma CLI does not read `.env.local` on its own |
-| `npm run db:studio` | Prisma Studio |
-| `npm run db:seed` | Categories, tags and the bundled template catalogue |
-| `npm run templates:generate` | Write `/templates` from the section library |
-| `npm run templates:index` | Compile `/templates` into `src/generated` |
-| `npm run templates:import` | Import templates from a GitHub repository |
-| `npm run storage:gc` | Delete uploaded images nothing points at any more (`-- --dry-run` to preview) |
-| `npm run admin:promote` | Grant admin (and optionally Pro) to an existing account |
-| `NEXT_DIST_DIR=.next-build npx next build` | Build without disturbing a running `npm run dev` (they otherwise share `.next`) |
-| `npm run verify:security` | 61 adversarial checks against the sanitisers, path handling, redirect guard and upload sniffing. No database needed |
-| `npm run verify:ratelimit` | Proves the rate limiter refuses traffic at the configured limit. Needs DATABASE_URL |
-| `npm run verify:pipeline` | End-to-end check of analyze → patch → generate → zip, with no database or network. Covers the sanitisers, editor tagging and ordinal stability |
+| `npm run dev` / `build` / `lint` | The usual |
+| `npm run check:env` | Reports what is missing and tests the database connection |
+| `npm run db:push` / `db:seed` / `db:studio` | Schema, catalogue, GUI |
+| `npm run templates:generate` / `:index` / `:import` | Write, compile, import templates |
+| `npm run storage:gc` | Delete images nothing points at (`-- --dry-run` to preview) |
+| `npm run admin:promote` / `admin:list` | Grant admin, inspect accounts |
+| `npm run verify:security` | 54 adversarial checks, no database needed |
+| `npm run verify:pipeline` | analyze → patch → generate → zip, end to end |
+| `npm run verify:ratelimit` | Proves the limiter refuses at the configured threshold |
+
+The `db:*` scripts run through `scripts/with-env.mjs` because the Prisma CLI does not read
+`.env.local` on its own.
 
 ---
 
-## Production checklist
+## Structure
 
-- [ ] `DATABASE_URL` and `DIRECT_URL` point at a production Postgres instance
-- [ ] `AUTH_SECRET` is a fresh 32-byte random value
-- [ ] `NEXT_PUBLIC_APP_URL` matches the production origin
-- [ ] `npm run db:push` and `npm run db:seed` have run against production
-- [ ] Stripe webhook registered and `STRIPE_WEBHOOK_SECRET` set; a test payment appears in
-      `/admin/revenue`
-- [ ] `RESEND_API_KEY` and `EMAIL_FROM` set with a verified sending domain; a sign-up code arrives
-- [ ] Blob store attached; an image upload succeeds in the editor
-- [ ] `npm run storage:gc -- --dry-run` runs clean, and the real sweep is scheduled
-- [ ] The first admin exists and `/admin` is unreachable for normal accounts
-- [ ] `ADMIN_EMAILS` removed once the first administrator is created
-- [ ] A template preview renders and its JavaScript cannot reach `document.cookie` from the frame
-- [ ] A downloaded ZIP opens correctly from `file://`
-- [ ] A downloaded ZIP has been dropped on Netlify Drop and the live site matches the editor
+```
+src/
+├── app/           (marketing) (auth) (app) admin editor api
+├── components/    ui marketing templates editor billing app admin
+├── lib/
+│   ├── auth/      edge-safe config, providers, guards
+│   ├── templates/ analyze, render, generate, serve, import
+│   ├── projects/  business logic
+│   ├── guides/    hosting-guide content
+│   ├── security/  paths, sanitisers, rate limiting, redirects
+│   └── plans.ts   limits and quota checks
+└── middleware.ts  security headers + cheap auth redirect
+
+prisma/schema.prisma   22 models
+scripts/               generation, seeding, import, verification
+templates/             the 108 bundled templates (generated)
+```
+
+Business logic lives in `src/lib`, not in components or route handlers. Route handlers parse,
+authorise, delegate and serialise.
 
 ---
 
 ## License
 
-Application code: MIT. Bundled templates: MIT. Imported templates retain their own license,
-attribution and author, which are stored per template and displayed on the template page.
+Application code and bundled templates: MIT. Imported templates keep their own license, author and
+attribution, stored per template and shown on its page.
