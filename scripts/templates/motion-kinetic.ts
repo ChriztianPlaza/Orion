@@ -27,9 +27,17 @@ export function kineticCss(): string {
   Headline reveal. Each line sits inside a clipping box and slides up into it,
   so the type is uncovered rather than faded — the mask is the animation.
 */
-.k-line{display:block;overflow:hidden}
+/*
+  The mask is overflow:hidden, so a line box tightened to .9 line-height shears
+  the descenders off every y, g and p — at display sizes that is glaring. The
+  space is padded onto the sliding span rather than the mask, so the span's own
+  height grows with it and translateY(105%) still clears the box completely.
+  The mask then pulls the extra back out, leaving the spacing as drawn.
+*/
+.k-line{display:block;overflow:hidden;margin-bottom:-.7em}
 .k-line > span{
   display:block;
+  padding-bottom:.7em;
   transform:translateY(105%);
   animation:k-line-in .85s cubic-bezier(.16,1,.3,1) forwards;
   animation-delay:calc(var(--i) * 90ms);

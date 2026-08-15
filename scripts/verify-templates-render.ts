@@ -36,6 +36,7 @@ type Report = {
   wide: string[];
   emptySections: number;
   sections: number;
+  sheared: number;
   stuck: string[];
   worstMargin: number;
   worstNode: string;
@@ -129,9 +130,17 @@ const PROBE = `(function () {
     },
   );
 
+  /* The headline mask is overflow:hidden, so it shears descenders off unless
+     the box is padded taller than the line. */
+  var sheared = 0;
+  Array.prototype.forEach.call(document.querySelectorAll(".k-line"), function (el) {
+    if (el.scrollHeight > el.clientHeight + 1) sheared += 1;
+  });
+
   var h1 = document.querySelector(".hero h1");
   var sections = Array.prototype.slice.call(document.querySelectorAll("section"));
   return {
+    sheared: sheared,
     stuck: stuck,
     h1Font: h1 ? getComputedStyle(h1).fontFamily.split(",")[0].replace(/"/g, "") : "",
     bodyFont: getComputedStyle(document.body).fontFamily.split(",")[0].replace(/"/g, ""),
@@ -194,6 +203,7 @@ async function main() {
 
     if (r.wide.length) fail(`${slug}: overflows — ${r.wide.join(", ")}`);
     if (r.emptySections) fail(`${slug}: ${r.emptySections}/${r.sections} sections collapsed`);
+    if (r.sheared) fail(`${slug}: ${r.sheared} headline line(s) clipping descenders`);
     if (r.stuck.length) fail(`${slug}: never revealed — ${r.stuck.join(", ")}`);
 
     // A margin below 1 means that node misses its own WCAG threshold.
