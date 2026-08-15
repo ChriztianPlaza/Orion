@@ -21,7 +21,8 @@
     "admin:list": "node scripts/with-env.mjs tsx scripts/whoami.ts",
     "admin:promote": "node scripts/with-env.mjs tsx scripts/promote-admin.ts",
     "admin:verify-existing": "node scripts/with-env.mjs tsx scripts/verify-existing-users.ts",
-    "storage:gc": "node scripts/with-env.mjs tsx scripts/storage-gc.ts"
+    "storage:gc": "node scripts/with-env.mjs tsx scripts/storage-gc.ts",
+    "verify:auth": "node scripts/with-env.mjs tsx scripts/verify-auth.ts"
   },
   "prisma": {
     "seed": "node scripts/with-env.mjs tsx scripts/seed.ts"
@@ -37,7 +38,7 @@
     "jszip": "^3.10.1",
     "lucide-react": "^0.469.0",
     "next": "^15.1.6",
-    "next-auth": "5.0.0-beta.25",
+    "next-auth": "^5.0.0-beta.32",
     "node-html-parser": "^7.0.1",
     "pdf-lib": "^1.17.1",
     "puppeteer-core": "^25.7.0",

@@ -235,6 +235,7 @@ network.
 | `npm run storage:gc` | Delete images nothing points at (`-- --dry-run` to preview) |
 | `npm run admin:promote` / `admin:list` | Grant admin, inspect accounts |
 | `npm run verify:security` | 54 adversarial checks, no database needed |
+| `npm run verify:auth` | Drives every sign-in branch over HTTP. Needs `npm run dev` running |
 | `npm run verify:pipeline` | analyze → patch → generate → zip, end to end |
 | `npm run verify:ratelimit` | Proves the limiter refuses at the configured threshold |
 
