@@ -1,0 +1,30 @@
+{
+  "name": "Outpost — Workspace",
+  "slug": "k-outpost-workspace",
+  "category": "business",
+  "tags": [
+    "dark",
+    "bold",
+    "workspace",
+    "local"
+  ],
+  "description": "A quiet workspace with fast internet, real chairs and nobody organising a networking breakfast.",
+  "theme": "voltage",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

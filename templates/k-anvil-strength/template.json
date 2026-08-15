@@ -1,0 +1,30 @@
+{
+  "name": "Anvil — Strength",
+  "slug": "k-anvil-strength",
+  "category": "fitness",
+  "tags": [
+    "dark",
+    "bold",
+    "gym",
+    "strength"
+  ],
+  "description": "A strength gym with no machines, no music policy and no classes — just coaching under the bar.",
+  "theme": "detonate",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Quarry — Warehouse Analytics",
+  "slug": "k-quarry-data",
+  "category": "saas",
+  "tags": [
+    "dark",
+    "bold",
+    "data",
+    "saas"
+  ],
+  "description": "No second copy, no nightly sync to babysit, no arguments about which number is real.",
+  "theme": "ultramarine",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

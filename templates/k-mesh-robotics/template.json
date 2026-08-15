@@ -1,0 +1,30 @@
+{
+  "name": "Mesh — Warehouse Robotics",
+  "slug": "k-mesh-robotics",
+  "category": "technology",
+  "tags": [
+    "dark",
+    "bold",
+    "robotics",
+    "industrial"
+  ],
+  "description": "No re-racking, no floor markings, no six-month integration — it maps your building and starts moving stock.",
+  "theme": "hazard",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

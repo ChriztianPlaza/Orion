@@ -1,0 +1,30 @@
+{
+  "name": "Marlowe — Speaker",
+  "slug": "k-marlowe-speaker",
+  "category": "personal",
+  "tags": [
+    "light",
+    "serif",
+    "speaking",
+    "personal"
+  ],
+  "description": "Keynotes and workshops on design practice, delivered without a single stock photograph.",
+  "theme": "cellar",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

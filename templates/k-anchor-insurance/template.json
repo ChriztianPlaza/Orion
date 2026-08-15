@@ -1,0 +1,30 @@
+{
+  "name": "Anchor — Commercial Insurance",
+  "slug": "k-anchor-insurance",
+  "category": "finance",
+  "tags": [
+    "dark",
+    "professional",
+    "insurance",
+    "b2b"
+  ],
+  "description": "We write plain-language summaries of what your cover actually excludes, because that is the part that matters.",
+  "theme": "cadet",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

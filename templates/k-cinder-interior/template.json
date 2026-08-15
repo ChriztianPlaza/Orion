@@ -1,0 +1,30 @@
+{
+  "name": "Cinder — Interior Architecture",
+  "slug": "k-cinder-interior",
+  "category": "portfolio",
+  "tags": [
+    "light",
+    "luxury",
+    "interior",
+    "serif"
+  ],
+  "description": "Interior architecture for restaurants and workplaces, where circulation matters more than mood boards.",
+  "theme": "cellar",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

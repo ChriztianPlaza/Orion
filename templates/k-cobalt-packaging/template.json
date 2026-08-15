@@ -1,0 +1,30 @@
+{
+  "name": "Cobalt — Packaging Design",
+  "slug": "k-cobalt-packaging",
+  "category": "creative",
+  "tags": [
+    "light",
+    "bold",
+    "packaging",
+    "design"
+  ],
+  "description": "Packaging designed to be recognised at three metres and read at thirty centimetres.",
+  "theme": "ultramarine",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

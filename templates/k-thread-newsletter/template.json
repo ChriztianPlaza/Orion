@@ -1,0 +1,30 @@
+{
+  "name": "Thread — Weekly",
+  "slug": "k-thread-newsletter",
+  "category": "blog",
+  "tags": [
+    "dark",
+    "bold",
+    "newsletter",
+    "tech"
+  ],
+  "description": "A short weekly on engineering leadership, curated by someone doing the job.",
+  "theme": "voltage",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Warp — Textile Studio",
+  "slug": "k-loom-textile-studio",
+  "category": "creative",
+  "tags": [
+    "light",
+    "craft",
+    "textile",
+    "studio"
+  ],
+  "description": "A studio developing woven fabric for interiors and fashion, sampling on hand looms before anything is scaled.",
+  "theme": "thicket",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

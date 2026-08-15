@@ -1,6 +1,8 @@
-import type { SectionData, SectionKey } from "./sections";
+import type { SectionData } from "./sections";
+import type { KineticSectionKey } from "./sections-kinetic";
 import { CATALOG_EXTRA } from "./catalog-extra";
 import { CATALOG_ANIMATED } from "./catalog-animated";
+import { CATALOG_KINETIC } from "./catalog-kinetic";
 
 /**
  * The bundled template catalog.
@@ -21,7 +23,9 @@ export type TemplateDef = {
   featured?: boolean;
   /** Ships the motion layer: scroll reveals, aurora, counters, pointer effects. */
   animated?: boolean;
-  layout: SectionKey[];
+  /** Uses the kinetic art direction: asymmetric sections, no glow. */
+  kinetic?: boolean;
+  layout: KineticSectionKey[];
   data: Partial<SectionData> & Pick<SectionData, "brand" | "headline" | "subhead">;
 };
 
@@ -2549,4 +2553,9 @@ const CATALOG_CORE: TemplateDef[] = [
 ];
 
 /** The full bundled catalogue. */
-export const CATALOG: TemplateDef[] = [...CATALOG_CORE, ...CATALOG_EXTRA, ...CATALOG_ANIMATED];
+export const CATALOG: TemplateDef[] = [
+  ...CATALOG_CORE,
+  ...CATALOG_EXTRA,
+  ...CATALOG_ANIMATED,
+  ...CATALOG_KINETIC,
+];

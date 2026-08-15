@@ -1,0 +1,30 @@
+{
+  "name": "Beacon — Charity",
+  "slug": "k-beacon-charity",
+  "category": "business",
+  "tags": [
+    "light",
+    "charity",
+    "trust",
+    "warm"
+  ],
+  "description": "Where the money goes, published quarterly, with the overhead stated plainly rather than buried.",
+  "theme": "thicket",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

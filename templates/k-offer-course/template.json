@@ -1,0 +1,30 @@
+{
+  "name": "Offer — Course Launch",
+  "slug": "k-offer-course",
+  "category": "landing-page",
+  "tags": [
+    "light",
+    "warm",
+    "course",
+    "conversion"
+  ],
+  "description": "A landing page for a course that genuinely has limited places, with the count shown honestly.",
+  "theme": "ultramarine",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -14,6 +14,8 @@ import { CATALOG, type TemplateDef } from "./templates/catalog";
 import { THEMES } from "./templates/themes";
 import { baseCss, baseJs, esc, renderSection, type SectionData } from "./templates/sections";
 import { motionCss, motionJs } from "./templates/motion";
+import { kineticCss, kineticJs } from "./templates/motion-kinetic";
+import { renderKineticSection } from "./templates/sections-kinetic";
 
 const ROOT = path.resolve(process.cwd(), "templates");
 
@@ -56,7 +58,7 @@ ${body}
 
 /** A secondary page so multi-page editing and export are exercised. */
 function secondaryPage(def: TemplateDef, data: SectionData, kind: "about" | "contact"): string {
-  const nav = renderSection(def.layout.find((l) => l.startsWith("nav:")) as never, data);
+  const nav = renderKineticSection(def.layout.find((l) => l.startsWith("nav:")) as never, data);
   const footer = renderSection("block:footer", data);
 
   const body =
@@ -148,15 +150,15 @@ function main() {
     if (!theme) throw new Error(`Unknown theme "${def.theme}" for ${def.slug}`);
 
     const data = fill(def);
-    const body = def.layout.map((key) => renderSection(key, data)).join("\n");
+    const body = def.layout.map((key) => renderKineticSection(key, data)).join("\n");
     const dir = path.join(ROOT, def.slug);
 
     const title = `${data.brand} — ${def.name.split("—").pop()?.trim() ?? def.name}`;
     // Animated templates layer motion on top of the same base output, so the
     // page is complete and readable before a single animation runs.
     write(path.join(dir, "index.html"), page(def, body, title, def.description));
-    write(path.join(dir, "style.css"), baseCss(theme) + (def.animated ? motionCss() : ""));
-    write(path.join(dir, "script.js"), baseJs() + (def.animated ? motionJs() : ""));
+    write(path.join(dir, "style.css"), baseCss(theme) + (def.kinetic ? kineticCss() : def.animated ? motionCss() : ""));
+    write(path.join(dir, "script.js"), baseJs() + (def.kinetic ? kineticJs() : def.animated ? motionJs() : ""));
     write(path.join(dir, "thumbnail.svg"), poster(def));
 
     const pages = ["index.html"];
@@ -180,7 +182,8 @@ function main() {
           colorScheme: theme.scheme,
           tier: def.tier ?? "FREE",
           featured: def.featured ?? false,
-          animated: def.animated ?? false,
+          animated: def.animated ?? def.kinetic ?? false,
+          kinetic: def.kinetic ?? false,
           entryFile: "index.html",
           pages,
           thumbnail: "thumbnail.svg",

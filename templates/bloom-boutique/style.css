@@ -3,18 +3,18 @@
   --bg:#fffafc;
   --bg-alt:#fdeef4;
   --surface:#ffffff;
-  --border:rgba(190,90,130,0.14);
+  --border:rgba(213,39,110,0.14);
   --ink:#2b1720;
   --ink-muted:#8a6473;
-  --accent:#e0578f;
+  --accent:#d5276e;
   --accent-ink:#ffffff;
-  --accent-soft:rgba(224,87,143,0.13);
+  --accent-soft:rgba(213,39,110,0.13);
   --radius:18px;
   --radius-lg:32px;
-  --shadow:0 24px 70px -46px rgba(190,90,130,0.4);
+  --shadow:0 24px 70px -46px rgba(213,39,110,0.4);
   --wrap:1080px;
   --pad:112px;
-  --font-body:'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body:'Nunito Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
   --font-head:'Playfair Display', Georgia, serif;
 }
 *,*::before,*::after{box-sizing:border-box}

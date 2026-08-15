@@ -1,0 +1,30 @@
+{
+  "name": "Press — Letterpress",
+  "slug": "k-press-letterpress",
+  "category": "creative",
+  "tags": [
+    "light",
+    "editorial",
+    "print",
+    "craft"
+  ],
+  "description": "Wedding stationery, business cards and short-run books printed on presses older than anyone here.",
+  "theme": "newsprint",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

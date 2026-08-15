@@ -14,6 +14,7 @@
   "tier": "PRO",
   "featured": false,
   "animated": true,
+  "kinetic": false,
   "entryFile": "index.html",
   "pages": [
     "index.html",

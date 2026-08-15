@@ -1,0 +1,30 @@
+{
+  "name": "Corvus — Brand Studio",
+  "slug": "k-corvus-brand",
+  "category": "agency",
+  "tags": [
+    "light",
+    "editorial",
+    "brand",
+    "serif"
+  ],
+  "description": "Naming, identity and the systems that keep it consistent once forty people are using it.",
+  "theme": "press",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

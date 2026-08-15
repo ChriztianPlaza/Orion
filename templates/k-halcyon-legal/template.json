@@ -1,0 +1,30 @@
+{
+  "name": "Halcyon — Commercial Law",
+  "slug": "k-halcyon-legal",
+  "category": "business",
+  "tags": [
+    "light",
+    "luxury",
+    "legal",
+    "serif"
+  ],
+  "description": "Commercial contracts written to be understood by the people who have to follow them.",
+  "theme": "cellar",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

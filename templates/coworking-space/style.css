@@ -14,7 +14,7 @@
   --shadow:0 20px 60px -44px rgba(28,28,23,0.4);
   --wrap:1060px;
   --pad:120px;
-  --font-body:'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body:'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
   --font-head:'DM Serif Display', Georgia, serif;
 }
 *,*::before,*::after{box-sizing:border-box}

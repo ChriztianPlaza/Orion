@@ -1,0 +1,30 @@
+{
+  "name": "Harbour — Deploys",
+  "slug": "k-harbor-deploy",
+  "category": "developer",
+  "tags": [
+    "dark",
+    "devtools",
+    "modern",
+    "b2b"
+  ],
+  "description": "Progressive rollout, automatic rollback and a diff of exactly what is about to change in production.",
+  "theme": "cadet",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

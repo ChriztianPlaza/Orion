@@ -1,0 +1,30 @@
+{
+  "name": "Quay — Lettings",
+  "slug": "k-quay-lettings",
+  "category": "real-estate",
+  "tags": [
+    "dark",
+    "property",
+    "modern",
+    "service"
+  ],
+  "description": "Managed lettings with a maintenance team on staff, because tenants who are looked after stay.",
+  "theme": "lagoon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

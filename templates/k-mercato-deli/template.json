@@ -1,0 +1,30 @@
+{
+  "name": "Mercato — Deli & Bakery",
+  "slug": "k-mercato-deli",
+  "category": "restaurant",
+  "tags": [
+    "light",
+    "warm",
+    "bakery",
+    "local"
+  ],
+  "description": "A neighbourhood bakery that bakes what it can sell in a day and closes when it runs out.",
+  "theme": "kiln",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

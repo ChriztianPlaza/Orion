@@ -1,0 +1,30 @@
+{
+  "name": "Okonkwo — CV",
+  "slug": "k-okonkwo-cv",
+  "category": "personal",
+  "tags": [
+    "light",
+    "typography",
+    "personal",
+    "minimal"
+  ],
+  "description": "Infrastructure engineer working on the unglamorous things that stop pagers going off at 3am.",
+  "theme": "newsprint",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

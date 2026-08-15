@@ -1,0 +1,30 @@
+{
+  "name": "Dispatch — Magazine",
+  "slug": "k-dispatch-mag",
+  "category": "blog",
+  "tags": [
+    "light",
+    "editorial",
+    "print",
+    "magazine"
+  ],
+  "description": "Long-form reporting on industry, labour and the built environment, printed because it deserves to be.",
+  "theme": "press",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

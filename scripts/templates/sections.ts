@@ -57,11 +57,11 @@ export type SectionData = {
   ctaBody?: string;
 };
 
-const K = (section: string, name: string) => `${section}.${name}`;
+export const K = (section: string, name: string) => `${section}.${name}`;
 
 /* ------------------------------------------------------------------ atoms */
 
-function button(
+export function button(
   key: string,
   link: Link,
   variant: "primary" | "ghost" | "outline" = "primary",
@@ -73,7 +73,7 @@ function avatar(initials: string, accent: string) {
   return `<span class="avatar" aria-hidden="true" style="background:${accent}1f;color:${accent}">${esc(initials)}</span>`;
 }
 
-function icon(name: string) {
+export function icon(name: string) {
   const paths: Record<string, string> = {
     bolt: "M13 2 3 14h7l-1 8 10-12h-7l1-8z",
     shield: "M12 3 4 6v6c0 5 3.4 8.4 8 9 4.6-.6 8-4 8-9V6l-8-3z",
@@ -921,18 +921,39 @@ export function baseJs(): string {
   });
 
   if ('IntersectionObserver' in window) {
+    /*
+      Small blocks come in once 12% of them shows. A section can be taller than
+      the window, so it may never reach 12% of itself while it fills the
+      screen — those come in once a quarter-screen of them is visible instead.
+      These elements start at opacity 0, so a reveal that never fires does not
+      degrade to "no animation", it degrades to missing content.
+    */
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          observer.unobserve(entry.target);
-        }
+        var tallEnough = entry.intersectionRect.height >= window.innerHeight * 0.25;
+        if (!entry.isIntersecting) return;
+        if (entry.intersectionRatio < 0.12 && !tallEnough) return;
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
       });
-    }, { threshold: 0.12 });
+    }, { threshold: [0, 0.12] });
+
     document.querySelectorAll('.section, .hero-media, .card, .shot').forEach(function (el, i) {
       el.setAttribute('data-reveal', '');
       el.style.transitionDelay = (i % 4) * 60 + 'ms';
       observer.observe(el);
+    });
+
+    /* Images finishing late can move a block out from under the observer, so
+       sweep once the page has settled and reveal whatever is on screen. */
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        document.querySelectorAll('[data-reveal]').forEach(function (el) {
+          if (el.classList.contains('in')) return;
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight * 0.9 && r.bottom > 0) el.classList.add('in');
+        });
+      }, 400);
     });
   }
 })();`;

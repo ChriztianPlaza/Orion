@@ -1,0 +1,30 @@
+{
+  "name": "Northgate — Development",
+  "slug": "k-northgate-devt",
+  "category": "real-estate",
+  "tags": [
+    "dark",
+    "industrial",
+    "property",
+    "premium"
+  ],
+  "description": "Housing designed for the second owner as much as the first, with fabric specified above regulation.",
+  "theme": "brass",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

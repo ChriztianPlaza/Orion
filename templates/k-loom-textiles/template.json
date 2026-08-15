@@ -1,0 +1,30 @@
+{
+  "name": "Loom — Textiles",
+  "slug": "k-loom-textiles",
+  "category": "ecommerce",
+  "tags": [
+    "light",
+    "craft",
+    "textile",
+    "warm"
+  ],
+  "description": "Blankets and throws woven on looms we own, from wool we can name the farm for.",
+  "theme": "thicket",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

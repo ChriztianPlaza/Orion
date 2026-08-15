@@ -1,0 +1,30 @@
+{
+  "name": "Kiln — Ceramics Studio",
+  "slug": "k-kiln-ceramics",
+  "category": "creative",
+  "tags": [
+    "light",
+    "craft",
+    "warm",
+    "studio"
+  ],
+  "description": "A working pottery with an open studio, evening classes and a shelf of seconds at half price.",
+  "theme": "kiln",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Forge — Hand Tools",
+  "slug": "k-forge-tools",
+  "category": "ecommerce",
+  "tags": [
+    "dark",
+    "industrial",
+    "craft",
+    "retail"
+  ],
+  "description": "Drop-forged tools with a hundred-year guarantee, sold direct because the markup was the only thing the middle added.",
+  "theme": "brass",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

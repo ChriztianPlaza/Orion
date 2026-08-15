@@ -1,0 +1,30 @@
+{
+  "name": "Willow — Clinic",
+  "slug": "k-willow-clinic",
+  "category": "healthcare",
+  "tags": [
+    "dark",
+    "clinical",
+    "health",
+    "calm"
+  ],
+  "description": "A practice built around consultations long enough to reach the actual problem.",
+  "theme": "lagoon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

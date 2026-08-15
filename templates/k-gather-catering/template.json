@@ -1,0 +1,30 @@
+{
+  "name": "Gather — Event Catering",
+  "slug": "k-gather-catering",
+  "category": "events",
+  "tags": [
+    "light",
+    "warm",
+    "catering",
+    "events"
+  ],
+  "description": "Menus designed for the realities of a field kitchen, so the ninetieth plate is as good as the first.",
+  "theme": "kiln",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

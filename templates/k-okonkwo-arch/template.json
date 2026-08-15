@@ -1,0 +1,30 @@
+{
+  "name": "Okonkwo — Architecture",
+  "slug": "k-okonkwo-arch",
+  "category": "portfolio",
+  "tags": [
+    "light",
+    "editorial",
+    "luxury",
+    "architecture"
+  ],
+  "description": "Housing, cultural and civic work grounded in the climate and the street it sits on.",
+  "theme": "yves",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

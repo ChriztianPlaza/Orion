@@ -1,0 +1,30 @@
+{
+  "name": "Pixelforge — Game Studio",
+  "slug": "k-pixelforge-studio",
+  "category": "gaming",
+  "tags": [
+    "dark",
+    "bold",
+    "games",
+    "studio"
+  ],
+  "description": "A nine-person studio that ships eighteen-month games instead of announcing five-year ones.",
+  "theme": "siren",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

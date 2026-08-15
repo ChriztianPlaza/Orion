@@ -1,0 +1,30 @@
+{
+  "name": "Parcel — Logistics",
+  "slug": "k-parcel-logistics",
+  "category": "saas",
+  "tags": [
+    "dark",
+    "bold",
+    "logistics",
+    "b2b"
+  ],
+  "description": "Route planning and live tracking for fleets between ten and five hundred vehicles.",
+  "theme": "hazard",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

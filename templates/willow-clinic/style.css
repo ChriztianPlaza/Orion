@@ -14,7 +14,7 @@
   --shadow:0 20px 60px -40px rgba(0,0,0,0.3);
   --wrap:1080px;
   --pad:128px;
-  --font-body:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body:'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
   --font-head:'Instrument Serif', Georgia, serif;
 }
 *,*::before,*::after{box-sizing:border-box}

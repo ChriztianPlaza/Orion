@@ -1,0 +1,30 @@
+{
+  "name": "Forum — Industry Summit",
+  "slug": "k-forum-summit",
+  "category": "events",
+  "tags": [
+    "light",
+    "luxury",
+    "business",
+    "serif"
+  ],
+  "description": "An invitation-only summit with no press, no recording and a Chatham House rule that is enforced.",
+  "theme": "alarm",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

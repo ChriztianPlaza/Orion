@@ -1,0 +1,30 @@
+{
+  "name": "Marlowe — Photography",
+  "slug": "k-marlowe-photo",
+  "category": "photography",
+  "tags": [
+    "light",
+    "editorial",
+    "documentary",
+    "serif"
+  ],
+  "description": "Reportage for magazines and institutions, usually over months rather than an afternoon.",
+  "theme": "cellar",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

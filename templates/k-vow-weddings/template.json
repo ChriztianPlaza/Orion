@@ -1,0 +1,30 @@
+{
+  "name": "Vow — Wedding Planning",
+  "slug": "k-vow-weddings",
+  "category": "events",
+  "tags": [
+    "light",
+    "luxury",
+    "wedding",
+    "serif"
+  ],
+  "description": "Full planning for weddings where the couple would rather be present than project managing.",
+  "theme": "cellar",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

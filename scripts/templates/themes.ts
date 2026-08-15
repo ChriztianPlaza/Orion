@@ -6,6 +6,11 @@
  * sections still read as different products.
  */
 
+import { googleFonts, SYSTEM_SANS } from "./theme-kit";
+import { KINETIC_THEMES } from "./themes-kinetic";
+
+export { googleFonts, SYSTEM_SANS };
+
 export type Theme = {
   id: string;
   scheme: "dark" | "light" | "colorful";
@@ -35,17 +40,10 @@ export type Theme = {
   uppercaseNav: boolean;
 };
 
-const SYSTEM_SANS =
-  "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif";
 
-function googleFonts(...families: string[]): string {
-  const query = families
-    .map((f) => `family=${f.replace(/ /g, "+")}`)
-    .join("&");
-  return `https://fonts.googleapis.com/css2?${query}&display=swap`;
-}
 
 export const THEMES: Record<string, Theme> = {
+  ...KINETIC_THEMES,
   midnight: {
     id: "midnight",
     scheme: "dark",
@@ -83,7 +81,7 @@ export const THEMES: Record<string, Theme> = {
     ink: "#f4f2ff",
     inkMuted: "#a29ec4",
     accent: "#7c5cff",
-    accentInk: "#ffffff",
+    accentInk: "#07070c",
     accentSoft: "rgba(124,92,255,0.18)",
     headingFont: `'Space Grotesk', ${SYSTEM_SANS}`,
     bodyFont: `'Inter', ${SYSTEM_SANS}`,
@@ -160,19 +158,19 @@ export const THEMES: Record<string, Theme> = {
     bg: "#faf6f0",
     bgAlt: "#f2ebe1",
     surface: "#fffdfa",
-    border: "rgba(80,60,40,0.12)",
+    border: "rgba(163,94,51,0.12)",
     ink: "#2a2119",
-    inkMuted: "#7a6a58",
-    accent: "#c2703d",
+    inkMuted: "#6f6150",
+    accent: "#a35e33",
     accentInk: "#ffffff",
-    accentSoft: "rgba(194,112,61,0.14)",
+    accentSoft: "rgba(163,94,51,0.14)",
     headingFont: `'Fraunces', Georgia, serif`,
     bodyFont: `'Karla', ${SYSTEM_SANS}`,
     headingWeight: 600,
     headingSpacing: "-0.015em",
     radius: "12px",
     radiusLg: "24px",
-    shadow: "0 24px 70px -46px rgba(90,60,30,0.55)",
+    shadow: "0 24px 70px -46px rgba(163,94,51,0.55)",
     maxWidth: "1100px",
     sectionPad: "116px",
     fontsHref: googleFonts("Karla:wght@400;500;700", "Fraunces:opsz,wght@9..144,400;9..144,600"),
@@ -191,7 +189,7 @@ export const THEMES: Record<string, Theme> = {
     ink: "#eaf2ff",
     inkMuted: "#8fa6c9",
     accent: "#3b82f6",
-    accentInk: "#ffffff",
+    accentInk: "#040a17",
     accentSoft: "rgba(59,130,246,0.16)",
     headingFont: `'Sora', ${SYSTEM_SANS}`,
     bodyFont: `'Inter', ${SYSTEM_SANS}`,
@@ -295,19 +293,19 @@ export const THEMES: Record<string, Theme> = {
     bg: "#fffafc",
     bgAlt: "#fdeef4",
     surface: "#ffffff",
-    border: "rgba(190,90,130,0.14)",
+    border: "rgba(213,39,110,0.14)",
     ink: "#2b1720",
     inkMuted: "#8a6473",
-    accent: "#e0578f",
+    accent: "#d5276e",
     accentInk: "#ffffff",
-    accentSoft: "rgba(224,87,143,0.13)",
+    accentSoft: "rgba(213,39,110,0.13)",
     headingFont: `'Playfair Display', Georgia, serif`,
     bodyFont: `'Nunito Sans', ${SYSTEM_SANS}`,
     headingWeight: 600,
     headingSpacing: "-0.01em",
     radius: "18px",
     radiusLg: "32px",
-    shadow: "0 24px 70px -46px rgba(190,90,130,0.4)",
+    shadow: "0 24px 70px -46px rgba(213,39,110,0.4)",
     maxWidth: "1080px",
     sectionPad: "112px",
     fontsHref: googleFonts("Nunito Sans:wght@400;600;700", "Playfair Display:wght@500;600;700"),
@@ -324,7 +322,7 @@ export const THEMES: Record<string, Theme> = {
     surface: "#ffffff",
     border: "rgba(15,23,42,0.09)",
     ink: "#0f172a",
-    inkMuted: "#64748b",
+    inkMuted: "#5e6a7d",
     accent: "#0f4c81",
     accentInk: "#ffffff",
     accentSoft: "rgba(15,76,129,0.1)",
@@ -353,7 +351,7 @@ export const THEMES: Record<string, Theme> = {
     ink: "#fdf4ff",
     inkMuted: "#b39ccb",
     accent: "#ec4899",
-    accentInk: "#ffffff",
+    accentInk: "#0a0118",
     accentSoft: "rgba(236,72,153,0.18)",
     headingFont: `'Chakra Petch', ${SYSTEM_SANS}`,
     bodyFont: `'Rajdhani', ${SYSTEM_SANS}`,

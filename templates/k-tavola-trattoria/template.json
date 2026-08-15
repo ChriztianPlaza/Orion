@@ -1,0 +1,30 @@
+{
+  "name": "Tavola — Trattoria",
+  "slug": "k-tavola-trattoria",
+  "category": "restaurant",
+  "tags": [
+    "light",
+    "editorial",
+    "family",
+    "italian"
+  ],
+  "description": "We change the menu roughly once a decade, and people write letters when we do.",
+  "theme": "press",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Anvil</title>
+<meta name="description" content="Aggressive caching, real parallelism, and a bill that does not scale with how flaky your tests are.">
+<meta property="og:title" content="Contact — Anvil">
+<meta property="og:description" content="Aggressive caching, real parallelism, and a bill that does not scale with how flaky your tests are.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="nav" id="top">
+  <div class="wrap nav-inner">
+    <a class="brand" data-editable="nav.brand" data-editable-label="Brand name" href="#top">Anvil</a>
+    <nav class="nav-links" aria-label="Main">
+      <a data-editable="nav.link1" href="#features">Work</a><a data-editable="nav.link2" href="#how">Approach</a><a data-editable="nav.link3" href="#contact">Contact</a>
+    </nav>
+    <div class="nav-actions"><a class="btn btn-primary" data-editable="nav.cta" data-editable-label="Start building button" href="#contact">Start building</a></div>
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="section contact" id="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <h2 data-editable="contact.title">Get in touch</h2>
+      <p class="section-intro" data-editable="contact.intro">We reply to every message within one business day.</p>
+      <ul class="contact-list">
+        <li><span>Email</span><a data-editable="contact.email" href="mailto:hello@k.example">hello@k.example</a></li>
+        <li><span>Phone</span><a data-editable="contact.phone" href="tel:+15550100">+1 (555) 0100</a></li>
+        <li><span>Address</span><p data-editable="contact.address">Studio address, your city</p></li>
+        <li><span>Hours</span><p data-editable="contact.hours">Mon — Fri, 9:00 — 17:00</p></li>
+      </ul>
+    </div>
+    <!--
+      No backend, so the form composes a message in the visitor's own mail app.
+      That works the moment the folder is uploaded anywhere. Swap the action for
+      a form service (Formspree, Basin) or your own endpoint when you have one.
+    -->
+    <form class="contact-form" data-mailto="hello@k.example">
+      <label>Name<input type="text" name="name" placeholder="Your name" required></label>
+      <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
+      <label>Message<textarea name="message" rows="4" placeholder="How can we help?" required></textarea></label>
+      <button class="btn btn-primary" type="submit" data-editable="contact.submit">Send message</button>
+      <p class="form-note" role="status">Opens in your email app, addressed to us.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="wrap footer-inner">
+    <div class="footer-brand">
+      <a class="brand" data-editable="footer.brand" href="#top">Anvil</a>
+      <p data-editable="footer.note">Anvil — continuous integration.</p>
+    </div>
+    <nav class="footer-links" aria-label="Footer">
+      <a data-editable="footer.link1" href="#features">Work</a><a data-editable="footer.link2" href="#how">Approach</a><a data-editable="footer.link3" href="#contact">Contact</a>
+    </nav>
+    
+  </div>
+  <div class="wrap footer-legal">
+    <p data-editable="footer.copyright">© 2026 Anvil. All rights reserved.</p>
+  </div>
+</footer>
+<script src="script.js" defer></script>
+</body>
+</html>

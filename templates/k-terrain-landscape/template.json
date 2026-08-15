@@ -1,0 +1,30 @@
+{
+  "name": "Terrain — Landscape Prints",
+  "slug": "k-terrain-landscape",
+  "category": "photography",
+  "tags": [
+    "light",
+    "craft",
+    "print",
+    "fine-art"
+  ],
+  "description": "Large-format landscape work, editioned, printed in-house on cotton rag.",
+  "theme": "thicket",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

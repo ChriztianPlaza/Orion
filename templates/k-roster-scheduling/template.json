@@ -1,0 +1,30 @@
+{
+  "name": "Roster — Shift Scheduling",
+  "slug": "k-roster-scheduling",
+  "category": "saas",
+  "tags": [
+    "dark",
+    "service",
+    "scheduling",
+    "b2b"
+  ],
+  "description": "Scheduling for hospitality and retail that respects availability, contracts and the law.",
+  "theme": "lagoon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

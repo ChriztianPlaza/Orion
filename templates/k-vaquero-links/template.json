@@ -1,0 +1,30 @@
+{
+  "name": "Vaquero — Links",
+  "slug": "k-vaquero-links",
+  "category": "personal",
+  "tags": [
+    "dark",
+    "bold",
+    "links",
+    "personal"
+  ],
+  "description": "A link page that is actually designed, rather than a list of buttons on a gradient.",
+  "theme": "siren",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

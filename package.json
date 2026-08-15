@@ -15,6 +15,8 @@
     "templates:index": "tsx scripts/build-template-index.ts",
     "templates:generate": "tsx scripts/generate-templates.ts",
     "verify:pipeline": "tsx scripts/verify-pipeline.ts",
+    "verify:templates": "tsx scripts/verify-templates.ts",
+    "verify:templates:render": "tsx scripts/verify-templates-render.ts",
     "verify:security": "tsx scripts/verify-security.ts",
     "verify:ratelimit": "node scripts/with-env.mjs tsx scripts/verify-ratelimit.ts",
     "check:env": "node scripts/with-env.mjs tsx scripts/check-env.ts",

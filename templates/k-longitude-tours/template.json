@@ -1,0 +1,30 @@
+{
+  "name": "Longitude — Expeditions",
+  "slug": "k-longitude-tours",
+  "category": "travel",
+  "tags": [
+    "dark",
+    "adventure",
+    "travel",
+    "premium"
+  ],
+  "description": "Expedition travel in groups small enough to change the plan when the weather does.",
+  "theme": "beacon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

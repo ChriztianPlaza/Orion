@@ -1,0 +1,30 @@
+{
+  "name": "Lattice — ML Platform",
+  "slug": "k-lattice-ml",
+  "category": "technology",
+  "tags": [
+    "dark",
+    "technical",
+    "ml",
+    "b2b"
+  ],
+  "description": "The same code trains, evaluates and serves, so the model in production is the one you tested.",
+  "theme": "cadet",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Cadence — Audio",
+  "slug": "k-cadence-audio",
+  "category": "ecommerce",
+  "tags": [
+    "dark",
+    "technical",
+    "audio",
+    "retail"
+  ],
+  "description": "Monitors designed to be accurate rather than flattering, which is uncomfortable and correct.",
+  "theme": "beacon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

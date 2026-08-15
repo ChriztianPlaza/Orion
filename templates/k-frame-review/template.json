@@ -1,0 +1,30 @@
+{
+  "name": "Frame — Film Criticism",
+  "slug": "k-frame-review",
+  "category": "blog",
+  "tags": [
+    "light",
+    "serif",
+    "film",
+    "editorial"
+  ],
+  "description": "Essays about what films are doing, from writers who assume you have already seen it.",
+  "theme": "cellar",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

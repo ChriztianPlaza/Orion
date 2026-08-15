@@ -1,0 +1,30 @@
+{
+  "name": "Signalbox — Observability",
+  "slug": "k-signal-observe",
+  "category": "saas",
+  "tags": [
+    "dark",
+    "terminal",
+    "devtools",
+    "saas"
+  ],
+  "description": "Traces, logs and metrics in one place, priced so you do not have to sample away the incident you needed.",
+  "theme": "console",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

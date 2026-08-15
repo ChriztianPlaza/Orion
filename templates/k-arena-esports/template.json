@@ -1,0 +1,30 @@
+{
+  "name": "Arena — Esports",
+  "slug": "k-arena-esports",
+  "category": "gaming",
+  "tags": [
+    "dark",
+    "bold",
+    "esports",
+    "team"
+  ],
+  "description": "Founded in a university dorm in 2018, currently ranked third in the world.",
+  "theme": "detonate",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

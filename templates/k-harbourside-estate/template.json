@@ -1,0 +1,30 @@
+{
+  "name": "Harbourside — Estate Agency",
+  "slug": "k-harbourside-estate",
+  "category": "real-estate",
+  "tags": [
+    "light",
+    "luxury",
+    "property",
+    "serif"
+  ],
+  "description": "Not what you want to hear. Honest valuations, because an overpriced listing helps nobody.",
+  "theme": "yves",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

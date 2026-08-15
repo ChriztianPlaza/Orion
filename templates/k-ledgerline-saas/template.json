@@ -1,0 +1,30 @@
+{
+  "name": "Ledgerline — Finance Ops",
+  "slug": "k-ledgerline-saas",
+  "category": "saas",
+  "tags": [
+    "dark",
+    "bold",
+    "b2b",
+    "saas"
+  ],
+  "description": "Reconciliation that runs continuously instead of in a panic on the third working day.",
+  "theme": "detonate",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

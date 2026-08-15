@@ -1,0 +1,30 @@
+{
+  "name": "Bramble — Content",
+  "slug": "k-bramble-content",
+  "category": "agency",
+  "tags": [
+    "light",
+    "editorial",
+    "content",
+    "warm"
+  ],
+  "description": "Editorial for technical companies, written by people who understand what you sell.",
+  "theme": "kiln",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

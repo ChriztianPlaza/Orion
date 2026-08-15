@@ -1,0 +1,30 @@
+{
+  "name": "Summit — Bouldering",
+  "slug": "k-summit-climb",
+  "category": "fitness",
+  "tags": [
+    "dark",
+    "bold",
+    "climbing",
+    "sport"
+  ],
+  "description": "Forty new problems a week across six grades, set by people who climb what they set.",
+  "theme": "hazard",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

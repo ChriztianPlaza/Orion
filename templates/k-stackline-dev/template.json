@@ -1,0 +1,30 @@
+{
+  "name": "Stackline — Engineering",
+  "slug": "k-stackline-dev",
+  "category": "agency",
+  "tags": [
+    "dark",
+    "terminal",
+    "engineering",
+    "b2b"
+  ],
+  "description": "Rescue work, platform migrations and the projects that have been ninety percent done for eight months.",
+  "theme": "beacon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

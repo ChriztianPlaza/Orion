@@ -1,0 +1,30 @@
+{
+  "name": "Vertex — Edge API",
+  "slug": "k-vertex-api",
+  "category": "technology",
+  "tags": [
+    "dark",
+    "technical",
+    "infra",
+    "api"
+  ],
+  "description": "Deploy request handlers to two hundred locations and route each user to the nearest healthy one.",
+  "theme": "beacon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

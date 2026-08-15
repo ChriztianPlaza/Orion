@@ -1,0 +1,30 @@
+{
+  "name": "Convert — Product Launch",
+  "slug": "k-convert-launch",
+  "category": "landing-page",
+  "tags": [
+    "dark",
+    "bold",
+    "launch",
+    "conversion"
+  ],
+  "description": "A launch page built to do exactly one thing, with everything that does not serve it removed.",
+  "theme": "flare",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

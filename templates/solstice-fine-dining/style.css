@@ -14,7 +14,7 @@
   --shadow:0 30px 90px -55px rgba(212,175,55,0.45);
   --wrap:1080px;
   --pad:132px;
-  --font-body:'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-body:'Jost', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, sans-serif;
   --font-head:'Cormorant Garamond', Georgia, serif;
 }
 *,*::before,*::after{box-sizing:border-box}

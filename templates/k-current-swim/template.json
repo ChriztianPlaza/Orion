@@ -1,0 +1,30 @@
+{
+  "name": "Current — Swim School",
+  "slug": "k-current-swim",
+  "category": "fitness",
+  "tags": [
+    "dark",
+    "calm",
+    "swim",
+    "adult"
+  ],
+  "description": "Adult-only lessons in a quiet pool, taught by coaches who specialise in nervous beginners.",
+  "theme": "beacon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

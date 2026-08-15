@@ -1,0 +1,30 @@
+{
+  "name": "Index — Engineering Writing",
+  "slug": "k-index-engineering",
+  "category": "blog",
+  "tags": [
+    "dark",
+    "terminal",
+    "engineering",
+    "writing"
+  ],
+  "description": "Incident writeups and architecture notes from a team that publishes the ones that went badly.",
+  "theme": "console",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

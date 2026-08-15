@@ -1,0 +1,30 @@
+{
+  "name": "Passage — Sailing School",
+  "slug": "k-passage-sailing",
+  "category": "travel",
+  "tags": [
+    "dark",
+    "sea",
+    "training",
+    "adventure"
+  ],
+  "description": "Mile-building passages rather than laps of a bay, with a berth and a qualification at the end.",
+  "theme": "beacon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

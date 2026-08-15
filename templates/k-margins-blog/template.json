@@ -1,0 +1,30 @@
+{
+  "name": "Margins — Essays",
+  "slug": "k-margins-blog",
+  "category": "blog",
+  "tags": [
+    "light",
+    "editorial",
+    "writing",
+    "typography"
+  ],
+  "description": "An essay every other Tuesday on software, cities and the places the two meet.",
+  "theme": "newsprint",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

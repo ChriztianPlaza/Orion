@@ -1,0 +1,30 @@
+{
+  "name": "Signal — Recording Studio",
+  "slug": "k-signal-sound",
+  "category": "creative",
+  "tags": [
+    "dark",
+    "bold",
+    "music",
+    "studio"
+  ],
+  "description": "A live room built for bands playing together, with a desk from 1978 and a machine that still runs.",
+  "theme": "flare",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

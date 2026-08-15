@@ -1,0 +1,30 @@
+{
+  "name": "Basecamp — Mountain Lodge",
+  "slug": "k-basecamp-lodge",
+  "category": "travel",
+  "tags": [
+    "dark",
+    "alpine",
+    "lodge",
+    "sport"
+  ],
+  "description": "A lodge at the end of the lift line, with a drying room that works and dinner at seven.",
+  "theme": "lagoon",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

@@ -1,0 +1,30 @@
+{
+  "name": "Northlight — Wedding Photography",
+  "slug": "k-northlight-wedding",
+  "category": "photography",
+  "tags": [
+    "light",
+    "warm",
+    "wedding",
+    "documentary"
+  ],
+  "description": "Documentary coverage of the day as it happens, with two photographers and no group-shot list.",
+  "theme": "kiln",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

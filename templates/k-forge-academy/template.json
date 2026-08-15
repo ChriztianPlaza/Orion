@@ -1,0 +1,30 @@
+{
+  "name": "Forge Academy — Engineering",
+  "slug": "k-forge-academy",
+  "category": "education",
+  "tags": [
+    "dark",
+    "bold",
+    "education",
+    "technical"
+  ],
+  "description": "Backend engineering taught by people who have been on call for what they are teaching you.",
+  "theme": "alarm",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

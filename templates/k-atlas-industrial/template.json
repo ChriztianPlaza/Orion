@@ -1,0 +1,30 @@
+{
+  "name": "Atlas — Industrial Design",
+  "slug": "k-atlas-industrial",
+  "category": "portfolio",
+  "tags": [
+    "dark",
+    "industrial",
+    "product",
+    "b2b"
+  ],
+  "description": "Product design that arrives with tolerances, a bill of materials and a factory that has quoted it.",
+  "theme": "brass",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

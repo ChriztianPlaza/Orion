@@ -1,0 +1,30 @@
+{
+  "name": "Tessera — Marketplace",
+  "slug": "k-tessera-marketplace",
+  "category": "startup",
+  "tags": [
+    "dark",
+    "bold",
+    "fintech",
+    "api"
+  ],
+  "description": "The unglamorous half of a marketplace, already built, already compliant in thirty countries.",
+  "theme": "hazard",
+  "colorScheme": "dark",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}

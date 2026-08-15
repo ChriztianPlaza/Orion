@@ -164,18 +164,37 @@ export function motionJs(): string {
 
   /* ---- scroll reveal ---- */
   if ('IntersectionObserver' in window) {
+    /*
+      A whole section is often taller than the window, so it can never reach
+      12% of itself while you are looking straight at it. Those also come in
+      once a quarter-screen of them is visible — without it they stay at
+      opacity 0 and the section reads as missing rather than un-animated.
+    */
     var revealer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
+        var tallEnough = entry.intersectionRect.height >= window.innerHeight * 0.25;
+        if (!entry.isIntersecting || (entry.intersectionRatio < 0.12 && !tallEnough)) return;
         entry.target.classList.add('in');
         revealer.unobserve(entry.target);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    }, { threshold: [0, 0.12], rootMargin: '0px 0px -8% 0px' });
 
     document.querySelectorAll('.section, .section-head, .card, .shot, .stat').forEach(function (el, i) {
       el.setAttribute('data-reveal', '');
       el.style.transitionDelay = (i % 5) * 70 + 'ms';
       revealer.observe(el);
+    });
+
+    /* Anything already on screen once the page settles is revealed outright,
+       so a reveal that never fires cannot hide content. */
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        document.querySelectorAll('[data-reveal]').forEach(function (el) {
+          if (el.classList.contains('in')) return;
+          var r = el.getBoundingClientRect();
+          if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+        });
+      }, 400);
     });
 
     /* ---- stat counters ---- */

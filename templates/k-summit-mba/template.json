@@ -1,0 +1,30 @@
+{
+  "name": "Summit — Executive Education",
+  "slug": "k-summit-mba",
+  "category": "education",
+  "tags": [
+    "light",
+    "luxury",
+    "serif",
+    "business"
+  ],
+  "description": "Modular executive education taught in intensive weeks, four times a year, in person.",
+  "theme": "cellar",
+  "colorScheme": "light",
+  "tier": "FREE",
+  "featured": false,
+  "animated": true,
+  "kinetic": true,
+  "entryFile": "index.html",
+  "pages": [
+    "index.html",
+    "about.html",
+    "contact.html"
+  ],
+  "thumbnail": "thumbnail.svg",
+  "license": "MIT",
+  "author": "Orion",
+  "source": "https://github.com/orion/templates",
+  "attribution": null,
+  "responsive": true
+}
