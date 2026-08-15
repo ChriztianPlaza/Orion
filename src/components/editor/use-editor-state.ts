@@ -34,43 +34,78 @@ export function useEditorState(input: {
   const saveTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
   const pending = React.useRef<Snapshot | null>(null);
   const inFlight = React.useRef(false);
+  /** The request currently open, so callers can wait for it rather than skip it. */
+  const inFlightPromise = React.useRef<Promise<void> | null>(null);
   const [historyVersion, setHistoryVersion] = React.useState(0);
 
-  const flush = React.useCallback(async () => {
-    if (inFlight.current || !pending.current) return;
+  const flush = React.useCallback(async (): Promise<void> => {
+    /*
+     * Wait for a save that is already open rather than returning.
+     *
+     * This used to bail out on `inFlight`, which quietly broke the one caller
+     * that depends on the promise meaning something: Download awaits
+     * `saveNow()` and then exports from the database. If the debounced autosave
+     * happened to be mid-request, `saveNow()` resolved immediately and the ZIP
+     * was built from the previous revision — so the last edits were missing
+     * from the downloaded files, seemingly at random.
+     */
+    const running = inFlightPromise.current;
+    if (running) await running;
+
+    if (!pending.current) return;
 
     const payload = pending.current;
     pending.current = null;
     inFlight.current = true;
     setSaveState("saving");
 
-    try {
-      const response = await fetch(`/api/projects/${input.projectId}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...payload, baseRevision: revision.current }),
-      });
-      const body = await response.json().catch(() => ({}));
+    const request = (async (): Promise<boolean> => {
+      try {
+        const response = await fetch(`/api/projects/${input.projectId}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...payload, baseRevision: revision.current }),
+        });
+        const body = await response.json().catch(() => ({}));
 
-      if (!response.ok) {
+        if (!response.ok) {
+          // Put the work back. Snapshots are whole states, so if a newer edit
+          // arrived while this was open it already supersedes `payload` —
+          // otherwise dropping it here lost the changes outright.
+          pending.current ??= payload;
+          setSaveState("error");
+          input.onError?.(body.message ?? "Changes could not be saved.");
+          return false;
+        }
+
+        revision.current = body.project?.revision ?? revision.current + 1;
+        setLastSavedAt(new Date());
+        setSaveState(pending.current ? "dirty" : "saved");
+        input.onSaved?.(revision.current);
+        return true;
+      } catch {
+        pending.current ??= payload;
         setSaveState("error");
-        input.onError?.(body.message ?? "Changes could not be saved.");
-        return;
+        input.onError?.("Network error — your changes are still here, retrying shortly.");
+        return false;
+      } finally {
+        inFlight.current = false;
+        inFlightPromise.current = null;
       }
+    })();
 
-      revision.current = body.project?.revision ?? revision.current + 1;
-      setLastSavedAt(new Date());
-      setSaveState(pending.current ? "dirty" : "saved");
-      input.onSaved?.(revision.current);
-    } catch {
-      setSaveState("error");
-      input.onError?.("Network error — your changes are still here, retrying shortly.");
-    } finally {
-      inFlight.current = false;
-      if (pending.current) {
-        saveTimer.current = setTimeout(() => void flush(), 400);
-      }
+    inFlightPromise.current = request.then(() => undefined);
+    const ok = await request;
+
+    if (!ok) {
+      // Back off instead of recursing, or a persistent failure spins.
+      if (saveTimer.current) clearTimeout(saveTimer.current);
+      saveTimer.current = setTimeout(() => void flush(), 2000);
+      return;
     }
+
+    // Edits made while that request was open still have to go.
+    if (pending.current) await flush();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [input.projectId]);
 
