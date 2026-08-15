@@ -541,12 +541,17 @@ export const BLOCKS = {
         ${d.contact.hours ? `<li><span>Hours</span><p data-editable="${K("contact", "hours")}">${esc(d.contact.hours)}</p></li>` : ""}
       </ul>
     </div>
-    <form class="contact-form" novalidate>
+    <!--
+      No backend, so the form composes a message in the visitor's own mail app.
+      That works the moment the folder is uploaded anywhere. Swap the action for
+      a form service (Formspree, Basin) or your own endpoint when you have one.
+    -->
+    <form class="contact-form" data-mailto="${esc(d.contact.email)}">
       <label>Name<input type="text" name="name" placeholder="Your name" required></label>
       <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
-      <label>Message<textarea name="message" rows="4" placeholder="How can we help?"></textarea></label>
+      <label>Message<textarea name="message" rows="4" placeholder="How can we help?" required></textarea></label>
       <button class="btn btn-primary" type="submit" data-editable="${K("contact", "submit")}">Send message</button>
-      <p class="form-note">This form is a starting point — connect it to your own backend or a form service.</p>
+      <p class="form-note" role="status">Opens in your email app, addressed to us.</p>
     </form>
   </div>
 </section>`,
@@ -869,6 +874,40 @@ export function baseJs(): string {
       });
     });
   }
+
+  /*
+   * Contact form.
+   *
+   * An exported site has no server, so rather than leave the button inert the
+   * form hands the message to the visitor's mail client with the fields
+   * already filled in. Replace this with a fetch() to your own endpoint or a
+   * form service when you have one.
+   */
+  document.querySelectorAll('form.contact-form').forEach(function (form) {
+    var to = form.getAttribute('data-mailto');
+    var note = form.querySelector('.form-note');
+    if (!to) return;
+
+    form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      var data = new FormData(form);
+      var name = String(data.get('name') || '').trim();
+      var email = String(data.get('email') || '').trim();
+      var message = String(data.get('message') || '').trim();
+
+      var subject = 'Website enquiry' + (name ? ' from ' + name : '');
+      var body = message + '\\n\\n—\\n' + name + (email ? '\\n' + email : '');
+
+      window.location.href =
+        'mailto:' + to +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(body);
+
+      if (note) note.textContent = 'Opening your email app…';
+    });
+  });
 
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (event) {

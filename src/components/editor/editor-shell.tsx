@@ -6,8 +6,11 @@ import { useRouter } from "next/navigation";
 import {
   ArrowLeft,
   Check,
+  ChevronDown,
   Download,
   ExternalLink,
+  FileArchive,
+  FileText,
   History,
   Loader2,
   PanelLeftClose,
@@ -88,7 +91,26 @@ export function EditorShell({
   const [historyOpen, setHistoryOpen] = React.useState(false);
   const [upgradeReason, setUpgradeReason] = React.useState<string | null>(null);
   const [downloading, setDownloading] = React.useState(false);
+  const [renderingPdf, setRenderingPdf] = React.useState(false);
+  const [downloadMenuOpen, setDownloadMenuOpen] = React.useState(false);
   const [frameNonce, setFrameNonce] = React.useState(0);
+  const downloadMenuRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    if (!downloadMenuOpen) return;
+    const onPointerDown = (event: PointerEvent) => {
+      if (!downloadMenuRef.current?.contains(event.target as Node)) setDownloadMenuOpen(false);
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setDownloadMenuOpen(false);
+    };
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [downloadMenuOpen]);
 
   const state = useEditorState({
     projectId: project.id,
@@ -187,6 +209,47 @@ export function EditorShell({
     setFrameNonce((value) => value + 1);
   }, [project.id, state]);
 
+  /** Saves the file the browser has already fetched. */
+  const saveBlob = (blob: Blob, filename: string) => {
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement("a");
+    anchor.href = url;
+    anchor.download = filename;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+  };
+
+  /*
+   * The PDF is a rendering, not the source files, so it costs no download
+   * allowance and leaves uploaded images in place.
+   */
+  const downloadPdf = async () => {
+    setRenderingPdf(true);
+    try {
+      await state.saveNow();
+      const response = await fetch(`/api/projects/${project.id}/export/pdf`);
+
+      if (!response.ok) {
+        const payload = await response.json().catch(() => ({}));
+        toast({
+          variant: "error",
+          title: "PDF unavailable",
+          description: payload.message ?? "Please try again.",
+        });
+        return;
+      }
+
+      saveBlob(await response.blob(), `${slugifyName(projectName)}.pdf`);
+      toast({ variant: "success", title: "PDF ready", description: "Saved to your downloads." });
+    } catch {
+      toast({ variant: "error", title: "PDF failed", description: "Check your connection." });
+    } finally {
+      setRenderingPdf(false);
+    }
+  };
+
   /* ---------------------------------------------------------- downloading */
   const download = async () => {
     setDownloading(true);
@@ -212,15 +275,7 @@ export function EditorShell({
       // The server hands uploaded images back once they are inside the archive.
       const releasedCount = Number(response.headers.get("X-Orion-Images-Released") ?? "0");
 
-      const blob = await response.blob();
-      const url = URL.createObjectURL(blob);
-      const anchor = document.createElement("a");
-      anchor.href = url;
-      anchor.download = `${projectName.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.zip`;
-      document.body.appendChild(anchor);
-      anchor.click();
-      anchor.remove();
-      URL.revokeObjectURL(url);
+      saveBlob(await response.blob(), `${slugifyName(projectName)}.zip`);
 
       toast({
         variant: "success",
@@ -314,10 +369,60 @@ export function EditorShell({
           <span className="hidden sm:inline">Publish</span>
         </Button>
 
-        <Button size="sm" onClick={download} loading={downloading}>
-          <Download />
-          <span className="hidden sm:inline">Download</span>
-        </Button>
+        <div className="relative" ref={downloadMenuRef}>
+          <Button
+            size="sm"
+            onClick={() => setDownloadMenuOpen((open) => !open)}
+            loading={downloading || renderingPdf}
+            aria-haspopup="menu"
+            aria-expanded={downloadMenuOpen}
+          >
+            <Download />
+            <span className="hidden sm:inline">Download</span>
+            <ChevronDown className="opacity-60" />
+          </Button>
+
+          {downloadMenuOpen && (
+            <div
+              role="menu"
+              className="glass absolute right-0 top-[calc(100%+6px)] z-30 w-[268px] rounded-xl p-1.5 shadow-[var(--shadow-overlay)]"
+            >
+              <button
+                role="menuitem"
+                onClick={() => {
+                  setDownloadMenuOpen(false);
+                  void download();
+                }}
+                className="flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-surface-2"
+              >
+                <FileArchive className="mt-0.5 size-4 shrink-0 text-ink-muted" />
+                <span className="min-w-0">
+                  <span className="block text-[13px] font-medium text-ink">Website files (.zip)</span>
+                  <span className="mt-0.5 block text-[12px] leading-snug text-ink-muted">
+                    The real thing — HTML, CSS and images you can host anywhere.
+                  </span>
+                </span>
+              </button>
+
+              <button
+                role="menuitem"
+                onClick={() => {
+                  setDownloadMenuOpen(false);
+                  void downloadPdf();
+                }}
+                className="flex w-full items-start gap-3 rounded-lg px-3 py-2.5 text-left transition-colors hover:bg-surface-2"
+              >
+                <FileText className="mt-0.5 size-4 shrink-0 text-ink-muted" />
+                <span className="min-w-0">
+                  <span className="block text-[13px] font-medium text-ink">Document (.pdf)</span>
+                  <span className="mt-0.5 block text-[12px] leading-snug text-ink-muted">
+                    A picture of the page, for sharing. Free — it uses no download allowance.
+                  </span>
+                </span>
+              </button>
+            </div>
+          )}
+        </div>
       </header>
 
       {plan === "FREE" && (
@@ -444,6 +549,11 @@ export function EditorShell({
       />
     </div>
   );
+}
+
+/** Matches the filename the export route builds, so both formats agree. */
+function slugifyName(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "website";
 }
 
 function SaveIndicator({

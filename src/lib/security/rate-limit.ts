@@ -26,6 +26,8 @@ export const RATE_LIMITS = {
   "project.read": { limit: 400, windowSec: 300 },
 
   "download.export": { limit: 20, windowSec: 3600 },
+  // Each call starts a browser, so this is far cheaper to abuse than it is to serve.
+  "download.pdf": { limit: 10, windowSec: 3600 },
 
   "upload.asset": { limit: 60, windowSec: 3600 },
   "billing.session": { limit: 20, windowSec: 3600 },

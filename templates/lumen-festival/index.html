@@ -145,12 +145,17 @@
         <li><span>Hours</span><p data-editable="contact.hours">Gates 12pm daily</p></li>
       </ul>
     </div>
-    <form class="contact-form" novalidate>
+    <!--
+      No backend, so the form composes a message in the visitor's own mail app.
+      That works the moment the folder is uploaded anywhere. Swap the action for
+      a form service (Formspree, Basin) or your own endpoint when you have one.
+    -->
+    <form class="contact-form" data-mailto="info@example.com">
       <label>Name<input type="text" name="name" placeholder="Your name" required></label>
       <label>Email<input type="email" name="email" placeholder="you@example.com" required></label>
-      <label>Message<textarea name="message" rows="4" placeholder="How can we help?"></textarea></label>
+      <label>Message<textarea name="message" rows="4" placeholder="How can we help?" required></textarea></label>
       <button class="btn btn-primary" type="submit" data-editable="contact.submit">Send message</button>
-      <p class="form-note">This form is a starting point — connect it to your own backend or a form service.</p>
+      <p class="form-note" role="status">Opens in your email app, addressed to us.</p>
     </form>
   </div>
 </section>
